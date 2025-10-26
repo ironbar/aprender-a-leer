@@ -1,6 +1,8 @@
 // State
 let isUpperCase = false;
 let activeConsonants = new Set();
+let lastVowel = null;
+let lastSyllable = null;
 
 // Data
 const vowels = ['a', 'e', 'i', 'o', 'u'];
@@ -9,6 +11,19 @@ const consonants = ['b', 'c', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm', 'n', 'ñ',
 // Utility Functions
 function getRandomElement(array) {
     return array[Math.floor(Math.random() * array.length)];
+}
+
+function getRandomElementExcluding(array, excludeValue) {
+    if (array.length <= 1) {
+        return array[0];
+    }
+    
+    let newElement;
+    do {
+        newElement = getRandomElement(array);
+    } while (newElement === excludeValue);
+    
+    return newElement;
 }
 
 function applyCase(text) {
@@ -56,7 +71,8 @@ function updateCurrentDisplay() {
 // Vocales Tab
 const vocalesDisplay = document.getElementById('vocalesDisplay');
 vocalesDisplay.addEventListener('click', () => {
-    const randomVowel = getRandomElement(vowels);
+    const randomVowel = getRandomElementExcluding(vowels, lastVowel);
+    lastVowel = randomVowel;
     const displayElement = vocalesDisplay.querySelector('.letter-display');
     displayElement.textContent = applyCase(randomVowel);
 });
@@ -103,8 +119,18 @@ silabasDisplay.addEventListener('click', () => {
     const activeConsonantsArray = Array.from(activeConsonants);
     const randomConsonant = getRandomElement(activeConsonantsArray);
     const randomVowel = getRandomElement(vowels);
-    const syllable = randomConsonant + randomVowel;
+    let syllable = randomConsonant + randomVowel;
     
+    // Ensure we don't repeat the same syllable
+    if (activeConsonantsArray.length > 1 || vowels.length > 1) {
+        while (syllable === lastSyllable) {
+            const newConsonant = getRandomElement(activeConsonantsArray);
+            const newVowel = getRandomElement(vowels);
+            syllable = newConsonant + newVowel;
+        }
+    }
+    
+    lastSyllable = syllable;
     const displayElement = silabasDisplay.querySelector('.letter-display');
     displayElement.textContent = applyCase(syllable);
 });

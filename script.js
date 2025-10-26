@@ -141,17 +141,63 @@ silabasDisplay.addEventListener('click', () => {
     displayElement.textContent = applyCase(syllable);
 });
 
-// Palabras Tab
-const letterCountSlider = document.getElementById('letterCount');
-const letterCountValue = document.getElementById('letterCountValue');
+// Tab 3 - Palabras
+const palabrasDisplayArea = document.getElementById('palabrasDisplay');
+const letterSlider = document.getElementById('letterSlider');
+const sliderValue = document.getElementById('sliderValue');
 
-letterCountSlider.addEventListener('input', (e) => {
-    letterCountValue.textContent = e.target.value;
+let allWords = [];
+let lastWord = '';
+
+// Load words from file
+async function loadWords() {
+    try {
+        const response = await fetch('most-common-spanish-words-v5.txt');
+        const text = await response.text();
+        allWords = text.split('\n')
+            .map(word => word.trim())
+            .filter(word => word.length > 0 && word.length >= 3 && word.length <= 10);
+        
+        console.log(`Loaded ${allWords.length} words`);
+    } catch (error) {
+        console.error('Error loading words:', error);
+        const displayElement = palabrasDisplayArea.querySelector('.letter-display');
+        displayElement.textContent = 'Error al cargar palabras';
+    }
+}
+
+// Filter words by length
+function getWordsByLength(length) {
+    return allWords.filter(word => word.length === length);
+}
+
+// Update slider value display
+letterSlider.addEventListener('input', () => {
+    sliderValue.textContent = letterSlider.value;
+    // Reset last word when slider changes
+    lastWord = '';
 });
 
-const palabrasDisplay = document.getElementById('palabrasDisplay');
-palabrasDisplay.addEventListener('click', () => {
-    // Placeholder - not implemented yet
-    const displayElement = palabrasDisplay.querySelector('.letter-display');
-    displayElement.textContent = 'Próximamente';
+palabrasDisplayArea.addEventListener('click', () => {
+    const displayElement = palabrasDisplayArea.querySelector('.letter-display');
+    
+    if (allWords.length === 0) {
+        displayElement.textContent = 'Haz clic para ver palabras';
+        return;
+    }
+    
+    const length = parseInt(letterSlider.value);
+    const availableWords = getWordsByLength(length);
+    
+    if (availableWords.length === 0) {
+        displayElement.textContent = 'No hay palabras disponibles';
+        return;
+    }
+    
+    const word = getRandomElementExcluding(availableWords, lastWord);
+    lastWord = word;
+    displayElement.textContent = isUpperCase ? word.toUpperCase() : word;
 });
+
+// Load words when page loads
+loadWords();

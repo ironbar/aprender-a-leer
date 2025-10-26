@@ -44,18 +44,12 @@
 
             <!-- Palabras Tab -->
             <div id="palabras" class="tab-content">
-                <div class="words-controls">
-                    <h3>Número de letras:</h3>
-                    <div class="slider-container">
-                        <input type="range" id="letterCount" min="3" max="10" value="3">
-                        <span id="letterCountValue">3</span>
-                    </div>
-                    <p class="placeholder-message">
-                        Esta funcionalidad estará disponible pronto...
-                    </p>
+                <div class="slider-container">
+                    <label for="letterSlider">Número de letras: <span id="sliderValue">3</span></label>
+                    <input type="range" id="letterSlider" min="3" max="10" value="3">
                 </div>
-                <div class="display-area" id="palabrasDisplay">
-                    <div class="letter-display">Próximamente</div>
+                <div id="palabrasDisplay" class="display-area">
+                    <div class="letter-display">Haz clic para ver palabras</div>
                 </div>
             </div>
         </main>

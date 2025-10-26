@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aprender a Leer en Español</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Aprender a Leer 📚</h1>
+            <button id="caseToggle" class="case-toggle">
+                <span id="caseText">ABC</span>
+            </button>
+        </header>
+
+        <nav class="tabs">
+            <button class="tab-button active" data-tab="vocales">Vocales</button>
+            <button class="tab-button" data-tab="silabas">Sílabas</button>
+            <button class="tab-button" data-tab="palabras">Palabras</button>
+        </nav>
+
+        <main>
+            <!-- Vocales Tab -->
+            <div id="vocales" class="tab-content active">
+                <div class="display-area" id="vocalesDisplay">
+                    <div class="letter-display">¡Haz clic!</div>
+                </div>
+            </div>
+
+            <!-- Sílabas Tab -->
+            <div id="silabas" class="tab-content">
+                <div class="consonants-selector">
+                    <h3>Selecciona las consonantes:</h3>
+                    <div class="consonants-grid" id="consonantsGrid">
+                        <!-- Consonants will be added by JavaScript -->
+                    </div>
+                </div>
+                <div class="display-area" id="silabasDisplay">
+                    <div class="letter-display">¡Haz clic!</div>
+                </div>
+            </div>
+
+            <!-- Palabras Tab -->
+            <div id="palabras" class="tab-content">
+                <div class="words-controls">
+                    <h3>Número de letras:</h3>
+                    <div class="slider-container">
+                        <input type="range" id="letterCount" min="3" max="10" value="3">
+                        <span id="letterCountValue">3</span>
+                    </div>
+                    <p class="placeholder-message">
+                        Esta funcionalidad estará disponible pronto...
+                    </p>
+                </div>
+                <div class="display-area" id="palabrasDisplay">
+                    <div class="letter-display">Próximamente</div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

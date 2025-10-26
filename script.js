@@ -1,5 +1,5 @@
 // State
-let isUpperCase = false;
+let isUpperCase = true;
 let activeConsonants = new Set();
 let lastVowel = null;
 let lastSyllable = null;
@@ -49,6 +49,9 @@ document.querySelectorAll('.tab-button').forEach(button => {
 const caseToggle = document.getElementById('caseToggle');
 const caseText = document.getElementById('caseText');
 
+// Initialize case text to match default state
+caseText.textContent = 'abc';
+
 caseToggle.addEventListener('click', () => {
     isUpperCase = !isUpperCase;
     caseText.textContent = isUpperCase ? 'abc' : 'ABC';
@@ -80,7 +83,7 @@ vocalesDisplay.addEventListener('click', () => {
 // Sílabas Tab
 // Initialize consonants grid
 const consonantsGrid = document.getElementById('consonantsGrid');
-consonants.forEach(consonant => {
+consonants.forEach((consonant, index) => {
     const item = document.createElement('div');
     item.className = 'consonant-item';
     
@@ -88,12 +91,15 @@ consonants.forEach(consonant => {
     checkbox.type = 'checkbox';
     checkbox.id = `consonant-${consonant}`;
     checkbox.value = consonant;
-    checkbox.checked = true;
-    activeConsonants.add(consonant);
+    // Only the first consonant (b) is checked by default
+    checkbox.checked = (index === 0);
+    if (index === 0) {
+        activeConsonants.add(consonant);
+    }
     
     const label = document.createElement('label');
     label.htmlFor = `consonant-${consonant}`;
-    label.textContent = consonant;
+    label.textContent = consonant.toUpperCase();
     
     checkbox.addEventListener('change', (e) => {
         if (e.target.checked) {

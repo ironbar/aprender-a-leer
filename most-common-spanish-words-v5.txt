@@ -206,9 +206,7 @@ dentro
 primero
 llamar
 e
-diablo
 fin
-maldito
 habla
 policía
 último
@@ -417,7 +415,6 @@ través
 mitad
 fuerza
 ante
-carajo
 libro
 ropa
 querido
@@ -523,7 +520,6 @@ dejado
 respuesta
 música
 intento
-sexo
 marido
 ocurrir
 señal
@@ -570,7 +566,6 @@ secreto
 bonito
 montón
 barco
-maldición
 teniente
 carne
 real
@@ -585,12 +580,10 @@ cualquiera
 zona
 increíble
 vuelo
-idiota
 pelea
 encuentro
 hotel
 uh
-trasero
 preferir
 ayer
 perfecto
@@ -619,7 +612,6 @@ sentar
 cámara
 novio
 rayo
-estúpido
 excelente
 código
 error
@@ -699,7 +691,7 @@ isla
 planeta
 parar
 energía
- después
+después
 terrible
 río
 servir
@@ -847,7 +839,6 @@ rico
 permitir
 diferencia
 salida
-joder
 triste
 azul
 robar
@@ -855,7 +846,6 @@ hogar
 dueño
 pista
 pan
-puto
 memoria
 puente
 compañero
@@ -878,7 +868,6 @@ temprano
 olvidar
 agradecer
 peso
-coger
 pareja
 líder
 público
@@ -897,7 +886,6 @@ héroe
 marca
 guardar
 enfermo
-coño
 quitar
 sujeto
 maravilloso
@@ -972,7 +960,6 @@ taxi
 lástima
 ocupar
 acto
-caray
 visita
 controlar
 canal
@@ -1084,7 +1071,6 @@ revista
 compra
 aspecto
 explicar
-cabrón
 necesidad
 criatura
 adorar
@@ -1263,7 +1249,6 @@ ganador
 cerdo
 tesoro
 montaña
-imbécil
 contado
 bromear
 apagar
@@ -1340,7 +1325,6 @@ huir
 corriente
 conversación
 capacidad
-bastardo
 mono
 Europa
 rogar
@@ -1585,7 +1569,6 @@ embajador
 celebrar
 indicar
 representar
-pene
 patrulla
 gracia
 ja
@@ -1711,7 +1694,6 @@ agradar
 burro
 ave
 tirado
-teta
 fila
 cuan
 castigo
@@ -1832,7 +1814,6 @@ lanzar
 invierno
 cubrir
 traducido
-sexual
 serpiente
 recompensa
 negar
@@ -2033,7 +2014,6 @@ falso
 cabaña
 misil
 incapaz
-gay
 furia
 frase
 círculo
@@ -2167,7 +2147,6 @@ brigada
 actriz
 plano
 centavo
-zorra
 tremendo
 manejo
 concentrar
@@ -2183,7 +2162,6 @@ heredero
 expresión
 esencia
 adulto
-violación
 rodilla
 objeción
 manual
@@ -2205,7 +2183,6 @@ extremo
 detenido
 descuidar
 contratar
-cogido
 anteriormente
 suma
 lágrima
@@ -2479,7 +2456,6 @@ litro
 fortaleza
 construido
 alimentar
-prostituta
 patear
 gota
 explotar
@@ -2574,7 +2550,6 @@ cometa
 alumno
 múltiple
 marzo
-jodido
 inventar
 iniciar
 guión
@@ -2692,16 +2667,13 @@ multitud
 imaginación
 hamburguesa
 fruta
-cretino
 receta
 ratón
 protector
-jodidamente
 discusión
 despejar
 cruzado
 cosmos
-cojo
 cocaína
 canto
 asesor
@@ -2752,7 +2724,6 @@ ansioso
 romance
 reunido
 persecución
-pendejo
 garaje
 circuito
 almacén
@@ -2932,7 +2903,6 @@ santuario
 sábana
 revisión
 pretender
-pito
 ordenado
 ingeniero
 deseado
@@ -2997,7 +2967,6 @@ sostener
 rehén
 plaga
 perímetro
-maricón
 instrumento
 galería
 forense
@@ -3019,7 +2988,6 @@ egoísta
 duelo
 cuadra
 cajón
-cagar
 vagón
 totenkopf
 tatuaje
@@ -3114,7 +3082,6 @@ recuperación
 rastrear
 presentado
 pa
-orina
 operar
 navegar
 modal
@@ -3173,7 +3140,6 @@ mini
 inclusive
 estrictamente
 comisaría
-cojón
 champaña
 capturado
 aliado
@@ -3237,7 +3203,6 @@ obligación
 monitor
 menú
 mc
-marica
 ligero
 láser
 labor
@@ -3410,7 +3375,6 @@ Tokio
 supervisor
 prudente
 presupuesto
-orinar
 marcador
 lastimado
 juramento
@@ -3420,7 +3384,6 @@ führer
 divino
 despertado
 confesar
-chupar
 brillar
 bloquear
 basar
@@ -3431,7 +3394,6 @@ reno
 rebelión
 razonable
 procurar
-porno
 pabellón
 metrópolis
 gene
@@ -3448,7 +3410,6 @@ quirófano
 oveja
 novato
 mudo
-mear
 martillo
 juzgado
 instalación
@@ -4106,7 +4067,6 @@ destrozar
 descendiente
 cardíaco
 vs
-violado
 tomado
 tablero
 suspendido
@@ -4117,7 +4077,6 @@ régimen
 rechazo
 rastreador
 plantar
-pis
 palanca
 onu
 medicamento
@@ -4174,7 +4133,6 @@ tequila
 superhéroe
 sobreviviente
 simulación
-sexualmente
 semestre
 prof
 pipa
@@ -4184,7 +4142,6 @@ morgue
 milicia
 jet
 jeep
-homosexual
 fluido
 fijo
 faro
@@ -4236,7 +4193,6 @@ relato
 reconocido
 ramón
 publico
-pornografía
 patán
 paranoia
 oración
@@ -4645,7 +4601,6 @@ ahorro
 ahogar
 aduana
 vergonzoso
-vagina
 sustituto
 suspender
 suavemente
@@ -4751,7 +4706,6 @@ ausente
 arbusto
 ahorrado
 adrenalina
-violador
 vigilado
 tesis
 terapeuta
@@ -4950,7 +4904,6 @@ provincia
 proveedor
 optimista
 okey
-nalga
 milord
 mediado
 liquidar
@@ -5120,7 +5073,6 @@ recluta
 psíquico
 prototipo
 propulsor
-pezón
 mapache
 manicomio
 linea
@@ -5226,7 +5178,6 @@ generosidad
 galáctico
 foso
 fosa
-follar
 feto
 fallecido
 excursión
@@ -5345,7 +5296,6 @@ mediano
 manager
 luto
 ligar
-lesbiana
 iraquí
 inventario
 interrogatorio
@@ -5381,7 +5331,6 @@ trueno
 titar
 sutil
 simulacro
-semen
 robado
 reservar
 reproductor
@@ -6064,7 +6013,6 @@ closet
 chantaje
 camello
 calabozo
-cagado
 Brasil
 benefactor
 bañado
@@ -6190,7 +6138,6 @@ filósofo
 fachada
 etiqueta
 estricto
-erección
 directorio
 desmayo
 cupón
@@ -6484,7 +6431,6 @@ portátil
 poblado
 plenamente
 ozono
-orgasmo
 mosquito
 mensual
 ligado
@@ -6716,7 +6662,6 @@ bucear
 atrocidad
 asiático
 apagón
-ano
 animador
 adorador
 acorde
@@ -6810,7 +6755,6 @@ apenar
 anuario
 antivirus
 anticipado
-anal
 álamo
 afirmación
 adorno
@@ -7144,7 +7088,6 @@ largarse
 lanzan
 lanchas
 lancé
-joderme
 iqué
 inventamos
 intervalo
@@ -7350,7 +7293,6 @@ ponerles
 pociones
 pittsburgh
 pitón
-pipí
 pilotar
 pesadas
 permití
@@ -7518,7 +7460,6 @@ cenaré
 cataratas
 caparazón
 calmo
-cagaste
 caerte
 burlándose
 brillaba
@@ -8178,7 +8119,6 @@ acantilado
 aburridas
 abad
 zombis
-violada
 violaciones
 vigílalo
 verdugo
@@ -8434,8 +8374,6 @@ calmarnos
 callarse
 calígula
 caían
-cagué
-cagó
 caerás
 cachetes
 breves
@@ -8564,7 +8502,6 @@ querra
 pulmonar
 proximidad
 protegió
-prostitución
 prosiga
 propietarios
 profanación
@@ -8742,7 +8679,6 @@ dejarlas
 decídete
 dábamos
 curará
-culito
 crónica
 criticaba
 creerle
@@ -9124,7 +9060,6 @@ canse
 cancelaré
 cachorrito
 cacharro
-cabrona
 cabecita
 cabalgamos
 busto
@@ -9271,7 +9206,6 @@ podiamos
 pisaste
 pidiéndote
 pensas
-pendejadas
 pelearse
 pelearás
 peldaños
@@ -9332,7 +9266,6 @@ liberas
 liado
 levantara
 lavó
-jodieron
 jockey
 jeringa
 jaulas
@@ -9478,7 +9411,6 @@ camarote
 camareras
 calza
 cale
-cague
 borre
 bordeaux
 beses
@@ -9654,7 +9586,6 @@ queno
 quemaré
 quédatelo
 quebrada
-putita
 pués
 pubertad
 prosperidad
@@ -9997,7 +9928,6 @@ volvieras
 volaría
 volantes
 vision
-violadores
 viniese
 vigiles
 vestidas
@@ -10617,7 +10547,6 @@ microscopio
 mencionan
 melocotón
 mega
-meado
 máteme
 masivos
 masacró
@@ -10830,7 +10759,6 @@ colonial
 coliseo
 colgaron
 ciruelas
-chupó
 cerrara
 cenicero
 cegar

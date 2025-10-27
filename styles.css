@@ -264,40 +264,80 @@ input[type="range"]::-moz-range-thumb {
 
 /* Responsive Design */
 @media (max-width: 768px) {
-    h1 {
-        font-size: 2rem;
+    body {
+        padding: 0;
+        align-items: stretch;
     }
 
-    .case-toggle {
-        position: static;
-        margin-top: 15px;
+    .container {
+        border-radius: 0;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
     }
 
-    .tab-button {
-        font-size: 1.1rem;
+    header {
         padding: 15px;
     }
 
-    .letter-display {
-        font-size: 5rem;
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    .case-toggle {
+        top: 15px;
+        right: 15px;
+        padding: 8px 15px;
+        font-size: 1rem;
+    }
+
+    .tab-button {
+        font-size: 0.9rem;
+        padding: 12px 8px;
     }
 
     main {
+        padding: 15px;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        min-height: 0;
+    }
+
+    .tab-content {
+        display: none;
+        flex: 1;
+        flex-direction: column;
+    }
+
+    .tab-content.active {
+        display: flex;
+    }
+
+    .display-area {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         padding: 20px;
+        margin-top: 15px;
+        min-height: 50vh;
     }
 
-    .consonants-grid {
-        grid-template-columns: repeat(auto-fill, minmax(50px, 1fr));
-    }
-
-    input[type="range"] {
-        width: 200px;
-    }
-}
-
-@media (max-width: 480px) {
     .letter-display {
-        font-size: 4rem;
+        font-size: 15vw;
+        line-height: 1;
+    }
+
+    .consonants-selector {
+        padding: 15px;
+        margin-bottom: 10px;
+        flex-shrink: 0;
+    }
+
+    .consonants-selector h3 {
+        font-size: 1rem;
+        margin-bottom: 10px;
     }
 
     .consonants-grid {
@@ -305,7 +345,85 @@ input[type="range"]::-moz-range-thumb {
         gap: 8px;
     }
 
+    .consonant-item input[type="checkbox"] {
+        width: 16px;
+        height: 16px;
+    }
+
     .consonant-item label {
-        font-size: 1.2rem;
+        font-size: 1.1rem;
+    }
+
+    .words-controls {
+        padding: 15px;
+        margin-bottom: 10px;
+        flex-shrink: 0;
+    }
+
+    .words-controls h3 {
+        font-size: 1rem;
+        margin-bottom: 10px;
+    }
+
+    .slider-container {
+        flex-direction: column;
+        gap: 10px;
+        margin-bottom: 0;
+    }
+
+    .slider-container label {
+        font-size: 1rem;
+    }
+
+    input[type="range"] {
+        width: 100%;
+        max-width: 300px;
+    }
+
+    #letterCountValue {
+        font-size: 1.5rem;
+    }
+
+    #silabas .display-area {
+        margin-top: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 1.3rem;
+    }
+
+    .tab-button {
+        font-size: 0.85rem;
+        padding: 10px 5px;
+    }
+
+    .letter-display {
+        font-size: 18vw;
+    }
+
+    .consonants-grid {
+        grid-template-columns: repeat(auto-fill, minmax(40px, 1fr));
+        gap: 6px;
+    }
+
+    .consonant-item label {
+        font-size: 1rem;
+    }
+}
+
+/* Landscape mode on mobile */
+@media (max-width: 900px) and (orientation: landscape) {
+    .container {
+        max-width: 100%;
+    }
+
+    .display-area {
+        min-height: 60vh;
+    }
+
+    .letter-display {
+        font-size: 12vh;
     }
 }

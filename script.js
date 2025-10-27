@@ -152,7 +152,7 @@ let lastWord = '';
 // Load words from file
 async function loadWords() {
     try {
-        const response = await fetch('most-common-spanish-words-v5.txt');
+        const response = await fetch('most-common-spanish-safe-words.txt');
         const text = await response.text();
         allWords = text.split('\n')
             .map(word => word.trim())

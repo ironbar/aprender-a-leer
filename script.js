@@ -2,6 +2,7 @@
 let isUpperCase = true;
 let activeConsonants = new Set();
 let lastVowel = null;
+let lastConsonant = null;
 let lastSyllable = null;
 
 // Data
@@ -78,6 +79,15 @@ vocalesDisplay.addEventListener('click', () => {
     lastVowel = randomVowel;
     const displayElement = vocalesDisplay.querySelector('.letter-display');
     displayElement.textContent = applyCase(randomVowel);
+});
+
+// Consonantes Tab
+const consonantesDisplay = document.getElementById('consonantesDisplay');
+consonantesDisplay.addEventListener('click', () => {
+    const randomConsonant = getRandomElementExcluding(consonants, lastConsonant);
+    lastConsonant = randomConsonant;
+    const displayElement = consonantesDisplay.querySelector('.letter-display');
+    displayElement.textContent = applyCase(randomConsonant);
 });
 
 // Sílabas Tab

@@ -2937,7 +2937,6 @@ molestia
 lujo
 diseñado
 clásico
-violar
 seco
 periodo
 localizado
@@ -2956,7 +2955,6 @@ surgir
 suelto
 solicitud
 renta
-ramera
 portada
 granjero
 economía
@@ -3209,7 +3207,6 @@ labor
 febrero
 callado
 cacería
-caca
 alabado
 volante
 tortura
@@ -3378,7 +3375,6 @@ presupuesto
 marcador
 lastimado
 juramento
-huevón
 halcón
 führer
 divino
@@ -3885,13 +3881,11 @@ tortuga
 tasa
 suceso
 separación
-seno
 salmón
 registrado
 pro
 potente
 postre
-pedo
 mai
 invadir
 hábito
@@ -3903,7 +3897,6 @@ cigarro
 chimenea
 canalla
 válvula
-suicida
 salvación
 patria
 merced
@@ -4304,7 +4297,6 @@ acelerar
 ultra
 ton
 team
-suicidar
 secuestrado
 retorno
 residir
@@ -4491,7 +4483,6 @@ reinado
 provocado
 pinche
 picar
-pervertido
 parlamento
 olla
 músico
@@ -4590,7 +4581,6 @@ constitución
 católico
 castigar
 campesino
-burdel
 brazalete
 banana
 avergonzar
@@ -4739,7 +4729,6 @@ característico
 banca
 apocalipsis
 alférez
-verga
 trofeo
 transformación
 solicitado
@@ -4844,7 +4833,6 @@ digital
 descender
 demente
 coser
-condón
 chivo
 casamiento
 cancelado
@@ -5762,7 +5750,6 @@ rodeo
 respiratorio
 resaca
 puñalada
-perversión
 Patroclo
 Pasadena
 oprimir

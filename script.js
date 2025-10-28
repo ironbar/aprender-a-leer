@@ -22,7 +22,7 @@ const fonts = [
     'Century Gothic, sans-serif',
     'Tahoma, sans-serif',
     'Arial Black, sans-serif',
-    'Brush Script MT, cursive'
+    // 'Brush Script MT, cursive'
 ];
 
 // Utility Functions

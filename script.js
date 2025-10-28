@@ -1,11 +1,13 @@
 // State
 let isUpperCase = true;
 let activeConsonants = new Set();
+let lastNumber = null;
 let lastVowel = null;
 let lastConsonant = null;
 let lastSyllable = null;
 
 // Data
+const numbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
 const vowels = ['a', 'e', 'i', 'o', 'u'];
 const consonants = ['b', 'c', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm', 'n', 'ñ', 'p', 'q', 'r', 's', 't', 'v', 'w', 'x', 'y', 'z'];
 
@@ -71,6 +73,15 @@ function updateCurrentDisplay() {
         displayArea.textContent = applyCase(currentText.toLowerCase());
     }
 }
+
+// Números Tab
+const numerosDisplay = document.getElementById('numerosDisplay');
+numerosDisplay.addEventListener('click', () => {
+    const randomNumber = getRandomElementExcluding(numbers, lastNumber);
+    lastNumber = randomNumber;
+    const displayElement = numerosDisplay.querySelector('.letter-display');
+    displayElement.textContent = randomNumber;
+});
 
 // Vocales Tab
 const vocalesDisplay = document.getElementById('vocalesDisplay');

@@ -16,15 +16,23 @@
         </header>
 
         <nav class="tabs">
-            <button class="tab-button active" data-tab="vocales">Vocales</button>
+            <button class="tab-button active" data-tab="numeros">Números</button>
+            <button class="tab-button" data-tab="vocales">Vocales</button>
             <button class="tab-button" data-tab="consonantes">Consonantes</button>
             <button class="tab-button" data-tab="silabas">Sílabas</button>
             <button class="tab-button" data-tab="palabras">Palabras</button>
         </nav>
 
         <main>
+            <!-- Números Tab -->
+            <div id="numeros" class="tab-content active">
+                <div class="display-area" id="numerosDisplay">
+                    <div class="letter-display">¡Haz clic!</div>
+                </div>
+            </div>
+
             <!-- Vocales Tab -->
-            <div id="vocales" class="tab-content active">
+            <div id="vocales" class="tab-content">
                 <div class="display-area" id="vocalesDisplay">
                     <div class="letter-display">¡Haz clic!</div>
                 </div>

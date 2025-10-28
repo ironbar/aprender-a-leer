@@ -33,6 +33,45 @@ function applyCase(text) {
     return isUpperCase ? text.toUpperCase() : text.toLowerCase();
 }
 
+// Adaptive text sizing
+function adjustTextSize(displayElement) {
+    const displayArea = displayElement.closest('.display-area');
+    const text = displayElement.textContent;
+    
+    // Get container dimensions
+    const containerWidth = displayArea.clientWidth;
+    const containerHeight = displayArea.clientHeight;
+    const minDimension = Math.min(containerWidth, containerHeight);
+    
+    // Calculate base size from container (using smaller dimension)
+    let fontSize = minDimension * 0.6; // Start with 60% of smallest dimension
+    
+    // Adjust based on text length
+    const textLength = text.length;
+    if (textLength <= 2) {
+        // Single characters or numbers - use largest size
+        fontSize = minDimension * 0.7;
+    } else if (textLength <= 3) {
+        // Syllables - medium-large size
+        fontSize = minDimension * 0.5;
+    } else if (textLength <= 5) {
+        // Short words
+        fontSize = minDimension * 0.35;
+    } else if (textLength <= 7) {
+        // Medium words
+        fontSize = minDimension * 0.25;
+    } else {
+        // Long words
+        fontSize = minDimension * 0.18;
+    }
+    
+    // Apply minimum and maximum constraints
+    fontSize = Math.max(fontSize, 32); // Minimum 32px
+    fontSize = Math.min(fontSize, 500); // Maximum 500px
+    
+    displayElement.style.fontSize = `${fontSize}px`;
+}
+
 // Tab Switching
 document.querySelectorAll('.tab-button').forEach(button => {
     button.addEventListener('click', () => {
@@ -71,6 +110,7 @@ function updateCurrentDisplay() {
     // Only update if it's a letter/syllable (not instructions)
     if (currentText && currentText.length <= 3 && /^[a-záéíóúñ]+$/i.test(currentText)) {
         displayArea.textContent = applyCase(currentText.toLowerCase());
+        adjustTextSize(displayArea);
     }
 }
 
@@ -81,6 +121,7 @@ numerosDisplay.addEventListener('click', () => {
     lastNumber = randomNumber;
     const displayElement = numerosDisplay.querySelector('.letter-display');
     displayElement.textContent = randomNumber;
+    adjustTextSize(displayElement);
 });
 
 // Vocales Tab
@@ -90,6 +131,7 @@ vocalesDisplay.addEventListener('click', () => {
     lastVowel = randomVowel;
     const displayElement = vocalesDisplay.querySelector('.letter-display');
     displayElement.textContent = applyCase(randomVowel);
+    adjustTextSize(displayElement);
 });
 
 // Consonantes Tab
@@ -99,6 +141,7 @@ consonantesDisplay.addEventListener('click', () => {
     lastConsonant = randomConsonant;
     const displayElement = consonantesDisplay.querySelector('.letter-display');
     displayElement.textContent = applyCase(randomConsonant);
+    adjustTextSize(displayElement);
 });
 
 // Sílabas Tab
@@ -160,6 +203,7 @@ silabasDisplay.addEventListener('click', () => {
     lastSyllable = syllable;
     const displayElement = silabasDisplay.querySelector('.letter-display');
     displayElement.textContent = applyCase(syllable);
+    adjustTextSize(displayElement);
 });
 
 // Tab 3 - Palabras
@@ -218,6 +262,7 @@ palabrasDisplayArea.addEventListener('click', () => {
     const word = getRandomElementExcluding(availableWords, lastWord);
     lastWord = word;
     displayElement.textContent = isUpperCase ? word.toUpperCase() : word;
+    adjustTextSize(displayElement);
 });
 
 // Load words when page loads

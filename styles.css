@@ -9,13 +9,17 @@ body {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     height: 100vh;
     overflow: hidden;
+    padding: clamp(0.5rem, 2vh, 1.5rem);
 }
 
 .container {
     background: white;
-    height: 100vh;
+    height: 100%;
     display: flex;
     flex-direction: column;
+    border-radius: clamp(15px, 3vmin, 30px);
+    overflow: hidden;
+    box-shadow: 0 clamp(10px, 2vh, 20px) clamp(30px, 5vh, 60px) rgba(0, 0, 0, 0.3);
 }
 
 header {

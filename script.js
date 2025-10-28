@@ -57,31 +57,16 @@ function adjustTextSize(displayElement) {
     const containerHeight = displayArea.clientHeight;
     const minDimension = Math.min(containerWidth, containerHeight);
     
-    // Calculate base size from container (using smaller dimension)
-    let fontSize = minDimension * 0.6; // Start with 60% of smallest dimension
-    
-    // Adjust based on text length
+    // Calculate font size based on text length using exponential decay
     const textLength = text.length;
-    if (textLength <= 2) {
-        // Single characters or numbers - use largest size
-        fontSize = minDimension * 0.7;
-    } else if (textLength <= 3) {
-        // Syllables - medium-large size
-        fontSize = minDimension * 0.5;
-    } else if (textLength <= 5) {
-        // Short words
-        fontSize = minDimension * 0.35;
-    } else if (textLength <= 7) {
-        // Medium words
-        fontSize = minDimension * 0.25;
-    } else {
-        // Long words
-        fontSize = minDimension * 0.18;
-    }
+    const baseFactor = 0.8;
+    const decayRate = 0.15;
+    const sizeFactor = baseFactor * Math.exp(-decayRate * (textLength - 1));
+    let fontSize = minDimension * sizeFactor;
     
     // Apply minimum and maximum constraints
     fontSize = Math.max(fontSize, 32); // Minimum 32px
-    fontSize = Math.min(fontSize, 500); // Maximum 500px
+    // fontSize = Math.min(fontSize, 500); // Maximum 500px
     
     displayElement.style.fontSize = `${fontSize}px`;
     

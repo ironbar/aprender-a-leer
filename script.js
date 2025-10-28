@@ -10,6 +10,20 @@ let lastSyllable = null;
 const numbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
 const vowels = ['a', 'e', 'i', 'o', 'u'];
 const consonants = ['b', 'c', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm', 'n', 'ñ', 'p', 'q', 'r', 's', 't', 'v', 'w', 'x', 'y', 'z'];
+const fonts = [
+    'Comic Sans MS, cursive',
+    'Arial Rounded MT Bold, Arial, sans-serif',
+    'Verdana, sans-serif',
+    'Georgia, serif',
+    'Trebuchet MS, sans-serif',
+    'Impact, fantasy',
+    'Courier New, monospace',
+    'Palatino Linotype, serif',
+    'Century Gothic, sans-serif',
+    'Tahoma, sans-serif',
+    'Arial Black, sans-serif',
+    'Brush Script MT, cursive'
+];
 
 // Utility Functions
 function getRandomElement(array) {
@@ -70,6 +84,9 @@ function adjustTextSize(displayElement) {
     fontSize = Math.min(fontSize, 500); // Maximum 500px
     
     displayElement.style.fontSize = `${fontSize}px`;
+    
+    // Apply random font
+    displayElement.style.fontFamily = getRandomElement(fonts);
 }
 
 // Tab Switching

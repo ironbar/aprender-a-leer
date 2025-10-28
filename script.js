@@ -55,18 +55,27 @@ function adjustTextSize(displayElement) {
     // Get container dimensions
     const containerWidth = displayArea.clientWidth;
     const containerHeight = displayArea.clientHeight;
-    const minDimension = Math.min(containerWidth, containerHeight);
-    
-    // Calculate font size based on text length using exponential decay
     const textLength = text.length;
-    const baseFactor = 0.8;
-    const decayRate = 0.15;
-    const sizeFactor = baseFactor * Math.exp(-decayRate * (textLength - 1));
-    let fontSize = minDimension * sizeFactor;
     
-    // Apply minimum and maximum constraints
-    fontSize = Math.max(fontSize, 32); // Minimum 32px
-    // fontSize = Math.min(fontSize, 500); // Maximum 500px
+    // Estimate character width as a fraction of font size (average is ~0.6 for most fonts)
+    const charWidthRatio = 0.6;
+    
+    let fontSize;
+    
+    if (containerHeight < containerWidth) {
+        // Landscape: height is limiting factor initially
+        // Font size based on height, but reduce if text is too wide
+        const maxFontFromHeight = containerHeight * 0.7;
+        const maxFontFromWidth = containerWidth * 0.7 / (textLength * charWidthRatio);
+        fontSize = Math.min(maxFontFromHeight, maxFontFromWidth);
+    } else {
+        // Portrait or square: width is limiting factor
+        // Font size proportional to width divided by text length
+        fontSize = containerWidth *0.7 / (textLength * charWidthRatio);
+    }
+    
+    // Apply minimum constraint
+    fontSize = Math.max(fontSize, 32);
     
     displayElement.style.fontSize = `${fontSize}px`;
     

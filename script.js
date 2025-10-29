@@ -11,7 +11,7 @@ const numbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
 const vowels = ['a', 'e', 'i', 'o', 'u'];
 const consonants = ['b', 'c', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm', 'n', 'ñ', 'p', 'q', 'r', 's', 't', 'v', 'w', 'x', 'y', 'z'];
 const fonts = [
-    'Comic Sans MS, cursive',
+    // 'Comic Sans MS, cursive',
     'Arial Rounded MT Bold, Arial, sans-serif',
     'Verdana, sans-serif',
     'Georgia, serif',

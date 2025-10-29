@@ -137,6 +137,7 @@ numerosDisplay.addEventListener('click', () => {
     const displayElement = numerosDisplay.querySelector('.letter-display');
     displayElement.textContent = randomNumber;
     adjustTextSize(displayElement);
+    triggerRandomEffect();
 });
 
 // Vocales Tab
@@ -147,6 +148,7 @@ vocalesDisplay.addEventListener('click', () => {
     const displayElement = vocalesDisplay.querySelector('.letter-display');
     displayElement.textContent = applyCase(randomVowel);
     adjustTextSize(displayElement);
+    triggerRandomEffect();
 });
 
 // Consonantes Tab
@@ -157,6 +159,7 @@ consonantesDisplay.addEventListener('click', () => {
     const displayElement = consonantesDisplay.querySelector('.letter-display');
     displayElement.textContent = applyCase(randomConsonant);
     adjustTextSize(displayElement);
+    triggerRandomEffect();
 });
 
 // Sílabas Tab
@@ -219,6 +222,7 @@ silabasDisplay.addEventListener('click', () => {
     const displayElement = silabasDisplay.querySelector('.letter-display');
     displayElement.textContent = applyCase(syllable);
     adjustTextSize(displayElement);
+    triggerRandomEffect();
 });
 
 // Tab 3 - Palabras
@@ -278,6 +282,7 @@ palabrasDisplayArea.addEventListener('click', () => {
     lastWord = word;
     displayElement.textContent = isUpperCase ? word.toUpperCase() : word;
     adjustTextSize(displayElement);
+    triggerRandomEffect();
 });
 
 // Load words when page loads

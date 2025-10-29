@@ -27,3 +27,7 @@ Try to create a very minimal but friendly style for the kids that are learning t
 
 First write a plan of how you are going to create the website.
 ```
+
+## TODO
+
+- [ ] Better word list, current one is safe but has weird words

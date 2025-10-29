@@ -80,7 +80,11 @@ function adjustTextSize(displayElement) {
     displayElement.style.fontSize = `${fontSize}px`;
     
     // Apply random font
-    displayElement.style.fontFamily = getRandomElement(fonts);
+    const selectedFont = getRandomElement(fonts);
+    displayElement.style.fontFamily = selectedFont;
+    
+    // Log the text and font
+    console.log(`Text: "${text}" | Font: ${selectedFont}`);
 }
 
 // Tab Switching

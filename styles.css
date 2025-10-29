@@ -7,9 +7,9 @@
 body {
     font-family: 'Comic Sans MS', 'Arial Rounded MT Bold', sans-serif;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    height: 100vh;
+    height: 100dvh; /* Use dynamic viewport height to account for mobile browser UI */
     overflow: hidden;
-    padding: clamp(2rem, 5vh, 4rem);
+    padding: clamp(2rem, 5dvh, 4rem);
 }
 
 .container {

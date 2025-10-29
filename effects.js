@@ -5,6 +5,7 @@ const EFFECT_PROBABILITY = 0.20; // 20% chance of showing an effect
 
 // Canvas setup
 let canvas, ctx;
+let activeAnimation = null;
 
 function initEffectsCanvas() {
     canvas = document.getElementById('effectsCanvas');
@@ -18,9 +19,18 @@ function resizeCanvas() {
     canvas.height = window.innerHeight;
 }
 
+function clearActiveAnimation() {
+    if (activeAnimation !== null) {
+        cancelAnimationFrame(activeAnimation);
+        activeAnimation = null;
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }
+}
+
 // Trigger random effect with probability
 function triggerRandomEffect() {
     if (Math.random() < EFFECT_PROBABILITY) {
+        clearActiveAnimation(); // Clear any existing effect
         const effects = [
             createConfetti,
             createFireworks,
@@ -38,6 +48,8 @@ function triggerRandomEffect() {
 function createConfetti() {
     const particles = [];
     const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#f9ca24', '#6c5ce7', '#fd79a8', '#fdcb6e'];
+    const maxDuration = 2000; // 2 seconds max
+    const startTime = Date.now();
     
     for (let i = 0; i < 100; i++) {
         particles.push({
@@ -52,10 +64,16 @@ function createConfetti() {
         });
     }
     
-    animateConfetti(particles);
+    animateConfetti(particles, startTime, maxDuration);
 }
 
-function animateConfetti(particles) {
+function animateConfetti(particles, startTime, maxDuration) {
+    if (Date.now() - startTime > maxDuration) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        activeAnimation = null;
+        return;
+    }
+    
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     
     particles.forEach((p, index) => {
@@ -77,7 +95,9 @@ function animateConfetti(particles) {
     });
     
     if (particles.length > 0) {
-        requestAnimationFrame(() => animateConfetti(particles));
+        activeAnimation = requestAnimationFrame(() => animateConfetti(particles, startTime, maxDuration));
+    } else {
+        activeAnimation = null;
     }
 }
 
@@ -141,7 +161,9 @@ function animateFireworks(explosions) {
     ctx.globalAlpha = 1;
     
     if (!allDead) {
-        requestAnimationFrame(() => animateFireworks(explosions));
+        activeAnimation = requestAnimationFrame(() => animateFireworks(explosions));
+    } else {
+        activeAnimation = null;
     }
 }
 
@@ -149,6 +171,8 @@ function animateFireworks(explosions) {
 function createBalloons() {
     const balloons = [];
     const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#f9ca24', '#6c5ce7', '#fd79a8', '#fdcb6e'];
+    const maxDuration = 2000; // 2 seconds max
+    const startTime = Date.now();
     
     for (let i = 0; i < 15; i++) {
         balloons.push({
@@ -156,16 +180,22 @@ function createBalloons() {
             y: canvas.height + 50,
             size: Math.random() * 30 + 40,
             color: colors[Math.floor(Math.random() * colors.length)],
-            speed: Math.random() * 2 + 1,
+            speed: Math.random() * 3 + 2, // Increased speed
             sway: Math.random() * 2,
             swayOffset: Math.random() * Math.PI * 2
         });
     }
     
-    animateBalloons(balloons);
+    animateBalloons(balloons, startTime, maxDuration);
 }
 
-function animateBalloons(balloons) {
+function animateBalloons(balloons, startTime, maxDuration) {
+    if (Date.now() - startTime > maxDuration) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        activeAnimation = null;
+        return;
+    }
+    
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     
     balloons.forEach((b, index) => {
@@ -198,7 +228,9 @@ function animateBalloons(balloons) {
     });
     
     if (balloons.length > 0) {
-        requestAnimationFrame(() => animateBalloons(balloons));
+        activeAnimation = requestAnimationFrame(() => animateBalloons(balloons, startTime, maxDuration));
+    } else {
+        activeAnimation = null;
     }
 }
 
@@ -268,20 +300,24 @@ function animateStars(stars) {
     });
     
     if (stars.length > 0) {
-        requestAnimationFrame(() => animateStars(stars));
+        activeAnimation = requestAnimationFrame(() => animateStars(stars));
+    } else {
+        activeAnimation = null;
     }
 }
 
 // Effect 5: Bubbles
 function createBubbles() {
     const bubbles = [];
+    const maxDuration = 2000; // 2 seconds max
+    const startTime = Date.now();
     
     for (let i = 0; i < 25; i++) {
         bubbles.push({
             x: Math.random() * canvas.width,
             y: canvas.height + 20,
             size: Math.random() * 40 + 20,
-            speed: Math.random() * 2 + 1,
+            speed: Math.random() * 3 + 2, // Increased speed
             sway: Math.random() * 3,
             swayOffset: Math.random() * Math.PI * 2,
             pop: false,
@@ -289,10 +325,16 @@ function createBubbles() {
         });
     }
     
-    animateBubbles(bubbles);
+    animateBubbles(bubbles, startTime, maxDuration);
 }
 
-function animateBubbles(bubbles) {
+function animateBubbles(bubbles, startTime, maxDuration) {
+    if (Date.now() - startTime > maxDuration) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        activeAnimation = null;
+        return;
+    }
+    
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     
     bubbles.forEach((b, index) => {
@@ -321,7 +363,7 @@ function animateBubbles(bubbles) {
             b.swayOffset += 0.03;
             
             // Chance to pop
-            if (Math.random() < 0.01 || b.y < -b.size) {
+            if (Math.random() < 0.02 || b.y < -b.size) {
                 b.pop = true;
             }
         } else {
@@ -343,7 +385,9 @@ function animateBubbles(bubbles) {
     });
     
     if (bubbles.length > 0) {
-        requestAnimationFrame(() => animateBubbles(bubbles));
+        activeAnimation = requestAnimationFrame(() => animateBubbles(bubbles, startTime, maxDuration));
+    } else {
+        activeAnimation = null;
     }
 }
 
@@ -351,6 +395,8 @@ function animateBubbles(bubbles) {
 function createEmojiRain() {
     const emojis = ['😊', '🎉', '⭐', '💖', '🌈', '✨', '🎈', '🌟', '💫', '🎊'];
     const particles = [];
+    const maxDuration = 2000; // 2 seconds max
+    const startTime = Date.now();
     
     for (let i = 0; i < 30; i++) {
         particles.push({
@@ -358,16 +404,22 @@ function createEmojiRain() {
             x: Math.random() * canvas.width,
             y: -50,
             size: Math.random() * 30 + 30,
-            speed: Math.random() * 3 + 2,
+            speed: Math.random() * 4 + 3, // Increased speed
             rotation: Math.random() * 360,
             rotationSpeed: (Math.random() - 0.5) * 5
         });
     }
     
-    animateEmojiRain(particles);
+    animateEmojiRain(particles, startTime, maxDuration);
 }
 
-function animateEmojiRain(particles) {
+function animateEmojiRain(particles, startTime, maxDuration) {
+    if (Date.now() - startTime > maxDuration) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        activeAnimation = null;
+        return;
+    }
+    
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     
     particles.forEach((p, index) => {
@@ -389,7 +441,9 @@ function animateEmojiRain(particles) {
     });
     
     if (particles.length > 0) {
-        requestAnimationFrame(() => animateEmojiRain(particles));
+        activeAnimation = requestAnimationFrame(() => animateEmojiRain(particles, startTime, maxDuration));
+    } else {
+        activeAnimation = null;
     }
 }
 

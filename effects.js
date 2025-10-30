@@ -1,17 +1,21 @@
 // filepath: /mnt/data/other/code/aprender-a-leer/effects.js
 
 // Effect Configuration
-const EFFECT_PROBABILITY = 0.20; // 20% chance of showing an effect
+const EFFECT_PROBABILITY = 0.2; // 20% chance of showing an effect
 
 // Canvas setup
 let canvas, ctx;
 let activeAnimation = null;
+let activeInteractiveObjects = null; // Track balloons or bubbles for interaction
+let isInteractive = false;
 
 function initEffectsCanvas() {
     canvas = document.getElementById('effectsCanvas');
     ctx = canvas.getContext('2d');
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
+    canvas.addEventListener('click', handleCanvasClick);
+    canvas.addEventListener('mousemove', handleCanvasHover);
 }
 
 function resizeCanvas() {
@@ -25,6 +29,95 @@ function clearActiveAnimation() {
         activeAnimation = null;
         ctx.clearRect(0, 0, canvas.width, canvas.height);
     }
+    disableCanvasInteraction();
+}
+
+function enableCanvasInteraction() {
+    isInteractive = true;
+    canvas.style.pointerEvents = 'auto';
+    canvas.style.cursor = 'pointer';
+}
+
+function disableCanvasInteraction() {
+    isInteractive = false;
+    activeInteractiveObjects = null;
+    canvas.style.pointerEvents = 'none';
+    canvas.style.cursor = 'default';
+}
+
+function handleCanvasClick(event) {
+    if (!isInteractive || !activeInteractiveObjects) return;
+    
+    const rect = canvas.getBoundingClientRect();
+    const x = event.clientX - rect.left;
+    const y = event.clientY - rect.top;
+    
+    // Check balloons
+    if (activeInteractiveObjects.type === 'balloons') {
+        activeInteractiveObjects.data.forEach(balloon => {
+            if (balloon.popped) return;
+            
+            const balloonX = balloon.x + Math.sin(balloon.swayOffset) * balloon.sway;
+            const balloonY = balloon.y;
+            const distance = Math.sqrt(Math.pow(x - balloonX, 2) + Math.pow(y - balloonY, 2));
+            
+            if (distance < balloon.size) {
+                balloon.popped = true;
+                balloon.popProgress = 0;
+            }
+        });
+    }
+    
+    // Check bubbles
+    if (activeInteractiveObjects.type === 'bubbles') {
+        activeInteractiveObjects.data.forEach(bubble => {
+            if (bubble.pop) return;
+            
+            const bubbleX = bubble.x + Math.sin(bubble.swayOffset) * bubble.sway;
+            const bubbleY = bubble.y;
+            const distance = Math.sqrt(Math.pow(x - bubbleX, 2) + Math.pow(y - bubbleY, 2));
+            
+            if (distance < bubble.size) {
+                bubble.pop = true;
+                bubble.popProgress = 0;
+            }
+        });
+    }
+}
+
+function handleCanvasHover(event) {
+    if (!isInteractive || !activeInteractiveObjects) return;
+    
+    const rect = canvas.getBoundingClientRect();
+    const x = event.clientX - rect.left;
+    const y = event.clientY - rect.top;
+    
+    let isOverObject = false;
+    
+    // Check if hovering over any balloon or bubble
+    if (activeInteractiveObjects.type === 'balloons') {
+        for (const balloon of activeInteractiveObjects.data) {
+            if (balloon.popped) continue;
+            const balloonX = balloon.x + Math.sin(balloon.swayOffset) * balloon.sway;
+            const distance = Math.sqrt(Math.pow(x - balloonX, 2) + Math.pow(y - balloon.y, 2));
+            if (distance < balloon.size) {
+                isOverObject = true;
+                break;
+            }
+        }
+    } else if (activeInteractiveObjects.type === 'bubbles') {
+        for (const bubble of activeInteractiveObjects.data) {
+            if (bubble.pop) continue;
+            const bubbleX = bubble.x + Math.sin(bubble.swayOffset) * bubble.sway;
+            const distance = Math.sqrt(Math.pow(x - bubbleX, 2) + Math.pow(y - bubble.y, 2));
+            if (distance < bubble.size) {
+                isOverObject = true;
+                break;
+            }
+        }
+    }
+    
+    canvas.style.cursor = isOverObject ? 'pointer' : 'default';
 }
 
 // Trigger random effect with probability
@@ -182,10 +275,14 @@ function createBalloons() {
             color: colors[Math.floor(Math.random() * colors.length)],
             speed: Math.random() * 3 + 2, // Increased speed
             sway: Math.random() * 2,
-            swayOffset: Math.random() * Math.PI * 2
+            swayOffset: Math.random() * Math.PI * 2,
+            popped: false,
+            popProgress: 0
         });
     }
     
+    activeInteractiveObjects = { type: 'balloons', data: balloons };
+    enableCanvasInteraction();
     animateBalloons(balloons, startTime, maxDuration);
 }
 
@@ -193,37 +290,65 @@ function animateBalloons(balloons, startTime, maxDuration) {
     if (Date.now() - startTime > maxDuration) {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         activeAnimation = null;
+        disableCanvasInteraction();
         return;
     }
     
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     
     balloons.forEach((b, index) => {
-        // Balloon body
-        ctx.fillStyle = b.color;
-        ctx.beginPath();
-        ctx.ellipse(b.x + Math.sin(b.swayOffset) * b.sway, b.y, b.size * 0.4, b.size * 0.5, 0, 0, Math.PI * 2);
-        ctx.fill();
-        
-        // Balloon tie
-        ctx.strokeStyle = b.color;
-        ctx.lineWidth = 2;
-        ctx.beginPath();
-        ctx.moveTo(b.x + Math.sin(b.swayOffset) * b.sway, b.y + b.size * 0.5);
-        ctx.lineTo(b.x + Math.sin(b.swayOffset + 0.5) * b.sway, b.y + b.size * 0.7);
-        ctx.stroke();
-        
-        // Highlight
-        ctx.fillStyle = 'rgba(255, 255, 255, 0.4)';
-        ctx.beginPath();
-        ctx.ellipse(b.x + Math.sin(b.swayOffset) * b.sway - b.size * 0.1, b.y - b.size * 0.15, b.size * 0.15, b.size * 0.2, 0, 0, Math.PI * 2);
-        ctx.fill();
-        
-        b.y -= b.speed;
-        b.swayOffset += 0.05;
-        
-        if (b.y < -b.size) {
-            balloons.splice(index, 1);
+        if (!b.popped) {
+            // Balloon body
+            ctx.fillStyle = b.color;
+            ctx.beginPath();
+            ctx.ellipse(b.x + Math.sin(b.swayOffset) * b.sway, b.y, b.size * 0.4, b.size * 0.5, 0, 0, Math.PI * 2);
+            ctx.fill();
+            
+            // Balloon tie
+            ctx.strokeStyle = b.color;
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.moveTo(b.x + Math.sin(b.swayOffset) * b.sway, b.y + b.size * 0.5);
+            ctx.lineTo(b.x + Math.sin(b.swayOffset + 0.5) * b.sway, b.y + b.size * 0.7);
+            ctx.stroke();
+            
+            // Highlight
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.4)';
+            ctx.beginPath();
+            ctx.ellipse(b.x + Math.sin(b.swayOffset) * b.sway - b.size * 0.1, b.y - b.size * 0.15, b.size * 0.15, b.size * 0.2, 0, 0, Math.PI * 2);
+            ctx.fill();
+            
+            b.y -= b.speed;
+            b.swayOffset += 0.05;
+            
+            if (b.y < -b.size) {
+                balloons.splice(index, 1);
+            }
+        } else {
+            // Popping animation
+            b.popProgress += 0.15;
+            const alpha = 1 - b.popProgress;
+            const expandSize = b.size * (1 + b.popProgress * 0.5);
+            
+            // Draw explosion lines
+            ctx.strokeStyle = `rgba(${hexToRgb(b.color)}, ${alpha})`;
+            ctx.lineWidth = 3;
+            for (let i = 0; i < 8; i++) {
+                const angle = (Math.PI * 2 * i) / 8;
+                const startX = b.x + Math.cos(angle) * b.size * 0.3;
+                const startY = b.y + Math.sin(angle) * b.size * 0.3;
+                const endX = b.x + Math.cos(angle) * expandSize;
+                const endY = b.y + Math.sin(angle) * expandSize;
+                
+                ctx.beginPath();
+                ctx.moveTo(startX, startY);
+                ctx.lineTo(endX, endY);
+                ctx.stroke();
+            }
+            
+            if (b.popProgress >= 1) {
+                balloons.splice(index, 1);
+            }
         }
     });
     
@@ -231,7 +356,16 @@ function animateBalloons(balloons, startTime, maxDuration) {
         activeAnimation = requestAnimationFrame(() => animateBalloons(balloons, startTime, maxDuration));
     } else {
         activeAnimation = null;
+        disableCanvasInteraction();
     }
+}
+
+// Helper function to convert hex color to RGB for alpha
+function hexToRgb(hex) {
+    const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    return result ? 
+        `${parseInt(result[1], 16)}, ${parseInt(result[2], 16)}, ${parseInt(result[3], 16)}` : 
+        '0, 0, 0';
 }
 
 // Effect 4: Stars
@@ -325,6 +459,8 @@ function createBubbles() {
         });
     }
     
+    activeInteractiveObjects = { type: 'bubbles', data: bubbles };
+    enableCanvasInteraction();
     animateBubbles(bubbles, startTime, maxDuration);
 }
 
@@ -332,6 +468,7 @@ function animateBubbles(bubbles, startTime, maxDuration) {
     if (Date.now() - startTime > maxDuration) {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         activeAnimation = null;
+        disableCanvasInteraction();
         return;
     }
     
@@ -362,8 +499,8 @@ function animateBubbles(bubbles, startTime, maxDuration) {
             b.y -= b.speed;
             b.swayOffset += 0.03;
             
-            // Chance to pop
-            if (Math.random() < 0.02 || b.y < -b.size) {
+            // Chance to pop (reduced since user can click)
+            if (Math.random() < 0.01 || b.y < -b.size) {
                 b.pop = true;
             }
         } else {
@@ -388,6 +525,7 @@ function animateBubbles(bubbles, startTime, maxDuration) {
         activeAnimation = requestAnimationFrame(() => animateBubbles(bubbles, startTime, maxDuration));
     } else {
         activeAnimation = null;
+        disableCanvasInteraction();
     }
 }
 

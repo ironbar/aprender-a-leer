@@ -264,14 +264,14 @@ function animateFireworks(explosions) {
 function createBalloons() {
     const balloons = [];
     const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#f9ca24', '#6c5ce7', '#fd79a8', '#fdcb6e'];
-    const maxDuration = 2000; // 2 seconds max
+    const maxDuration = 4000; // 4 seconds max (doubled)
     const startTime = Date.now();
     
     for (let i = 0; i < 15; i++) {
         balloons.push({
             x: Math.random() * canvas.width,
             y: canvas.height + 50,
-            size: Math.random() * 30 + 40,
+            size: Math.random() * 60 + 80, // Doubled size (was 30 + 40)
             color: colors[Math.floor(Math.random() * colors.length)],
             speed: Math.random() * 3 + 2, // Increased speed
             sway: Math.random() * 2,
@@ -443,7 +443,7 @@ function animateStars(stars) {
 // Effect 5: Bubbles
 function createBubbles() {
     const bubbles = [];
-    const maxDuration = 2000; // 2 seconds max
+    const maxDuration = 4000; // 4 seconds max (doubled)
     const startTime = Date.now();
     
     for (let i = 0; i < 25; i++) {

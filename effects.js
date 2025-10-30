@@ -2,6 +2,7 @@
 
 // Effect Configuration
 const EFFECT_PROBABILITY = 0.2; // 20% chance of showing an effect
+const INTERACTIVE_COOLDOWN = 1000; // 1 second cooldown after interactive effects
 
 // Canvas setup
 let canvas, ctx;
@@ -287,77 +288,80 @@ function createBalloons() {
 }
 
 function animateBalloons(balloons, startTime, maxDuration) {
-    if (Date.now() - startTime > maxDuration) {
+    const elapsed = Date.now() - startTime;
+    
+    // Check if we're past the total duration (animation + cooldown)
+    if (elapsed > maxDuration + INTERACTIVE_COOLDOWN) {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         activeAnimation = null;
         disableCanvasInteraction();
         return;
     }
     
+    // Clear canvas regardless of phase
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     
-    balloons.forEach((b, index) => {
-        if (!b.popped) {
-            // Balloon body
-            ctx.fillStyle = b.color;
-            ctx.beginPath();
-            ctx.ellipse(b.x + Math.sin(b.swayOffset) * b.sway, b.y, b.size * 0.4, b.size * 0.5, 0, 0, Math.PI * 2);
-            ctx.fill();
-            
-            // Balloon tie
-            ctx.strokeStyle = b.color;
-            ctx.lineWidth = 2;
-            ctx.beginPath();
-            ctx.moveTo(b.x + Math.sin(b.swayOffset) * b.sway, b.y + b.size * 0.5);
-            ctx.lineTo(b.x + Math.sin(b.swayOffset + 0.5) * b.sway, b.y + b.size * 0.7);
-            ctx.stroke();
-            
-            // Highlight
-            ctx.fillStyle = 'rgba(255, 255, 255, 0.4)';
-            ctx.beginPath();
-            ctx.ellipse(b.x + Math.sin(b.swayOffset) * b.sway - b.size * 0.1, b.y - b.size * 0.15, b.size * 0.15, b.size * 0.2, 0, 0, Math.PI * 2);
-            ctx.fill();
-            
-            b.y -= b.speed;
-            b.swayOffset += 0.05;
-            
-            if (b.y < -b.size) {
-                balloons.splice(index, 1);
-            }
-        } else {
-            // Popping animation
-            b.popProgress += 0.15;
-            const alpha = 1 - b.popProgress;
-            const expandSize = b.size * (1 + b.popProgress * 0.5);
-            
-            // Draw explosion lines
-            ctx.strokeStyle = `rgba(${hexToRgb(b.color)}, ${alpha})`;
-            ctx.lineWidth = 3;
-            for (let i = 0; i < 8; i++) {
-                const angle = (Math.PI * 2 * i) / 8;
-                const startX = b.x + Math.cos(angle) * b.size * 0.3;
-                const startY = b.y + Math.sin(angle) * b.size * 0.3;
-                const endX = b.x + Math.cos(angle) * expandSize;
-                const endY = b.y + Math.sin(angle) * expandSize;
-                
+    // Only render if within animation duration (not in cooldown)
+    if (elapsed <= maxDuration) {
+        balloons.forEach((b, index) => {
+            if (!b.popped) {
+                // Balloon body
+                ctx.fillStyle = b.color;
                 ctx.beginPath();
-                ctx.moveTo(startX, startY);
-                ctx.lineTo(endX, endY);
+                ctx.ellipse(b.x + Math.sin(b.swayOffset) * b.sway, b.y, b.size * 0.4, b.size * 0.5, 0, 0, Math.PI * 2);
+                ctx.fill();
+                
+                // Balloon tie
+                ctx.strokeStyle = b.color;
+                ctx.lineWidth = 2;
+                ctx.beginPath();
+                ctx.moveTo(b.x + Math.sin(b.swayOffset) * b.sway, b.y + b.size * 0.5);
+                ctx.lineTo(b.x + Math.sin(b.swayOffset + 0.5) * b.sway, b.y + b.size * 0.7);
                 ctx.stroke();
+                
+                // Highlight
+                ctx.fillStyle = 'rgba(255, 255, 255, 0.4)';
+                ctx.beginPath();
+                ctx.ellipse(b.x + Math.sin(b.swayOffset) * b.sway - b.size * 0.1, b.y - b.size * 0.15, b.size * 0.15, b.size * 0.2, 0, 0, Math.PI * 2);
+                ctx.fill();
+                
+                b.y -= b.speed;
+                b.swayOffset += 0.05;
+                
+                if (b.y < -b.size) {
+                    balloons.splice(index, 1);
+                }
+            } else {
+                // Popping animation
+                b.popProgress += 0.15;
+                const alpha = 1 - b.popProgress;
+                const expandSize = b.size * (1 + b.popProgress * 0.5);
+                
+                // Draw explosion lines
+                ctx.strokeStyle = `rgba(${hexToRgb(b.color)}, ${alpha})`;
+                ctx.lineWidth = 3;
+                for (let i = 0; i < 8; i++) {
+                    const angle = (Math.PI * 2 * i) / 8;
+                    const startX = b.x + Math.cos(angle) * b.size * 0.3;
+                    const startY = b.y + Math.sin(angle) * b.size * 0.3;
+                    const endX = b.x + Math.cos(angle) * expandSize;
+                    const endY = b.y + Math.sin(angle) * expandSize;
+                    
+                    ctx.beginPath();
+                    ctx.moveTo(startX, startY);
+                    ctx.lineTo(endX, endY);
+                    ctx.stroke();
+                }
+                
+                if (b.popProgress >= 1) {
+                    balloons.splice(index, 1);
+                }
             }
-            
-            if (b.popProgress >= 1) {
-                balloons.splice(index, 1);
-            }
-        }
-    });
-    
-    if (balloons.length > 0) {
-        activeAnimation = requestAnimationFrame(() => animateBalloons(balloons, startTime, maxDuration));
-    } else {
-        activeAnimation = null;
-        disableCanvasInteraction();
+        });
     }
+    // During cooldown phase: canvas stays clear but interactive
+    
+    activeAnimation = requestAnimationFrame(() => animateBalloons(balloons, startTime, maxDuration));
 }
 
 // Helper function to convert hex color to RGB for alpha
@@ -465,68 +469,71 @@ function createBubbles() {
 }
 
 function animateBubbles(bubbles, startTime, maxDuration) {
-    if (Date.now() - startTime > maxDuration) {
+    const elapsed = Date.now() - startTime;
+    
+    // Check if we're past the total duration (animation + cooldown)
+    if (elapsed > maxDuration + INTERACTIVE_COOLDOWN) {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         activeAnimation = null;
         disableCanvasInteraction();
         return;
     }
     
+    // Clear canvas regardless of phase
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     
-    bubbles.forEach((b, index) => {
-        if (!b.pop) {
-            // Bubble
-            const gradient = ctx.createRadialGradient(
-                b.x - b.size * 0.3, b.y - b.size * 0.3, 0,
-                b.x, b.y, b.size
-            );
-            gradient.addColorStop(0, 'rgba(255, 255, 255, 0.8)');
-            gradient.addColorStop(0.5, 'rgba(135, 206, 250, 0.3)');
-            gradient.addColorStop(1, 'rgba(65, 105, 225, 0.4)');
-            
-            ctx.fillStyle = gradient;
-            ctx.beginPath();
-            ctx.arc(b.x + Math.sin(b.swayOffset) * b.sway, b.y, b.size, 0, Math.PI * 2);
-            ctx.fill();
-            
-            // Highlight
-            ctx.fillStyle = 'rgba(255, 255, 255, 0.6)';
-            ctx.beginPath();
-            ctx.arc(b.x - b.size * 0.3 + Math.sin(b.swayOffset) * b.sway, b.y - b.size * 0.3, b.size * 0.2, 0, Math.PI * 2);
-            ctx.fill();
-            
-            b.y -= b.speed;
-            b.swayOffset += 0.03;
-            
-            // Chance to pop (reduced since user can click)
-            if (Math.random() < 0.01 || b.y < -b.size) {
-                b.pop = true;
+    // Only render if within animation duration (not in cooldown)
+    if (elapsed <= maxDuration) {
+        bubbles.forEach((b, index) => {
+            if (!b.pop) {
+                // Bubble
+                const gradient = ctx.createRadialGradient(
+                    b.x - b.size * 0.3, b.y - b.size * 0.3, 0,
+                    b.x, b.y, b.size
+                );
+                gradient.addColorStop(0, 'rgba(255, 255, 255, 0.8)');
+                gradient.addColorStop(0.5, 'rgba(135, 206, 250, 0.3)');
+                gradient.addColorStop(1, 'rgba(65, 105, 225, 0.4)');
+                
+                ctx.fillStyle = gradient;
+                ctx.beginPath();
+                ctx.arc(b.x + Math.sin(b.swayOffset) * b.sway, b.y, b.size, 0, Math.PI * 2);
+                ctx.fill();
+                
+                // Highlight
+                ctx.fillStyle = 'rgba(255, 255, 255, 0.6)';
+                ctx.beginPath();
+                ctx.arc(b.x - b.size * 0.3 + Math.sin(b.swayOffset) * b.sway, b.y - b.size * 0.3, b.size * 0.2, 0, Math.PI * 2);
+                ctx.fill();
+                
+                b.y -= b.speed;
+                b.swayOffset += 0.03;
+                
+                // Chance to pop (reduced since user can click)
+                if (Math.random() < 0.01 || b.y < -b.size) {
+                    b.pop = true;
+                }
+            } else {
+                // Popping animation
+                b.popProgress += 0.1;
+                const alpha = 1 - b.popProgress;
+                const expandSize = b.size * (1 + b.popProgress);
+                
+                ctx.strokeStyle = `rgba(135, 206, 250, ${alpha})`;
+                ctx.lineWidth = 3;
+                ctx.beginPath();
+                ctx.arc(b.x, b.y, expandSize, 0, Math.PI * 2);
+                ctx.stroke();
+                
+                if (b.popProgress >= 1) {
+                    bubbles.splice(index, 1);
+                }
             }
-        } else {
-            // Popping animation
-            b.popProgress += 0.1;
-            const alpha = 1 - b.popProgress;
-            const expandSize = b.size * (1 + b.popProgress);
-            
-            ctx.strokeStyle = `rgba(135, 206, 250, ${alpha})`;
-            ctx.lineWidth = 3;
-            ctx.beginPath();
-            ctx.arc(b.x, b.y, expandSize, 0, Math.PI * 2);
-            ctx.stroke();
-            
-            if (b.popProgress >= 1) {
-                bubbles.splice(index, 1);
-            }
-        }
-    });
-    
-    if (bubbles.length > 0) {
-        activeAnimation = requestAnimationFrame(() => animateBubbles(bubbles, startTime, maxDuration));
-    } else {
-        activeAnimation = null;
-        disableCanvasInteraction();
+        });
     }
+    // During cooldown phase: canvas stays clear but interactive
+    
+    activeAnimation = requestAnimationFrame(() => animateBubbles(bubbles, startTime, maxDuration));
 }
 
 // Effect 6: Emoji Rain

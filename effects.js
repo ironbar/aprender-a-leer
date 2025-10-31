@@ -50,54 +50,119 @@ function disableCanvasInteraction() {
 
 function handleCanvasClick(event) {
     if (!isInteractive || !activeInteractiveObjects) return;
-    
+
     const rect = canvas.getBoundingClientRect();
     const x = event.clientX - rect.left;
     const y = event.clientY - rect.top;
-    
+
     // Check balloons
     if (activeInteractiveObjects.type === 'balloons') {
         activeInteractiveObjects.data.forEach(balloon => {
             if (balloon.popped) return;
-            
+
             const balloonX = balloon.x + Math.sin(balloon.swayOffset) * balloon.sway;
             const balloonY = balloon.y;
             const distance = Math.sqrt(Math.pow(x - balloonX, 2) + Math.pow(y - balloonY, 2));
-            
+
             if (distance < balloon.size) {
                 balloon.popped = true;
                 balloon.popProgress = 0;
             }
         });
     }
-    
+
     // Check bubbles
     if (activeInteractiveObjects.type === 'bubbles') {
         activeInteractiveObjects.data.forEach(bubble => {
             if (bubble.pop) return;
-            
+
             const bubbleX = bubble.x + Math.sin(bubble.swayOffset) * bubble.sway;
             const bubbleY = bubble.y;
             const distance = Math.sqrt(Math.pow(x - bubbleX, 2) + Math.pow(y - bubbleY, 2));
-            
+
             if (distance < bubble.size) {
                 bubble.pop = true;
                 bubble.popProgress = 0;
             }
         });
     }
+
+    // Check confetti burst creation
+    if (activeInteractiveObjects.type === 'confetti') {
+        const { particles, colors } = activeInteractiveObjects.data;
+        for (let i = 0; i < 25; i++) {
+            particles.push({
+                x: x + (Math.random() - 0.5) * 40,
+                y: y + (Math.random() - 0.5) * 40,
+                size: Math.random() * 8 + 4,
+                color: colors[Math.floor(Math.random() * colors.length)],
+                speedY: -Math.random() * 4 - 2,
+                speedX: (Math.random() - 0.5) * 6,
+                rotation: Math.random() * 360,
+                rotationSpeed: (Math.random() - 0.5) * 12
+            });
+        }
+    }
+
+    // Add fireworks explosion at click position
+    if (activeInteractiveObjects.type === 'fireworks') {
+        const data = activeInteractiveObjects.data;
+        data.explosions.push(createExplosion(x, y));
+    }
+
+    // Stars react to nearby clicks or spawn a new one
+    if (activeInteractiveObjects.type === 'stars') {
+        const { stars } = activeInteractiveObjects.data;
+        let interacted = false;
+
+        stars.forEach(star => {
+            const distance = Math.sqrt(Math.pow(x - star.x, 2) + Math.pow(y - star.y, 2));
+            if (distance < star.size) {
+                interacted = true;
+                star.life = 100;
+                star.growthPhase = true;
+                star.twinkle = 1;
+                star.rotationSpeed = 6;
+            }
+        });
+
+        if (!interacted) {
+            stars.push(createStarAtPosition(x, y));
+        }
+    }
+
+    // Emojis bounce when clicked, otherwise spawn a new emoji
+    if (activeInteractiveObjects.type === 'emoji') {
+        const data = activeInteractiveObjects.data;
+        let bounced = false;
+
+        data.particles.forEach(particle => {
+            const distance = Math.sqrt(Math.pow(x - particle.x, 2) + Math.pow(y - particle.y, 2));
+            if (distance < particle.size * 0.6) {
+                bounced = true;
+                particle.speed = -Math.abs(particle.speed) - 2;
+                particle.rotationSpeed = (Math.random() - 0.5) * 12;
+                particle.emoji = data.emojis[Math.floor(Math.random() * data.emojis.length)];
+                particle.bounces = (particle.bounces || 0) + 1;
+            }
+        });
+
+        if (!bounced) {
+            data.particles.push(createEmojiAtPosition(x, y, data.emojis));
+        }
+    }
 }
 
 function handleCanvasHover(event) {
     if (!isInteractive || !activeInteractiveObjects) return;
-    
+
     const rect = canvas.getBoundingClientRect();
     const x = event.clientX - rect.left;
     const y = event.clientY - rect.top;
-    
+
     let isOverObject = false;
-    
-    // Check if hovering over any balloon or bubble
+
+    // Check if hovering over any interactive object
     if (activeInteractiveObjects.type === 'balloons') {
         for (const balloon of activeInteractiveObjects.data) {
             if (balloon.popped) continue;
@@ -118,8 +183,26 @@ function handleCanvasHover(event) {
                 break;
             }
         }
+    } else if (activeInteractiveObjects.type === 'stars') {
+        for (const star of activeInteractiveObjects.data.stars) {
+            const distance = Math.sqrt(Math.pow(x - star.x, 2) + Math.pow(y - star.y, 2));
+            if (distance < star.size) {
+                isOverObject = true;
+                break;
+            }
+        }
+    } else if (activeInteractiveObjects.type === 'emoji') {
+        for (const emoji of activeInteractiveObjects.data.particles) {
+            const distance = Math.sqrt(Math.pow(x - emoji.x, 2) + Math.pow(y - emoji.y, 2));
+            if (distance < emoji.size * 0.6) {
+                isOverObject = true;
+                break;
+            }
+        }
+    } else if (activeInteractiveObjects.type === 'confetti' || activeInteractiveObjects.type === 'fireworks') {
+        isOverObject = true; // clicking anywhere triggers a reaction
     }
-    
+
     canvas.style.cursor = isOverObject ? 'pointer' : 'default';
 }
 
@@ -146,13 +229,16 @@ function triggerRandomEffect() {
 
 // Effect 1: Confetti
 function createConfetti() {
-    const particles = [];
     const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#f9ca24', '#6c5ce7', '#fd79a8', '#fdcb6e'];
-    const maxDuration = 2000; // 2 seconds max
-    const startTime = Date.now();
-    
-    for (let i = 0; i < 100; i++) {
-        particles.push({
+    const data = {
+        particles: [],
+        colors,
+        startTime: Date.now(),
+        maxDuration: 4000
+    };
+
+    for (let i = 0; i < 120; i++) {
+        data.particles.push({
             x: Math.random() * canvas.width,
             y: -20,
             size: Math.random() * 8 + 4,
@@ -163,108 +249,140 @@ function createConfetti() {
             rotationSpeed: (Math.random() - 0.5) * 10
         });
     }
-    
-    animateConfetti(particles, startTime, maxDuration);
+
+    activeInteractiveObjects = { type: 'confetti', data };
+    enableCanvasInteraction();
+    animateConfetti(data);
 }
 
-function animateConfetti(particles, startTime, maxDuration) {
-    if (Date.now() - startTime > maxDuration) {
+function animateConfetti(data) {
+    const { particles, startTime, maxDuration } = data;
+    const elapsed = Date.now() - startTime;
+
+    if (elapsed > maxDuration + INTERACTIVE_COOLDOWN) {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         activeAnimation = null;
+        disableCanvasInteraction();
         return;
     }
-    
+
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    
-    particles.forEach((p, index) => {
+
+    for (let i = particles.length - 1; i >= 0; i--) {
+        const p = particles[i];
         ctx.save();
         ctx.translate(p.x, p.y);
         ctx.rotate(p.rotation * Math.PI / 180);
         ctx.fillStyle = p.color;
         ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size);
         ctx.restore();
-        
+
         p.y += p.speedY;
         p.x += p.speedX;
         p.rotation += p.rotationSpeed;
-        p.speedY += 0.1; // gravity
-        
-        if (p.y > canvas.height) {
-            particles.splice(index, 1);
+        p.speedY += 0.1;
+
+        if (p.y > canvas.height + 20) {
+            if (elapsed <= maxDuration) {
+                p.y = -20;
+                p.x = Math.random() * canvas.width;
+                p.speedY = Math.random() * 3 + 2;
+                p.speedX = (Math.random() - 0.5) * 4;
+                p.rotation = Math.random() * 360;
+            } else {
+                particles.splice(i, 1);
+            }
         }
-    });
-    
-    if (particles.length > 0) {
-        activeAnimation = requestAnimationFrame(() => animateConfetti(particles, startTime, maxDuration));
-    } else {
-        activeAnimation = null;
     }
+
+    activeAnimation = requestAnimationFrame(() => animateConfetti(data));
 }
 
 // Effect 2: Fireworks
 function createFireworks() {
-    const explosions = [];
-    
+    const data = {
+        explosions: [],
+        startTime: Date.now(),
+        maxDuration: 4000
+    };
+
     for (let i = 0; i < 3; i++) {
         setTimeout(() => {
+            if (!activeInteractiveObjects || activeInteractiveObjects.type !== 'fireworks' || activeInteractiveObjects.data !== data) {
+                return;
+            }
             const x = Math.random() * canvas.width;
             const y = Math.random() * canvas.height * 0.5;
-            explosions.push(createExplosion(x, y));
+            data.explosions.push(createExplosion(x, y));
         }, i * 400);
     }
-    
-    animateFireworks(explosions);
+
+    activeInteractiveObjects = { type: 'fireworks', data };
+    enableCanvasInteraction();
+    animateFireworks(data);
 }
 
 function createExplosion(x, y) {
     const particles = [];
     const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#f9ca24', '#6c5ce7', '#fd79a8'];
     const particleCount = 50;
-    
+
     for (let i = 0; i < particleCount; i++) {
         const angle = (Math.PI * 2 * i) / particleCount;
         const speed = Math.random() * 4 + 2;
         particles.push({
-            x: x,
-            y: y,
+            x,
+            y,
             vx: Math.cos(angle) * speed,
             vy: Math.sin(angle) * speed,
             life: 100,
             color: colors[Math.floor(Math.random() * colors.length)]
         });
     }
-    
+
     return particles;
 }
 
-function animateFireworks(explosions) {
+function animateFireworks(data) {
+    const { explosions, startTime, maxDuration } = data;
+    const elapsed = Date.now() - startTime;
+
+    if (elapsed > maxDuration + INTERACTIVE_COOLDOWN) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        activeAnimation = null;
+        disableCanvasInteraction();
+        return;
+    }
+
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    
-    let allDead = true;
-    
+
     explosions.forEach(particles => {
-        particles.forEach((p, index) => {
+        for (let i = particles.length - 1; i >= 0; i--) {
+            const p = particles[i];
             if (p.life > 0) {
-                allDead = false;
                 ctx.fillStyle = p.color;
                 ctx.globalAlpha = p.life / 100;
                 ctx.fillRect(p.x, p.y, 3, 3);
-                
+
                 p.x += p.vx;
                 p.y += p.vy;
-                p.vy += 0.1; // gravity
+                p.vy += 0.08;
                 p.life -= 2;
+            } else {
+                particles.splice(i, 1);
             }
-        });
+        }
     });
-    
+
     ctx.globalAlpha = 1;
-    
-    if (!allDead) {
-        activeAnimation = requestAnimationFrame(() => animateFireworks(explosions));
-    } else {
-        activeAnimation = null;
+
+    for (let i = explosions.length - 1; i >= 0; i--) {
+        if (explosions[i].length === 0 && elapsed > maxDuration) {
+            explosions.splice(i, 1);
+        }
     }
+
+    activeAnimation = requestAnimationFrame(() => animateFireworks(data));
 }
 
 // Effect 3: Balloons
@@ -380,43 +498,70 @@ function hexToRgb(hex) {
 
 // Effect 4: Stars
 function createStars() {
-    const stars = [];
-    
+    const data = {
+        stars: [],
+        startTime: Date.now(),
+        maxDuration: 4000
+    };
+
     for (let i = 0; i < 30; i++) {
-        stars.push({
-            x: Math.random() * canvas.width,
-            y: Math.random() * canvas.height,
-            size: Math.random() * 20 + 10,
-            life: 100,
-            growthPhase: true,
-            rotation: Math.random() * 360
-        });
+        data.stars.push(createStarAtPosition(Math.random() * canvas.width, Math.random() * canvas.height));
     }
-    
-    animateStars(stars);
+
+    activeInteractiveObjects = { type: 'stars', data };
+    enableCanvasInteraction();
+    animateStars(data);
 }
 
-function animateStars(stars) {
+function createStarAtPosition(x, y) {
+    return {
+        x,
+        y,
+        size: Math.random() * 20 + 10,
+        life: 100,
+        growthPhase: true,
+        rotation: Math.random() * 360,
+        rotationSpeed: 2,
+        twinkle: 0,
+        vx: (Math.random() - 0.5) * 0.6,
+        vy: (Math.random() - 0.5) * 0.6
+    };
+}
+
+function animateStars(data) {
+    const { stars, startTime, maxDuration } = data;
+    const elapsed = Date.now() - startTime;
+
+    if (elapsed > maxDuration + INTERACTIVE_COOLDOWN) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        activeAnimation = null;
+        disableCanvasInteraction();
+        return;
+    }
+
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    
-    stars.forEach((s, index) => {
+
+    for (let i = stars.length - 1; i >= 0; i--) {
+        const s = stars[i];
         if (s.life > 0) {
             ctx.save();
             ctx.translate(s.x, s.y);
             ctx.rotate(s.rotation * Math.PI / 180);
-            
-            const scale = s.growthPhase ? (100 - s.life) / 50 : s.life / 50;
-            const alpha = s.life / 100;
-            
+
+            const baseScale = s.growthPhase ? (100 - s.life) / 50 : s.life / 50;
+            const twinkleScale = 1 + s.twinkle * 0.3;
+            const scale = Math.max(0, baseScale) * twinkleScale;
+            const alpha = Math.min(1, (s.life / 100) + s.twinkle * 0.3);
+
             ctx.fillStyle = `rgba(255, 215, 0, ${alpha})`;
             ctx.beginPath();
-            for (let i = 0; i < 5; i++) {
-                const angle = (Math.PI * 2 * i) / 5 - Math.PI / 2;
-                const x = Math.cos(angle) * s.size * scale;
-                const y = Math.sin(angle) * s.size * scale;
-                if (i === 0) ctx.moveTo(x, y);
-                else ctx.lineTo(x, y);
-                
+            for (let j = 0; j < 5; j++) {
+                const angle = (Math.PI * 2 * j) / 5 - Math.PI / 2;
+                const pointX = Math.cos(angle) * s.size * scale;
+                const pointY = Math.sin(angle) * s.size * scale;
+                if (j === 0) ctx.moveTo(pointX, pointY);
+                else ctx.lineTo(pointX, pointY);
+
                 const innerAngle = angle + Math.PI / 5;
                 const innerX = Math.cos(innerAngle) * s.size * scale * 0.4;
                 const innerY = Math.sin(innerAngle) * s.size * scale * 0.4;
@@ -424,30 +569,32 @@ function animateStars(stars) {
             }
             ctx.closePath();
             ctx.fill();
-            
-            // Glow
+
             ctx.strokeStyle = `rgba(255, 255, 255, ${alpha * 0.5})`;
             ctx.lineWidth = 2;
             ctx.stroke();
-            
+
             ctx.restore();
-            
+
             if (s.growthPhase && s.life < 50) {
                 s.growthPhase = false;
             }
-            
-            s.life -= 2;
-            s.rotation += 2;
+
+            s.life -= 1.5;
+            s.rotation += s.rotationSpeed;
+            s.x += s.vx;
+            s.y += s.vy;
+            s.twinkle = Math.max(0, s.twinkle - 0.02);
+
+            if (s.x < -50 || s.x > canvas.width + 50 || s.y < -50 || s.y > canvas.height + 50) {
+                stars.splice(i, 1);
+            }
         } else {
-            stars.splice(index, 1);
+            stars.splice(i, 1);
         }
-    });
-    
-    if (stars.length > 0) {
-        activeAnimation = requestAnimationFrame(() => animateStars(stars));
-    } else {
-        activeAnimation = null;
     }
+
+    activeAnimation = requestAnimationFrame(() => animateStars(data));
 }
 
 // Effect 5: Bubbles
@@ -545,35 +692,51 @@ function animateBubbles(bubbles, startTime, maxDuration) {
 // Effect 6: Emoji Rain
 function createEmojiRain() {
     const emojis = ['😊', '🎉', '⭐', '💖', '🌈', '✨', '🎈', '🌟', '💫', '🎊'];
-    const particles = [];
-    const maxDuration = 2000; // 2 seconds max
-    const startTime = Date.now();
-    
-    for (let i = 0; i < 30; i++) {
-        particles.push({
-            emoji: emojis[Math.floor(Math.random() * emojis.length)],
-            x: Math.random() * canvas.width,
-            y: -50,
-            size: Math.random() * 30 + 30,
-            speed: Math.random() * 4 + 3, // Increased speed
-            rotation: Math.random() * 360,
-            rotationSpeed: (Math.random() - 0.5) * 5
-        });
+    const data = {
+        particles: [],
+        emojis,
+        startTime: Date.now(),
+        maxDuration: 4000
+    };
+
+    for (let i = 0; i < 35; i++) {
+        data.particles.push(createEmojiAtPosition(Math.random() * canvas.width, -50, emojis));
     }
-    
-    animateEmojiRain(particles, startTime, maxDuration);
+
+    activeInteractiveObjects = { type: 'emoji', data };
+    enableCanvasInteraction();
+    animateEmojiRain(data);
 }
 
-function animateEmojiRain(particles, startTime, maxDuration) {
-    if (Date.now() - startTime > maxDuration) {
+function createEmojiAtPosition(x, y, emojis) {
+    const isFromTop = y <= -10;
+    return {
+        emoji: emojis[Math.floor(Math.random() * emojis.length)],
+        x,
+        y,
+        size: Math.random() * 30 + 30,
+        speed: isFromTop ? Math.random() * 3 + 2 : -Math.random() * 4 - 2,
+        rotation: Math.random() * 360,
+        rotationSpeed: (Math.random() - 0.5) * 6,
+        bounces: 0
+    };
+}
+
+function animateEmojiRain(data) {
+    const { particles, startTime, maxDuration, emojis } = data;
+    const elapsed = Date.now() - startTime;
+
+    if (elapsed > maxDuration + INTERACTIVE_COOLDOWN) {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         activeAnimation = null;
+        disableCanvasInteraction();
         return;
     }
-    
+
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    
-    particles.forEach((p, index) => {
+
+    for (let i = particles.length - 1; i >= 0; i--) {
+        const p = particles[i];
         ctx.save();
         ctx.translate(p.x, p.y);
         ctx.rotate(p.rotation * Math.PI / 180);
@@ -582,20 +745,31 @@ function animateEmojiRain(particles, startTime, maxDuration) {
         ctx.textBaseline = 'middle';
         ctx.fillText(p.emoji, 0, 0);
         ctx.restore();
-        
+
         p.y += p.speed;
         p.rotation += p.rotationSpeed;
-        
-        if (p.y > canvas.height + 50) {
-            particles.splice(index, 1);
+        p.speed = Math.min(p.speed + 0.08, 8);
+
+        if (p.speed < -10) {
+            p.speed = -10;
         }
-    });
-    
-    if (particles.length > 0) {
-        activeAnimation = requestAnimationFrame(() => animateEmojiRain(particles, startTime, maxDuration));
-    } else {
-        activeAnimation = null;
+
+        if (p.y > canvas.height + 60) {
+            if (elapsed <= maxDuration) {
+                p.y = -60;
+                p.x = Math.random() * canvas.width;
+                p.speed = Math.random() * 3 + 2;
+                p.rotationSpeed = (Math.random() - 0.5) * 6;
+                p.emoji = emojis[Math.floor(Math.random() * emojis.length)];
+            } else {
+                particles.splice(i, 1);
+            }
+        } else if (p.y < -80 && p.speed < 0) {
+            p.speed = Math.abs(p.speed) * 0.6;
+        }
     }
+
+    activeAnimation = requestAnimationFrame(() => animateEmojiRain(data));
 }
 
 // Initialize when DOM is ready

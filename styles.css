@@ -20,6 +20,15 @@ body {
     height: 100dvh; /* Use dynamic viewport height to account for mobile browser UI */
     overflow: hidden;
     padding: clamp(2rem, 5dvh, 4rem);
+    transition: background 1.2s ease;
+}
+
+body.effects-active {
+    background: linear-gradient(135deg, #ffe53b 0%, #ff2525 100%);
+}
+
+body.effects-cooldown {
+    transition-duration: 1.8s;
 }
 
 .container {

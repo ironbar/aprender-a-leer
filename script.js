@@ -1,5 +1,6 @@
 // State
 let isUpperCase = true;
+let activeNumbers = new Set();
 let activeConsonants = new Set();
 let lastNumber = null;
 let lastVowel = null;
@@ -130,11 +131,67 @@ function updateCurrentDisplay() {
 }
 
 // Números Tab
+const numbersGrid = document.getElementById('numbersGrid');
+const selectAllNumbersButton = document.getElementById('selectAllNumbers');
+const selectNoNumbersButton = document.getElementById('selectNoNumbers');
+const numberCheckboxes = [];
+
+numbers.forEach((number) => {
+    const item = document.createElement('div');
+    item.className = 'number-item';
+
+    const checkbox = document.createElement('input');
+    checkbox.type = 'checkbox';
+    checkbox.id = `number-${number}`;
+    checkbox.value = number;
+    checkbox.checked = true;
+    activeNumbers.add(number);
+
+    const label = document.createElement('label');
+    label.htmlFor = `number-${number}`;
+    label.textContent = number;
+
+    checkbox.addEventListener('change', (e) => {
+        if (e.target.checked) {
+            activeNumbers.add(number);
+        } else {
+            activeNumbers.delete(number);
+        }
+    });
+
+    item.appendChild(checkbox);
+    item.appendChild(label);
+    numbersGrid.appendChild(item);
+    numberCheckboxes.push(checkbox);
+});
+
+selectAllNumbersButton.addEventListener('click', () => {
+    numberCheckboxes.forEach((checkbox) => {
+        checkbox.checked = true;
+        activeNumbers.add(checkbox.value);
+    });
+});
+
+selectNoNumbersButton.addEventListener('click', () => {
+    numberCheckboxes.forEach((checkbox) => {
+        checkbox.checked = false;
+    });
+    activeNumbers.clear();
+});
+
 const numerosDisplay = document.getElementById('numerosDisplay');
 numerosDisplay.addEventListener('click', () => {
-    const randomNumber = getRandomElementExcluding(numbers, lastNumber);
-    lastNumber = randomNumber;
     const displayElement = numerosDisplay.querySelector('.letter-display');
+
+    if (activeNumbers.size === 0) {
+        displayElement.textContent = '¡Selecciona números!';
+        adjustTextSize(displayElement);
+        return;
+    }
+
+    const activeNumbersArray = Array.from(activeNumbers);
+    const randomNumber = getRandomElementExcluding(activeNumbersArray, lastNumber);
+    lastNumber = randomNumber;
     displayElement.textContent = randomNumber;
     adjustTextSize(displayElement);
     triggerRandomEffect();

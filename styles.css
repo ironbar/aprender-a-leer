@@ -161,6 +161,78 @@ main {
     line-height: 1;
 }
 
+.numbers-selector {
+    background: #f8f9fa;
+    border-radius: 15px;
+    padding: clamp(1rem, 2vh, 1.5rem);
+    flex-shrink: 0;
+}
+
+.numbers-selector h3 {
+    color: #495057;
+    margin-bottom: clamp(0.8rem, 2vh, 1.2rem);
+    font-size: clamp(1rem, 2vw, 1.3rem);
+}
+
+.numbers-actions {
+    display: flex;
+    gap: clamp(0.5rem, 1vw, 1rem);
+    flex-wrap: wrap;
+    margin-bottom: clamp(0.8rem, 2vh, 1.2rem);
+}
+
+.numbers-actions button {
+    background: #f5576c;
+    border: none;
+    color: white;
+    padding: clamp(0.5rem, 1.5vh, 0.8rem) clamp(0.8rem, 2vw, 1.2rem);
+    border-radius: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.numbers-actions button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+.numbers-actions button:active {
+    transform: translateY(0);
+}
+
+.numbers-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(clamp(40px, 8vw, 60px), 1fr));
+    gap: clamp(0.4rem, 1vw, 0.8rem);
+}
+
+.number-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: clamp(0.2rem, 0.5vh, 0.4rem);
+}
+
+.number-item input[type="checkbox"] {
+    width: clamp(16px, 3vw, 20px);
+    height: clamp(16px, 3vw, 20px);
+    cursor: pointer;
+}
+
+.number-item label {
+    font-size: clamp(1rem, 2.5vw, 1.5rem);
+    font-weight: bold;
+    color: #495057;
+    cursor: pointer;
+    user-select: none;
+}
+
+.number-item input[type="checkbox"]:checked + label {
+    color: #f5576c;
+}
+
 @keyframes fadeIn {
     from {
         opacity: 0;

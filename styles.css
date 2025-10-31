@@ -174,14 +174,16 @@ main {
     font-size: clamp(1rem, 2vw, 1.3rem);
 }
 
-.numbers-actions {
+.numbers-actions,
+.selector-actions {
     display: flex;
     gap: clamp(0.5rem, 1vw, 1rem);
     flex-wrap: wrap;
     margin-bottom: clamp(0.8rem, 2vh, 1.2rem);
 }
 
-.numbers-actions button {
+.numbers-actions button,
+.selector-actions button {
     background: #f5576c;
     border: none;
     color: white;
@@ -193,12 +195,14 @@ main {
     transition: transform 0.2s, box-shadow 0.2s;
 }
 
-.numbers-actions button:hover {
+.numbers-actions button:hover,
+.selector-actions button:hover {
     transform: translateY(-2px);
     box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
 }
 
-.numbers-actions button:active {
+.numbers-actions button:active,
+.selector-actions button:active {
     transform: translateY(0);
 }
 

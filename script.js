@@ -1,7 +1,8 @@
 // State
 let isUpperCase = true;
 let activeNumbers = new Set();
-let activeConsonants = new Set();
+let activeConsonantLetters = new Set();
+let activeSyllableConsonants = new Set();
 let lastNumber = null;
 let lastVowel = null;
 let lastConsonant = null;
@@ -209,11 +210,69 @@ vocalesDisplay.addEventListener('click', () => {
 });
 
 // Consonantes Tab
+const consonantsTabGrid = document.getElementById('consonantsTabGrid');
+const consonantTabCheckboxes = [];
+
+consonants.forEach((consonant) => {
+    const item = document.createElement('div');
+    item.className = 'consonant-item';
+
+    const checkbox = document.createElement('input');
+    checkbox.type = 'checkbox';
+    checkbox.id = `consonant-tab-${consonant}`;
+    checkbox.value = consonant;
+    checkbox.checked = true;
+    activeConsonantLetters.add(consonant);
+
+    const label = document.createElement('label');
+    label.htmlFor = `consonant-tab-${consonant}`;
+    label.textContent = consonant.toUpperCase();
+
+    checkbox.addEventListener('change', (e) => {
+        if (e.target.checked) {
+            activeConsonantLetters.add(consonant);
+        } else {
+            activeConsonantLetters.delete(consonant);
+        }
+    });
+
+    item.appendChild(checkbox);
+    item.appendChild(label);
+    consonantsTabGrid.appendChild(item);
+    consonantTabCheckboxes.push(checkbox);
+});
+
+const selectAllConsonantLettersButton = document.getElementById('selectAllConsonantLetters');
+const deselectAllConsonantLettersButton = document.getElementById('deselectAllConsonantLetters');
+
+selectAllConsonantLettersButton.addEventListener('click', () => {
+    activeConsonantLetters.clear();
+    consonantTabCheckboxes.forEach((checkbox) => {
+        checkbox.checked = true;
+        activeConsonantLetters.add(checkbox.value);
+    });
+});
+
+deselectAllConsonantLettersButton.addEventListener('click', () => {
+    consonantTabCheckboxes.forEach((checkbox) => {
+        checkbox.checked = false;
+    });
+    activeConsonantLetters.clear();
+});
+
 const consonantesDisplay = document.getElementById('consonantesDisplay');
 consonantesDisplay.addEventListener('click', () => {
-    const randomConsonant = getRandomElementExcluding(consonants, lastConsonant);
-    lastConsonant = randomConsonant;
     const displayElement = consonantesDisplay.querySelector('.letter-display');
+
+    if (activeConsonantLetters.size === 0) {
+        displayElement.textContent = '¡Selecciona consonantes!';
+        adjustTextSize(displayElement);
+        return;
+    }
+
+    const activeConsonantLettersArray = Array.from(activeConsonantLetters);
+    const randomConsonant = getRandomElementExcluding(activeConsonantLettersArray, lastConsonant);
+    lastConsonant = randomConsonant;
     displayElement.textContent = applyCase(randomConsonant);
     adjustTextSize(displayElement);
     triggerRandomEffect();
@@ -221,55 +280,77 @@ consonantesDisplay.addEventListener('click', () => {
 
 // Sílabas Tab
 // Initialize consonants grid
-const consonantsGrid = document.getElementById('consonantsGrid');
+const syllableConsonantsGrid = document.getElementById('syllableConsonantsGrid');
+const syllableConsonantCheckboxes = [];
+
 consonants.forEach((consonant, index) => {
     const item = document.createElement('div');
     item.className = 'consonant-item';
-    
+
     const checkbox = document.createElement('input');
     checkbox.type = 'checkbox';
-    checkbox.id = `consonant-${consonant}`;
+    checkbox.id = `syllable-consonant-${consonant}`;
     checkbox.value = consonant;
     // Only the first consonant (b) is checked by default
     checkbox.checked = (index === 0);
     if (index === 0) {
-        activeConsonants.add(consonant);
+        activeSyllableConsonants.add(consonant);
     }
-    
+
     const label = document.createElement('label');
-    label.htmlFor = `consonant-${consonant}`;
+    label.htmlFor = `syllable-consonant-${consonant}`;
     label.textContent = consonant.toUpperCase();
-    
+
     checkbox.addEventListener('change', (e) => {
         if (e.target.checked) {
-            activeConsonants.add(consonant);
+            activeSyllableConsonants.add(consonant);
         } else {
-            activeConsonants.delete(consonant);
+            activeSyllableConsonants.delete(consonant);
         }
     });
-    
+
     item.appendChild(checkbox);
     item.appendChild(label);
-    consonantsGrid.appendChild(item);
+    syllableConsonantsGrid.appendChild(item);
+    syllableConsonantCheckboxes.push(checkbox);
+});
+
+const selectAllSyllableConsonantsButton = document.getElementById('selectAllSyllableConsonants');
+const deselectAllSyllableConsonantsButton = document.getElementById('deselectAllSyllableConsonants');
+
+selectAllSyllableConsonantsButton.addEventListener('click', () => {
+    activeSyllableConsonants.clear();
+    syllableConsonantCheckboxes.forEach((checkbox) => {
+        checkbox.checked = true;
+        activeSyllableConsonants.add(checkbox.value);
+    });
+});
+
+deselectAllSyllableConsonantsButton.addEventListener('click', () => {
+    syllableConsonantCheckboxes.forEach((checkbox) => {
+        checkbox.checked = false;
+    });
+    activeSyllableConsonants.clear();
 });
 
 const silabasDisplay = document.getElementById('silabasDisplay');
 silabasDisplay.addEventListener('click', () => {
-    if (activeConsonants.size === 0) {
+    if (activeSyllableConsonants.size === 0) {
         const displayElement = silabasDisplay.querySelector('.letter-display');
         displayElement.textContent = '¡Selecciona consonantes!';
+        adjustTextSize(displayElement);
         return;
     }
-    
-    const activeConsonantsArray = Array.from(activeConsonants);
-    const randomConsonant = getRandomElement(activeConsonantsArray);
+
+    const activeSyllableConsonantsArray = Array.from(activeSyllableConsonants);
+    const randomConsonant = getRandomElement(activeSyllableConsonantsArray);
     const randomVowel = getRandomElement(vowels);
     let syllable = randomConsonant + randomVowel;
-    
+
     // Ensure we don't repeat the same syllable
-    if (activeConsonantsArray.length > 1 || vowels.length > 1) {
+    if (activeSyllableConsonantsArray.length > 1 || vowels.length > 1) {
         while (syllable === lastSyllable) {
-            const newConsonant = getRandomElement(activeConsonantsArray);
+            const newConsonant = getRandomElement(activeSyllableConsonantsArray);
             const newVowel = getRandomElement(vowels);
             syllable = newConsonant + newVowel;
         }

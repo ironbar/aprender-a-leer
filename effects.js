@@ -1,8 +1,10 @@
 // filepath: /mnt/data/other/code/aprender-a-leer/effects.js
 
 // Effect Configuration
-const EFFECT_PROBABILITY = 0.2; // 20% chance of showing an effect
+const EFFECT_INTERVAL = 4; // Show an effect every 4 trigger calls
 const INTERACTIVE_COOLDOWN = 1000; // 1 second cooldown after interactive effects
+
+let effectTriggerCount = 0;
 
 // Canvas setup
 let canvas, ctx;
@@ -121,21 +123,25 @@ function handleCanvasHover(event) {
     canvas.style.cursor = isOverObject ? 'pointer' : 'default';
 }
 
-// Trigger random effect with probability
+// Trigger an effect at a deterministic interval
 function triggerRandomEffect() {
-    if (Math.random() < EFFECT_PROBABILITY) {
-        clearActiveAnimation(); // Clear any existing effect
-        const effects = [
-            createConfetti,
-            createFireworks,
-            createBalloons,
-            createStars,
-            createBubbles,
-            createEmojiRain
-        ];
-        const randomEffect = effects[Math.floor(Math.random() * effects.length)];
-        randomEffect();
+    effectTriggerCount = (effectTriggerCount + 1) % EFFECT_INTERVAL;
+
+    if (effectTriggerCount !== 0) {
+        return;
     }
+
+    clearActiveAnimation(); // Clear any existing effect
+    const effects = [
+        createConfetti,
+        createFireworks,
+        createBalloons,
+        createStars,
+        createBubbles,
+        createEmojiRain
+    ];
+    const randomEffect = effects[Math.floor(Math.random() * effects.length)];
+    randomEffect();
 }
 
 // Effect 1: Confetti

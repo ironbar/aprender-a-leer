@@ -2,7 +2,7 @@
 
 // Effect Configuration
 const EFFECT_INTERVAL = 4; // Show an effect every 4 trigger calls
-const INTERACTIVE_COOLDOWN = 1000; // 1 second cooldown after interactive effects
+const INTERACTIVE_COOLDOWN = 1500; // 1.5 second cooldown after interactive effects
 
 let effectTriggerCount = 0;
 

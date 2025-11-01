@@ -7,6 +7,11 @@ let lastNumber = null;
 let lastVowel = null;
 let lastConsonant = null;
 let lastSyllable = null;
+let isSamplingCooldownActive = false;
+let samplingCooldownTimeoutId = null;
+
+// Interaction configuration
+const SAMPLING_COOLDOWN_DURATION = 400; // milliseconds
 
 // Data
 const numbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
@@ -49,7 +54,32 @@ function applyCase(text) {
     return isUpperCase ? text.toUpperCase() : text.toLowerCase();
 }
 
+function clearSamplingCooldown() {
+    isSamplingCooldownActive = false;
+    if (samplingCooldownTimeoutId) {
+        clearTimeout(samplingCooldownTimeoutId);
+        samplingCooldownTimeoutId = null;
+    }
+}
+
+function startSamplingCooldown() {
+    if (SAMPLING_COOLDOWN_DURATION <= 0) {
+        return;
+    }
+
+    clearSamplingCooldown();
+    isSamplingCooldownActive = true;
+    samplingCooldownTimeoutId = setTimeout(() => {
+        isSamplingCooldownActive = false;
+        samplingCooldownTimeoutId = null;
+    }, SAMPLING_COOLDOWN_DURATION);
+}
+
 function isInteractionDisabled() {
+    if (isSamplingCooldownActive) {
+        return true;
+    }
+
     if (typeof isEffectInCooldown === 'function' && isEffectInCooldown()) {
         return true;
     }
@@ -322,6 +352,7 @@ numerosDisplay.addEventListener('click', () => {
     lastNumber = randomNumber;
     displayElement.textContent = randomNumber;
     adjustTextSize(displayElement);
+    startSamplingCooldown();
     triggerRandomEffect();
 });
 
@@ -336,6 +367,7 @@ vocalesDisplay.addEventListener('click', () => {
     const displayElement = vocalesDisplay.querySelector('.letter-display');
     displayElement.textContent = applyCase(randomVowel);
     adjustTextSize(displayElement);
+    startSamplingCooldown();
     triggerRandomEffect();
 });
 
@@ -408,6 +440,7 @@ consonantesDisplay.addEventListener('click', () => {
     lastConsonant = randomConsonant;
     displayElement.textContent = applyCase(randomConsonant);
     adjustTextSize(displayElement);
+    startSamplingCooldown();
     triggerRandomEffect();
 });
 
@@ -496,6 +529,7 @@ silabasDisplay.addEventListener('click', () => {
     const displayElement = silabasDisplay.querySelector('.letter-display');
     displayElement.textContent = applyCase(syllable);
     adjustTextSize(displayElement);
+    startSamplingCooldown();
     triggerRandomEffect();
 });
 
@@ -559,6 +593,7 @@ palabrasDisplayArea.addEventListener('click', () => {
     lastWord = word;
     displayElement.textContent = isUpperCase ? word.toUpperCase() : word;
     adjustTextSize(displayElement);
+    startSamplingCooldown();
     triggerRandomEffect();
 });
 

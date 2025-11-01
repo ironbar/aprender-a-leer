@@ -69,6 +69,7 @@ function startEffectCooldownPhase() {
     if (currentEffectState !== EFFECT_STATE.ACTIVE) return;
     currentEffectState = EFFECT_STATE.COOLDOWN;
     logEffectCooldownStart();
+    disableCanvasInteraction();
     bodyElement.classList.remove('effects-active');
     bodyElement.classList.add('effects-cooldown');
 }
@@ -358,29 +359,31 @@ function animateConfetti(data) {
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    for (let i = particles.length - 1; i >= 0; i--) {
-        const p = particles[i];
-        ctx.save();
-        ctx.translate(p.x, p.y);
-        ctx.rotate(p.rotation * Math.PI / 180);
-        ctx.fillStyle = p.color;
-        ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size);
-        ctx.restore();
+    if (elapsed <= maxDuration) {
+        for (let i = particles.length - 1; i >= 0; i--) {
+            const p = particles[i];
+            ctx.save();
+            ctx.translate(p.x, p.y);
+            ctx.rotate(p.rotation * Math.PI / 180);
+            ctx.fillStyle = p.color;
+            ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size);
+            ctx.restore();
 
-        p.y += p.speedY;
-        p.x += p.speedX;
-        p.rotation += p.rotationSpeed;
-        p.speedY += 0.1;
+            p.y += p.speedY;
+            p.x += p.speedX;
+            p.rotation += p.rotationSpeed;
+            p.speedY += 0.1;
 
-        if (p.y > canvas.height + 20) {
-            if (elapsed <= maxDuration) {
-                p.y = -20;
-                p.x = Math.random() * canvas.width;
-                p.speedY = Math.random() * 3 + 2;
-                p.speedX = (Math.random() - 0.5) * 4;
-                p.rotation = Math.random() * 360;
-            } else {
-                particles.splice(i, 1);
+            if (p.y > canvas.height + 20) {
+                if (elapsed <= maxDuration) {
+                    p.y = -20;
+                    p.x = Math.random() * canvas.width;
+                    p.speedY = Math.random() * 3 + 2;
+                    p.speedX = (Math.random() - 0.5) * 4;
+                    p.rotation = Math.random() * 360;
+                } else {
+                    particles.splice(i, 1);
+                }
             }
         }
     }
@@ -453,31 +456,33 @@ function animateFireworks(data) {
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    explosions.forEach(particles => {
-        for (let i = particles.length - 1; i >= 0; i--) {
-            const p = particles[i];
-            if (p.life > 0) {
-                ctx.fillStyle = p.color;
-                ctx.globalAlpha = p.life / 100;
-                ctx.fillRect(p.x, p.y, 3, 3);
+    if (elapsed <= maxDuration) {
+        explosions.forEach(particles => {
+            for (let i = particles.length - 1; i >= 0; i--) {
+                const p = particles[i];
+                if (p.life > 0) {
+                    ctx.fillStyle = p.color;
+                    ctx.globalAlpha = p.life / 100;
+                    ctx.fillRect(p.x, p.y, 3, 3);
 
-                p.x += p.vx;
-                p.y += p.vy;
-                p.vy += 0.08;
-                p.life -= 2;
-            } else {
-                particles.splice(i, 1);
+                    p.x += p.vx;
+                    p.y += p.vy;
+                    p.vy += 0.08;
+                    p.life -= 2;
+                } else {
+                    particles.splice(i, 1);
+                }
+            }
+        });
+
+        for (let i = explosions.length - 1; i >= 0; i--) {
+            if (explosions[i].length === 0 && elapsed > maxDuration) {
+                explosions.splice(i, 1);
             }
         }
-    });
+    }
 
     ctx.globalAlpha = 1;
-
-    for (let i = explosions.length - 1; i >= 0; i--) {
-        if (explosions[i].length === 0 && elapsed > maxDuration) {
-            explosions.splice(i, 1);
-        }
-    }
 
     activeAnimation = requestAnimationFrame(() => animateFireworks(data));
 }
@@ -584,7 +589,7 @@ function animateBalloons(balloons, startTime, maxDuration) {
             }
         });
     }
-    // During cooldown phase: canvas stays clear but interactive
+    // During cooldown phase: canvas stays clear
     
     activeAnimation = requestAnimationFrame(() => animateBalloons(balloons, startTime, maxDuration));
 }
@@ -646,56 +651,58 @@ function animateStars(data) {
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    for (let i = stars.length - 1; i >= 0; i--) {
-        const s = stars[i];
-        if (s.life > 0) {
-            ctx.save();
-            ctx.translate(s.x, s.y);
-            ctx.rotate(s.rotation * Math.PI / 180);
+    if (elapsed <= maxDuration) {
+        for (let i = stars.length - 1; i >= 0; i--) {
+            const s = stars[i];
+            if (s.life > 0) {
+                ctx.save();
+                ctx.translate(s.x, s.y);
+                ctx.rotate(s.rotation * Math.PI / 180);
 
-            const baseScale = s.growthPhase ? (100 - s.life) / 50 : s.life / 50;
-            const twinkleScale = 1 + s.twinkle * 0.3;
-            const scale = Math.max(0, baseScale) * twinkleScale;
-            const alpha = Math.min(1, (s.life / 100) + s.twinkle * 0.3);
+                const baseScale = s.growthPhase ? (100 - s.life) / 50 : s.life / 50;
+                const twinkleScale = 1 + s.twinkle * 0.3;
+                const scale = Math.max(0, baseScale) * twinkleScale;
+                const alpha = Math.min(1, (s.life / 100) + s.twinkle * 0.3);
 
-            ctx.fillStyle = `rgba(255, 215, 0, ${alpha})`;
-            ctx.beginPath();
-            for (let j = 0; j < 5; j++) {
-                const angle = (Math.PI * 2 * j) / 5 - Math.PI / 2;
-                const pointX = Math.cos(angle) * s.size * scale;
-                const pointY = Math.sin(angle) * s.size * scale;
-                if (j === 0) ctx.moveTo(pointX, pointY);
-                else ctx.lineTo(pointX, pointY);
+                ctx.fillStyle = `rgba(255, 215, 0, ${alpha})`;
+                ctx.beginPath();
+                for (let j = 0; j < 5; j++) {
+                    const angle = (Math.PI * 2 * j) / 5 - Math.PI / 2;
+                    const pointX = Math.cos(angle) * s.size * scale;
+                    const pointY = Math.sin(angle) * s.size * scale;
+                    if (j === 0) ctx.moveTo(pointX, pointY);
+                    else ctx.lineTo(pointX, pointY);
 
-                const innerAngle = angle + Math.PI / 5;
-                const innerX = Math.cos(innerAngle) * s.size * scale * 0.4;
-                const innerY = Math.sin(innerAngle) * s.size * scale * 0.4;
-                ctx.lineTo(innerX, innerY);
-            }
-            ctx.closePath();
-            ctx.fill();
+                    const innerAngle = angle + Math.PI / 5;
+                    const innerX = Math.cos(innerAngle) * s.size * scale * 0.4;
+                    const innerY = Math.sin(innerAngle) * s.size * scale * 0.4;
+                    ctx.lineTo(innerX, innerY);
+                }
+                ctx.closePath();
+                ctx.fill();
 
-            ctx.strokeStyle = `rgba(255, 255, 255, ${alpha * 0.5})`;
-            ctx.lineWidth = 2;
-            ctx.stroke();
+                ctx.strokeStyle = `rgba(255, 255, 255, ${alpha * 0.5})`;
+                ctx.lineWidth = 2;
+                ctx.stroke();
 
-            ctx.restore();
+                ctx.restore();
 
-            if (s.growthPhase && s.life < 50) {
-                s.growthPhase = false;
-            }
+                if (s.growthPhase && s.life < 50) {
+                    s.growthPhase = false;
+                }
 
-            s.life -= 1.5;
-            s.rotation += s.rotationSpeed;
-            s.x += s.vx;
-            s.y += s.vy;
-            s.twinkle = Math.max(0, s.twinkle - 0.02);
+                s.life -= 1.5;
+                s.rotation += s.rotationSpeed;
+                s.x += s.vx;
+                s.y += s.vy;
+                s.twinkle = Math.max(0, s.twinkle - 0.02);
 
-            if (s.x < -50 || s.x > canvas.width + 50 || s.y < -50 || s.y > canvas.height + 50) {
+                if (s.x < -50 || s.x > canvas.width + 50 || s.y < -50 || s.y > canvas.height + 50) {
+                    stars.splice(i, 1);
+                }
+            } else {
                 stars.splice(i, 1);
             }
-        } else {
-            stars.splice(i, 1);
         }
     }
 
@@ -793,7 +800,7 @@ function animateBubbles(bubbles, startTime, maxDuration) {
             }
         });
     }
-    // During cooldown phase: canvas stays clear but interactive
+    // During cooldown phase: canvas stays clear
     
     activeAnimation = requestAnimationFrame(() => animateBubbles(bubbles, startTime, maxDuration));
 }
@@ -848,37 +855,39 @@ function animateEmojiRain(data) {
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    for (let i = particles.length - 1; i >= 0; i--) {
-        const p = particles[i];
-        ctx.save();
-        ctx.translate(p.x, p.y);
-        ctx.rotate(p.rotation * Math.PI / 180);
-        ctx.font = `${p.size}px Arial`;
-        ctx.textAlign = 'center';
-        ctx.textBaseline = 'middle';
-        ctx.fillText(p.emoji, 0, 0);
-        ctx.restore();
+    if (elapsed <= maxDuration) {
+        for (let i = particles.length - 1; i >= 0; i--) {
+            const p = particles[i];
+            ctx.save();
+            ctx.translate(p.x, p.y);
+            ctx.rotate(p.rotation * Math.PI / 180);
+            ctx.font = `${p.size}px Arial`;
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText(p.emoji, 0, 0);
+            ctx.restore();
 
-        p.y += p.speed;
-        p.rotation += p.rotationSpeed;
-        p.speed = Math.min(p.speed + 0.08, 8);
+            p.y += p.speed;
+            p.rotation += p.rotationSpeed;
+            p.speed = Math.min(p.speed + 0.08, 8);
 
-        if (p.speed < -10) {
-            p.speed = -10;
-        }
-
-        if (p.y > canvas.height + 60) {
-            if (elapsed <= maxDuration) {
-                p.y = -60;
-                p.x = Math.random() * canvas.width;
-                p.speed = Math.random() * 3 + 2;
-                p.rotationSpeed = (Math.random() - 0.5) * 6;
-                p.emoji = emojis[Math.floor(Math.random() * emojis.length)];
-            } else {
-                particles.splice(i, 1);
+            if (p.speed < -10) {
+                p.speed = -10;
             }
-        } else if (p.y < -80 && p.speed < 0) {
-            p.speed = Math.abs(p.speed) * 0.6;
+
+            if (p.y > canvas.height + 60) {
+                if (elapsed <= maxDuration) {
+                    p.y = -60;
+                    p.x = Math.random() * canvas.width;
+                    p.speed = Math.random() * 3 + 2;
+                    p.rotationSpeed = (Math.random() - 0.5) * 6;
+                    p.emoji = emojis[Math.floor(Math.random() * emojis.length)];
+                } else {
+                    particles.splice(i, 1);
+                }
+            } else if (p.y < -80 && p.speed < 0) {
+                p.speed = Math.abs(p.speed) * 0.6;
+            }
         }
     }
 

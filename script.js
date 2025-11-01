@@ -9,6 +9,7 @@ let lastConsonant = null;
 let lastSyllable = null;
 let isSamplingCooldownActive = false;
 let samplingCooldownTimeoutId = null;
+let samplingCount = 0;
 
 // Interaction configuration
 const SAMPLING_COOLDOWN_DURATION = 400; // milliseconds
@@ -61,6 +62,17 @@ function clearSamplingCooldown() {
         samplingCooldownTimeoutId = null;
     }
     document.body.classList.remove('sampling-cooldown');
+}
+
+const samplingCounterElement = document.getElementById('samplingCounter');
+
+function incrementSamplingCounter() {
+    if (!samplingCounterElement) {
+        return;
+    }
+
+    samplingCount += 1;
+    samplingCounterElement.textContent = `Clics: ${samplingCount}`;
 }
 
 function startSamplingCooldown() {
@@ -355,6 +367,7 @@ numerosDisplay.addEventListener('click', () => {
     lastNumber = randomNumber;
     displayElement.textContent = randomNumber;
     adjustTextSize(displayElement);
+    incrementSamplingCounter();
     startSamplingCooldown();
     triggerRandomEffect();
 });
@@ -370,6 +383,7 @@ vocalesDisplay.addEventListener('click', () => {
     const displayElement = vocalesDisplay.querySelector('.letter-display');
     displayElement.textContent = applyCase(randomVowel);
     adjustTextSize(displayElement);
+    incrementSamplingCounter();
     startSamplingCooldown();
     triggerRandomEffect();
 });
@@ -443,6 +457,7 @@ consonantesDisplay.addEventListener('click', () => {
     lastConsonant = randomConsonant;
     displayElement.textContent = applyCase(randomConsonant);
     adjustTextSize(displayElement);
+    incrementSamplingCounter();
     startSamplingCooldown();
     triggerRandomEffect();
 });
@@ -532,6 +547,7 @@ silabasDisplay.addEventListener('click', () => {
     const displayElement = silabasDisplay.querySelector('.letter-display');
     displayElement.textContent = applyCase(syllable);
     adjustTextSize(displayElement);
+    incrementSamplingCounter();
     startSamplingCooldown();
     triggerRandomEffect();
 });
@@ -596,6 +612,7 @@ palabrasDisplayArea.addEventListener('click', () => {
     lastWord = word;
     displayElement.textContent = isUpperCase ? word.toUpperCase() : word;
     adjustTextSize(displayElement);
+    incrementSamplingCounter();
     startSamplingCooldown();
     triggerRandomEffect();
 });

@@ -798,10 +798,8 @@ argentino
 argumento
 aries
 armada
-armado
 armadura
 armaduras
-armamento
 armar
 armario
 arme
@@ -924,7 +922,6 @@ aseguraron
 aseguré
 asesinadas
 asesinado
-asesinar
 asesinas
 asesor
 asesora
@@ -980,7 +977,6 @@ asustaron
 así
 atacado
 atacante
-atacar
 atacaré
 atacaría
 atacas
@@ -989,7 +985,6 @@ atadas
 atado
 ataja
 atajo
-ataque
 atar
 atardecer
 atarme
@@ -1209,7 +1204,6 @@ bajarme
 bajito
 bajo
 bajío
-bala
 balance
 balazo
 balcón
@@ -1390,10 +1384,6 @@ bolsillo
 bolso
 bolsón
 bolígrafo
-bombardeando
-bombardear
-bombardeo
-bombardero
 bombardeó
 bombea
 bombero
@@ -1847,8 +1837,6 @@ caña
 cañería
 cañerías
 caño
-cañon
-cañón
 ce
 cebo
 cebolla
@@ -1913,7 +1901,6 @@ cerro
 cerrojo
 certeza
 certificado
-cerveza
 cervical
 cesar
 cesen
@@ -1930,7 +1917,6 @@ champiñones
 champán
 champú
 chance
-chantaje
 chao
 chapa
 chaqueta
@@ -2155,7 +2141,6 @@ comandante
 comandar
 comando
 comarca
-combate
 combatiendo
 combatir
 combinación
@@ -2635,7 +2620,6 @@ correo
 correr
 correspondencia
 corresponder
-corrida
 corrido
 corriente
 corrija
@@ -2780,7 +2764,6 @@ cubría
 cucaracha
 cuchara
 cuchilla
-cuchillo
 cuelgas
 cuello
 cuellos
@@ -2866,7 +2849,6 @@ cálculo
 cálido
 cáliz
 cámara
-cáncer
 cántame
 cápsula
 cárcel
@@ -3478,12 +3460,10 @@ disminuya
 disparaba
 disparad
 disparado
-disparar
 dispararan
 dispararemos
 dispararán
 disparate
-disparo
 dispone
 disponemos
 disponer
@@ -3595,7 +3575,6 @@ dramática
 dramático
 drenaje
 drenar
-drogadicto
 drogado
 droide
 ducha
@@ -3877,7 +3856,6 @@ enfadado
 enfadar
 enfado
 enfermar
-enfermedad
 enfermera
 enfermero
 enfermería
@@ -4095,7 +4073,6 @@ esconderé
 escondido
 escondite
 escondiéndose
-escopeta
 escoria
 escorpiones
 escorpión
@@ -4231,8 +4208,6 @@ estado
 estadounidense
 estadía
 estadístico
-estafa
-estafador
 estalla
 estallar
 estallido
@@ -4665,7 +4640,6 @@ fobia
 foco
 fogata
 folla
-follando
 folleto
 fondo
 forastero
@@ -4761,14 +4735,9 @@ fuisteis
 fulana
 fulano
 fumaba
-fumado
-fumador
 fuman
-fumar
 fumaré
-fumaste
 fumes
-fumé
 funcionamiento
 funcionar
 funcionario
@@ -4880,7 +4849,6 @@ generosidad
 generoso
 genial
 genio
-genitales
 genocidio
 gente
 gentil
@@ -4965,7 +4933,6 @@ graduar
 grama
 gramo
 gramática
-granada
 granado
 grande
 grandeza
@@ -5026,9 +4993,7 @@ guarnición
 guasón
 guau
 guay
-guerra
 guerrera
-guerrero
 guia
 guiados
 guiando
@@ -5148,8 +5113,6 @@ hematoma
 hembra
 hemisferio
 hemoglobina
-hemorragia
-hemorragias
 hepatitis
 heredado
 heredar
@@ -5220,8 +5183,6 @@ holograma
 hombre
 hombro
 homenaje
-homicida
-homicidas
 homo
 honda
 hondo
@@ -5249,7 +5210,6 @@ horriblemente
 horror
 hospital
 hospitalidad
-hostia
 hostil
 hostilidad
 hot
@@ -6267,7 +6227,6 @@ mami
 mamita
 mamut
 mamá
-mamón
 manada
 manager
 manantial
@@ -6757,8 +6716,6 @@ mueble
 muelle
 muerda
 muerdes
-muerte
-muerto
 muestra
 mugre
 mujer
@@ -7512,9 +7469,7 @@ película
 pena
 penal
 pendiente
-penetración
 penetrando
-penetrar
 penetró
 penicilina
 penique
@@ -7822,7 +7777,6 @@ porqué
 porra
 porrista
 porristas
-porro
 portaaviones
 portada
 portado
@@ -8225,8 +8179,6 @@ purpura
 puré
 pués
 puñado
-puñal
-puñalada
 puñetazo
 puño
 págale
@@ -9060,9 +9012,6 @@ sanar
 sanará
 sanatorio
 sandwich
-sangrado
-sangrar
-sangriento
 sanguíneo
 sanidad
 sano
@@ -9107,7 +9056,6 @@ sector
 secuencia
 secuencias
 secuestrado
-secuestrador
 secuestrados
 secuestran
 secundario
@@ -9626,7 +9574,6 @@ tampa
 tampoco
 tan
 tango
-tanque
 tanto
 tao
 tapa
@@ -9721,7 +9668,6 @@ tentado
 tentar
 tentativa
 teoría
-tequila
 terapeuta
 terapia
 tercer
@@ -9800,8 +9746,6 @@ tirarla
 tirarle
 tiraría
 tiro
-tiroteo
-tiroteos
 tirón
 titanio
 titar
@@ -9853,7 +9797,6 @@ tornillo
 torno
 toro
 torpe
-torpedo
 torre
 torso
 torta
@@ -10002,7 +9945,6 @@ tributo
 trigo
 trillones
 trillón
-trinchera
 trineo
 tripa
 triple
@@ -10049,7 +9991,6 @@ tubo
 tumba
 tumbado
 tumbar
-tumor
 tunel
 turbina
 turbo
@@ -10384,7 +10325,6 @@ vocabulario
 vocación
 vocal
 vocero
-vodka
 volado
 volador
 voladores
@@ -10406,7 +10346,6 @@ volveran
 volvi
 volvieras
 vomita
-vomitar
 vos
 vosotras
 vosotros
@@ -10433,14 +10372,11 @@ víctima
 vídeo
 vínculo
 víspera
-vómito
-vómitos
 vórtice
 wai
 web
 western
 wey
-whiskey
 wild
 wimbledon
 windsor

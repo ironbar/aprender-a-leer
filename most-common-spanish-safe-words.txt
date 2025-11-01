@@ -393,7 +393,6 @@ alejado
 alejar
 alejaras
 alejarlos
-alejense
 alejé
 alejó
 aleluya
@@ -550,7 +549,6 @@ anduve
 andén
 anemia
 anestesia
-aneurisma
 anexo
 anfitriona
 anfitriones
@@ -624,7 +622,6 @@ análisis
 anónima
 anónimo
 anónimos
-aorta
 apache
 apagado
 apagando
@@ -757,7 +754,6 @@ apunte
 apuntándome
 apurado
 apurar
-apurense
 apuro
 apéndice
 apóyate
@@ -1082,7 +1078,6 @@ automático
 automóvil
 automóviles
 autopista
-autopsia
 autor
 autora
 autores
@@ -1146,8 +1141,6 @@ ayudado
 ayudante
 ayudar
 ayudarían
-ayudeme
-ayudenme
 ayuntamiento
 ayúdale
 ayúdalo
@@ -1208,7 +1201,6 @@ bandeja
 bandera
 bandido
 bando
-bang
 banquero
 banqueros
 banquete
@@ -1422,7 +1414,6 @@ brujo
 brutal
 brutalidad
 brutalmente
-bruto
 brújula
 buceando
 bucear
@@ -1553,7 +1544,6 @@ callarse
 calle
 callejero
 callejón
-callense
 calma
 calmada
 calmado
@@ -3236,7 +3226,6 @@ detendrán
 detener
 detenerla
 detenerse
-detenganse
 detengo
 detenido
 deterioro
@@ -3251,7 +3240,6 @@ detonador
 detonadores
 detonar
 detrás
-deténte
 deuda
 devastado
 devastador
@@ -3265,7 +3253,6 @@ devora
 devoto
 devuelta
 devuelto
-devuelveme
 devuelven
 diabetes
 diabólico
@@ -3613,8 +3600,6 @@ elección
 electo
 electricidad
 electro
-electrones
-electrón
 electrónico
 elefante
 elegancia
@@ -3659,7 +3644,6 @@ embarazoso
 embarcación
 embargo
 embarque
-embolia
 emborrachó
 emboscada
 embotellamiento
@@ -3838,7 +3822,6 @@ ensayar
 ensayo
 enseguida
 enseñado
-enseñame
 enseñanza
 enseñanzas
 enseñar
@@ -3853,7 +3836,6 @@ ente
 entender
 entenderé
 entenderías
-entendi
 entendimiento
 enterada
 enterado
@@ -3936,7 +3918,6 @@ envío
 enzima
 epa
 epidemia
-epinefrina
 episodio
 equilibrio
 equipado
@@ -4003,7 +3984,6 @@ escoria
 escorpiones
 escorpión
 escotilla
-escribio
 escribir
 escribirle
 escribirá
@@ -4014,7 +3994,6 @@ escritor
 escritorio
 escritura
 escuadra
-escuadron
 escuadrón
 escuchar
 escuchara
@@ -4108,7 +4087,6 @@ esquiar
 esquina
 esquivando
 esquivar
-esquizofrenia
 esquí
 estabilidad
 estabilizar
@@ -4199,7 +4177,6 @@ estudio
 estufa
 estupendo
 estupidez
-estupidos
 estuviesen
 estándar
 estándares
@@ -4431,7 +4408,6 @@ farsante
 fascinación
 fascinante
 fascinar
-fascista
 fase
 fastidia
 fastidiar
@@ -4473,7 +4449,6 @@ fianza
 fiar
 fiasco
 fibra
-fibrilación
 ficción
 ficha
 ficus
@@ -4693,7 +4668,6 @@ físico
 fórmula
 fósforo
 fútbol
-führer
 gabinete
 gafas
 gaje
@@ -4951,7 +4925,6 @@ habitante
 habitual
 habitualmente
 habla
-hablame
 hablar
 habláis
 habran
@@ -6997,7 +6970,6 @@ ojalá
 ojeada
 ojiva
 ojo
-okay
 okey
 ola
 oleada
@@ -8024,7 +7996,6 @@ próximo
 psicología
 psicológica
 psicológico
-psicosis
 psicólogo
 psiquiatra
 psiquiatría
@@ -9087,7 +9058,6 @@ siberia
 sicótico
 sid
 siempre
-sientense
 sientese
 sierra
 siervo
@@ -9118,7 +9088,6 @@ simulador
 simular
 simón
 sin
-sinapsis
 sinceramente
 sinceridad
 sincero
@@ -9670,7 +9639,6 @@ ton
 tonelada
 tono
 tontería
-tonto
 topado
 topamos
 topar
@@ -10155,7 +10123,6 @@ villano
 vinagre
 viniese
 vino
-violaciones
 violan
 violeta
 violín

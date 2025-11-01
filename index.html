@@ -12,9 +12,40 @@
     <div class="container">
         <header>
             <h1>Aprender a Leer 📚</h1>
-            <button id="caseToggle" class="case-toggle">
-                <span id="caseText">abc</span>
-            </button>
+            <div class="header-controls">
+                <button id="caseToggle" class="case-toggle">
+                    <span id="caseText">abc</span>
+                </button>
+                <button id="settingsButton" class="settings-button" aria-haspopup="true" aria-expanded="false" title="Configuración de efectos">⚙️</button>
+                <div id="settingsMenu" class="settings-menu" role="dialog" aria-modal="false" aria-labelledby="settingsTitle">
+                    <h2 id="settingsTitle">Configuración de efectos</h2>
+                    <label class="settings-toggle" for="effectsEnabled">
+                        <input type="checkbox" id="effectsEnabled" checked>
+                        Activar efectos visuales
+                    </label>
+                    <div class="settings-control">
+                        <div class="settings-control-header">
+                            <label for="effectInterval">Periodo de efectos</label>
+                            <span class="settings-value">Cada <span id="effectIntervalValue">4</span> clics</span>
+                        </div>
+                        <input type="number" id="effectInterval" min="1" max="10" value="4">
+                    </div>
+                    <div class="settings-control">
+                        <div class="settings-control-header">
+                            <label for="effectDuration">Duración del efecto</label>
+                            <span class="settings-value"><span id="effectDurationValue">4</span> s</span>
+                        </div>
+                        <input type="range" id="effectDuration" min="1000" max="8000" step="500" value="4000">
+                    </div>
+                    <div class="settings-control">
+                        <div class="settings-control-header">
+                            <label for="cooldownDuration">Duración del enfriamiento</label>
+                            <span class="settings-value"><span id="cooldownDurationValue">1.5</span> s</span>
+                        </div>
+                        <input type="range" id="cooldownDuration" min="500" max="5000" step="250" value="1500">
+                    </div>
+                </div>
+            </div>
         </header>
 
         <nav class="tabs">

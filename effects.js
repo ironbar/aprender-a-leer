@@ -1,8 +1,10 @@
 // filepath: /mnt/data/other/code/aprender-a-leer/effects.js
 
 // Effect Configuration
-const EFFECT_INTERVAL = 4; // Show an effect every 4 trigger calls
-const INTERACTIVE_COOLDOWN = 1500; // 1.5 second cooldown after interactive effects
+let EFFECT_INTERVAL = 4; // Show an effect every 4 trigger calls
+let INTERACTIVE_COOLDOWN = 1500; // 1.5 second cooldown after interactive effects
+let EFFECT_DURATION = 4000; // Default effect animation duration in ms
+let effectsEnabled = true;
 
 let effectTriggerCount = 0;
 
@@ -22,6 +24,40 @@ let currentEffectState = EFFECT_STATE.IDLE;
 let currentEffectName = null;
 let currentEffectStartTime = null;
 let hasLoggedCooldownEnd = false;
+
+function setEffectsEnabled(enabled) {
+    effectsEnabled = Boolean(enabled);
+    effectTriggerCount = 0;
+    if (!effectsEnabled) {
+        clearActiveAnimation();
+        resetEffectBackground();
+    }
+}
+
+function setEffectInterval(interval) {
+    const value = Math.max(1, Math.round(interval));
+    EFFECT_INTERVAL = value;
+    effectTriggerCount = 0;
+}
+
+function setEffectDuration(duration) {
+    const value = Math.max(500, Math.round(duration));
+    EFFECT_DURATION = value;
+}
+
+function setEffectCooldown(cooldown) {
+    const value = Math.max(0, Math.round(cooldown));
+    INTERACTIVE_COOLDOWN = value;
+}
+
+function getEffectSettings() {
+    return {
+        enabled: effectsEnabled,
+        interval: EFFECT_INTERVAL,
+        duration: EFFECT_DURATION,
+        cooldown: INTERACTIVE_COOLDOWN
+    };
+}
 
 function isEffectInCooldown() {
     return currentEffectState === EFFECT_STATE.COOLDOWN;
@@ -297,6 +333,10 @@ function handleCanvasHover(event) {
 
 // Trigger an effect at a deterministic interval
 function triggerRandomEffect() {
+    if (!effectsEnabled) {
+        return;
+    }
+
     effectTriggerCount = (effectTriggerCount + 1) % EFFECT_INTERVAL;
 
     if (effectTriggerCount !== 0) {
@@ -325,7 +365,7 @@ function createConfetti() {
         particles: [],
         colors,
         startTime: Date.now(),
-        maxDuration: 4000
+        maxDuration: EFFECT_DURATION
     };
 
     for (let i = 0; i < 120; i++) {
@@ -401,7 +441,7 @@ function createFireworks(fireworkCount = 40) {
     const data = {
         explosions: [],
         startTime: Date.now(),
-        maxDuration: 4000
+        maxDuration: EFFECT_DURATION
     };
 
     const interval = Math.min(400, data.maxDuration / Math.max(totalFireworks, 1));
@@ -495,7 +535,7 @@ function animateFireworks(data) {
 function createBalloons() {
     const balloons = [];
     const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#f9ca24', '#6c5ce7', '#fd79a8', '#fdcb6e'];
-    const maxDuration = 4000; // 4 seconds max (doubled)
+    const maxDuration = EFFECT_DURATION;
     const startTime = Date.now();
     
     for (let i = 0; i < 15; i++) {
@@ -611,7 +651,7 @@ function createStars() {
     const data = {
         stars: [],
         startTime: Date.now(),
-        maxDuration: 4000
+        maxDuration: EFFECT_DURATION
     };
 
     for (let i = 0; i < 30; i++) {
@@ -716,7 +756,7 @@ function animateStars(data) {
 // Effect 5: Bubbles
 function createBubbles() {
     const bubbles = [];
-    const maxDuration = 4000; // 4 seconds max (doubled)
+    const maxDuration = EFFECT_DURATION;
     const startTime = Date.now();
     
     for (let i = 0; i < 25; i++) {
@@ -816,7 +856,7 @@ function createEmojiRain() {
         particles: [],
         emojis,
         startTime: Date.now(),
-        maxDuration: 4000
+        maxDuration: EFFECT_DURATION
     };
 
     for (let i = 0; i < 35; i++) {

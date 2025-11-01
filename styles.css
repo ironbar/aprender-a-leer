@@ -301,6 +301,33 @@ main {
     color: #f5576c;
 }
 
+@media (min-aspect-ratio: 1/1) {
+    #numeros.tab-content.active,
+    #consonantes.tab-content.active,
+    #silabas.tab-content.active {
+        flex-direction: row;
+        align-items: stretch;
+        gap: clamp(1rem, 2vw, 2rem);
+    }
+
+    #numeros .numbers-selector,
+    #consonantes .consonants-selector,
+    #silabas .consonants-selector {
+        flex: 0 0 34%;
+        display: flex;
+        flex-direction: column;
+        max-height: 100%;
+        overflow: auto;
+    }
+
+    #numeros .display-area,
+    #consonantes .display-area,
+    #silabas .display-area {
+        flex: 1 1 66%;
+        margin-top: 0;
+    }
+}
+
 .slider-container {
     background: #f8f9fa;
     border-radius: 15px;

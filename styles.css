@@ -359,6 +359,11 @@ main {
     transform: translateY(-2px);
 }
 
+body.sampling-cooldown .display-area {
+    background: linear-gradient(135deg, #ffd6c6 0%, #f5a88c 100%);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+}
+
 .letter-display {
     font-size: 4rem; /* Default fallback, will be overridden by JavaScript */
     font-weight: bold;

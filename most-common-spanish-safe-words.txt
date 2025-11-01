@@ -29,7 +29,6 @@ abrazas
 abrazos
 abrazó
 abrelatas
-abrete
 abrevadero
 abrigo
 abril
@@ -78,7 +77,6 @@ accesorios
 accidental
 accidentalmente
 accidente
-accion
 acción
 acecha
 acechando
@@ -157,7 +155,6 @@ activos
 acto
 actor
 actriz
-actuacion
 actuación
 actuado
 actual
@@ -370,7 +367,6 @@ alargar
 alarma
 alba
 albergue
-albin
 alboroto
 albóndigas
 alcaide
@@ -509,7 +505,6 @@ amarras
 amarás
 amaste
 amazona
-amber
 ambicioso
 ambición
 ambiente
@@ -542,9 +537,7 @@ ampolla
 amuleto
 amábamos
 amén
-an
 anacondas
-analisis
 analista
 analistas
 analiza
@@ -786,7 +779,6 @@ aquello
 aquí
 arar
 araña
-arboles
 arbusto
 arca
 archivo
@@ -897,7 +889,6 @@ arte
 artefacto
 arteria
 arterias
-arthemisa
 artificial
 artillero
 artillería
@@ -944,7 +935,6 @@ asignado
 asignar
 asignaron
 asilo
-asique
 asiste
 asisten
 asistencia
@@ -1038,8 +1028,6 @@ aterrorizar
 atestiguar
 atienden
 atiendes
-atlantic
-atlantis
 atleta
 atlántico
 atmósfera
@@ -1104,10 +1092,8 @@ aura
 aurora
 ausencia
 ausente
-austin
 austria
 auto
-autobus
 autobús
 autodestrucción
 autoestima
@@ -1201,7 +1187,6 @@ baba
 babe
 babilonio
 babor
-babylon
 bachillerato
 bacteria
 bacón
@@ -1227,7 +1212,6 @@ bajío
 bala
 balance
 balazo
-balboa
 balcón
 balde
 ballena
@@ -1236,7 +1220,6 @@ baloncesto
 balsa
 balística
 balón
-bambi
 banana
 banca
 bancaria
@@ -1279,7 +1262,6 @@ barón
 basado
 basar
 base
-baseball
 bastaba
 bastante
 bastar
@@ -1298,7 +1280,6 @@ bate
 batea
 bateador
 batear
-bateria
 baterista
 batería
 batido
@@ -1320,10 +1301,6 @@ bebido
 bebé
 beca
 becas
-beijing
-beirut
-belfast
-bell
 bella
 belleza
 bello
@@ -1364,7 +1341,6 @@ bienvenida
 bienvenido
 bigote
 bikini
-bilbo
 billar
 billete
 billetera
@@ -1430,9 +1406,7 @@ bonito
 bono
 bordar
 borde
-bordeaux
 bordo
-borg
 borracho
 borrado
 borramos
@@ -1447,12 +1421,9 @@ botella
 botiquín
 botín
 botón
-bourbon
 boxeador
 boxear
 boxeo
-boxer
-boy
 boya
 braga
 brava
@@ -1512,7 +1483,6 @@ bulevar
 bulto
 buque
 burbuja
-burger
 burla
 burlado
 burlan
@@ -1525,13 +1495,11 @@ bus
 buscado
 buscador
 buscapié
-buscapé
 buscar
 buscarás
 busto
 buzos
 buzón
-bypass
 báculo
 bájense
 bárbaro
@@ -1692,7 +1660,6 @@ campo
 campus
 camuflaje
 can
-canada
 canadiense
 canal
 canalla
@@ -1700,7 +1667,6 @@ canasta
 cancelado
 cancelar
 cancelaré
-cancer
 cancha
 canciller
 canción
@@ -1736,11 +1702,9 @@ capilar
 capilla
 capital
 capitana
-capitulo
 capitán
 capricho
 capricornio
-capsula
 capta
 captado
 captando
@@ -1966,7 +1930,6 @@ champiñones
 champán
 champú
 chance
-change
 chantaje
 chao
 chapa
@@ -1988,7 +1951,6 @@ chequeado
 chequeando
 chequear
 chequeo
-chester
 chi
 chica
 chicle
@@ -2025,8 +1987,6 @@ chupe
 chupo
 chusma
 chófer
-ciao
-ciase
 cibernético
 cicatriz
 ciclo
@@ -2036,7 +1996,6 @@ ciego
 cielo
 cien
 ciencia
-cientificos
 ciento
 científica
 científicamente
@@ -2110,16 +2069,13 @@ cliente
 clientela
 clima
 clon
-closet
 club
-clubs
 clásica
 clásico
 cláusula
 clérigo
 clínica
 cm
-cmdte
 coalición
 coartada
 cobarde
@@ -2189,7 +2145,6 @@ colonial
 coloqué
 color
 colorado
-columbine
 columna
 coló
 colócate
@@ -2226,14 +2181,12 @@ cometa
 cometan
 cometer
 cometido
-comic
 comida
 comienzos
 comisario
 comisaría
 comisionado
 comisión
-comite
 comité
 comodidad
 comodidades
@@ -2325,7 +2278,6 @@ computación
 computador
 computadora
 comun
-comunicacion
 comunicación
 comunicado
 comunicados
@@ -2340,7 +2292,6 @@ comunismo
 comunista
 comunión
 comunícate
-comó
 común
 con
 concebir
@@ -2404,7 +2355,6 @@ conectarse
 conecte
 conectó
 conejo
-conexion
 conexión
 conferencia
 confesado
@@ -2515,7 +2465,6 @@ constar
 constelación
 constitución
 constituir
-construccion
 construcción
 constructor
 construidas
@@ -2604,7 +2553,6 @@ controlar
 contrólate
 contusiones
 contusión
-convencdo
 convencer
 convencerla
 convencerte
@@ -2618,7 +2566,6 @@ conveniente
 convenir
 convento
 convergen
-conversacion
 conversación
 conversar
 converse
@@ -2637,7 +2584,6 @@ convoca
 convocar
 convoy
 convulsiones
-cool
 cooperación
 cooperar
 coordenado
@@ -2732,11 +2678,9 @@ costumbre
 costura
 cotillón
 cotton
-county
 coyote
 coyotes
 coñac
-coños
 crack
 craneal
 crash
@@ -2947,7 +2891,6 @@ cómplice
 cómprale
 cómprame
 cónsul
-córrete
 córtate
 cúbranse
 cúbrete
@@ -3474,9 +3417,6 @@ diplomática
 diplomático
 diputado
 dique
-dira
-diran
-diras
 dirección
 directamente
 directiva
@@ -3596,7 +3536,6 @@ divorciado
 divorcio
 diálisis
 diálogo
-diós
 do
 doblado
 doblamos
@@ -3805,8 +3744,6 @@ eludir
 eléctrica
 eléctrico
 em
-email
-emails
 embajada
 embajadas
 embajador
@@ -4097,7 +4034,6 @@ epa
 epidemia
 epinefrina
 episodio
-epoca
 equilibrio
 equipado
 equipaje
@@ -4354,7 +4290,6 @@ estropee
 estructura
 estructuras
 estrés
-estubo
 estuche
 estudiado
 estudian
@@ -4365,7 +4300,6 @@ estufa
 estupendo
 estupidez
 estupidos
-estuvieramos
 estuviesen
 estándar
 estándares
@@ -4498,7 +4432,6 @@ expresar
 expresidente
 expresiones
 expresión
-express
 exprimir
 expuesta
 expuesto
@@ -4584,7 +4517,6 @@ familiar
 familiarizado
 famosas
 famoso
-família
 fango
 fantasia
 fantasma
@@ -4620,7 +4552,6 @@ febrero
 fecha
 federación
 federal
-feiiz
 felicidad
 felicitación
 felicitar
@@ -4674,7 +4605,6 @@ fijo
 fila
 filete
 filetes
-film
 filmación
 filmado
 filmamos

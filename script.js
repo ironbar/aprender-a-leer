@@ -49,6 +49,10 @@ function applyCase(text) {
     return isUpperCase ? text.toUpperCase() : text.toLowerCase();
 }
 
+function isInteractionDisabled() {
+    return typeof isEffectInCooldown === 'function' && isEffectInCooldown();
+}
+
 // Adaptive text sizing
 function adjustTextSize(displayElement) {
     const displayArea = displayElement.closest('.display-area');
@@ -192,6 +196,9 @@ selectNoNumbersButton.addEventListener('click', () => {
 
 const numerosDisplay = document.getElementById('numerosDisplay');
 numerosDisplay.addEventListener('click', () => {
+    if (isInteractionDisabled()) {
+        return;
+    }
     const displayElement = numerosDisplay.querySelector('.letter-display');
 
     if (activeNumbers.size === 0) {
@@ -211,6 +218,9 @@ numerosDisplay.addEventListener('click', () => {
 // Vocales Tab
 const vocalesDisplay = document.getElementById('vocalesDisplay');
 vocalesDisplay.addEventListener('click', () => {
+    if (isInteractionDisabled()) {
+        return;
+    }
     const randomVowel = getRandomElementExcluding(vowels, lastVowel);
     lastVowel = randomVowel;
     const displayElement = vocalesDisplay.querySelector('.letter-display');
@@ -272,6 +282,9 @@ deselectAllConsonantLettersButton.addEventListener('click', () => {
 
 const consonantesDisplay = document.getElementById('consonantesDisplay');
 consonantesDisplay.addEventListener('click', () => {
+    if (isInteractionDisabled()) {
+        return;
+    }
     const displayElement = consonantesDisplay.querySelector('.letter-display');
 
     if (activeConsonantLetters.size === 0) {
@@ -345,6 +358,9 @@ deselectAllSyllableConsonantsButton.addEventListener('click', () => {
 
 const silabasDisplay = document.getElementById('silabasDisplay');
 silabasDisplay.addEventListener('click', () => {
+    if (isInteractionDisabled()) {
+        return;
+    }
     if (activeSyllableConsonants.size === 0) {
         const displayElement = silabasDisplay.querySelector('.letter-display');
         displayElement.textContent = '¡Selecciona consonantes!';
@@ -411,6 +427,9 @@ letterSlider.addEventListener('input', () => {
 });
 
 palabrasDisplayArea.addEventListener('click', () => {
+    if (isInteractionDisabled()) {
+        return;
+    }
     const displayElement = palabrasDisplayArea.querySelector('.letter-display');
     
     if (allWords.length === 0) {

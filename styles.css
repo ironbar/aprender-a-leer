@@ -21,6 +21,17 @@ body {
     overflow: hidden;
     padding: clamp(2rem, 5dvh, 4rem);
     transition: background 1.2s ease;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+input,
+textarea,
+select {
+    -webkit-user-select: auto;
+    -ms-user-select: auto;
+    user-select: auto;
 }
 
 body.effects-active {

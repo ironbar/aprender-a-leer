@@ -108,13 +108,23 @@ document.querySelectorAll('.tab-button').forEach(button => {
 const caseToggle = document.getElementById('caseToggle');
 const caseText = document.getElementById('caseText');
 
+function updateCaseToggleLabel() {
+    if (isUpperCase) {
+        caseText.textContent = 'ABC → abc';
+        caseToggle.setAttribute('aria-label', 'Cambiar a minúsculas');
+    } else {
+        caseText.textContent = 'abc → ABC';
+        caseToggle.setAttribute('aria-label', 'Cambiar a mayúsculas');
+    }
+}
+
 // Initialize case text to match default state
-caseText.textContent = 'abc';
+updateCaseToggleLabel();
 
 caseToggle.addEventListener('click', () => {
     isUpperCase = !isUpperCase;
-    caseText.textContent = isUpperCase ? 'abc' : 'ABC';
-    
+    updateCaseToggleLabel();
+
     // Update current display if there's content
     updateCurrentDisplay();
 });

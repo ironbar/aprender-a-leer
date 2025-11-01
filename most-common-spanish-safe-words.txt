@@ -902,7 +902,6 @@ asegurar
 aseguraremos
 aseguraron
 aseguré
-asesinas
 asesor
 asesora
 asesores
@@ -996,10 +995,6 @@ aterrizaje
 aterrizamos
 aterrizar
 aterrizaremos
-aterroriza
-aterrorizada
-aterrorizado
-aterrorizar
 atestiguar
 atienden
 atiendes
@@ -1181,7 +1176,6 @@ bajito
 bajo
 bajío
 balance
-balazo
 balcón
 balde
 ballena
@@ -1722,7 +1716,6 @@ cartera
 cartero
 cartucho
 cartón
-carver
 carácter
 casa
 casadas
@@ -1933,8 +1926,6 @@ ciertamente
 cierto
 ciervo
 cifra
-cigarrillo
-cigarro
 cilindros
 cima
 cimiento
@@ -3374,12 +3365,7 @@ disgustado
 disminuido
 disminuir
 disminuya
-disparaba
 disparad
-disparado
-dispararan
-dispararemos
-dispararán
 disparate
 dispone
 disponemos
@@ -4698,7 +4684,6 @@ gancho
 ganchos
 ganga
 ganso
-garage
 garaje
 garante
 garantizar
@@ -4749,14 +4734,12 @@ gerencia
 gerente
 gestión
 gesto
-ghetto
 gigante
 gigantesca
 gigantesco
 gil
 gimnasia
 gimnasio
-ginebra
 ginecólogo
 gira
 girar
@@ -4842,7 +4825,6 @@ grato
 grave
 gravedad
 gravemente
-greenwich
 gremio
 griega
 griego
@@ -4940,7 +4922,6 @@ hacian
 hacias
 hacienda
 haciéndonos
-hacker
 hacérmelo
 hacés
 hada
@@ -4967,7 +4948,6 @@ hambriento
 hamburguesa
 hangar
 hanzo
-hardware
 harina
 hartar
 harto
@@ -5629,7 +5609,6 @@ jet
 jinete
 jirachi
 job
-jockey
 joden
 jodo
 jornada
@@ -5702,14 +5681,9 @@ júpiter
 ka
 karate
 kelvin
-kg
-khan
 kilo
 kilómetro
-km
-korea
 krypton
-kuwait
 la
 laberinto
 labial
@@ -5866,7 +5840,6 @@ libreta
 libro
 libérate
 licencia
-licor
 liderando
 liderar
 liderazgo
@@ -6419,7 +6392,6 @@ millonario
 millón
 milo
 milord
-milwaukee
 mina
 mineral
 minero
@@ -6458,7 +6430,6 @@ mitad
 mito
 mitología
 miércoles
-mm
 mmm
 mobile
 mochila
@@ -6970,7 +6941,6 @@ ojalá
 ojeada
 ojiva
 ojo
-okey
 ola
 oleada
 oler
@@ -7111,7 +7081,6 @@ pagues
 paine
 paisaje
 paises
-paja
 pajaritos
 pala
 palabra
@@ -7601,7 +7570,6 @@ poema
 poesía
 poeta
 pogue
-poker
 polaco
 polacos
 polar
@@ -8065,7 +8033,6 @@ pétalos
 pídeme
 píldora
 pío
-póker
 póliza
 pólvora
 póquer
@@ -8827,7 +8794,6 @@ saga
 sagrado
 sagrados
 sajón
-sake
 sal
 sala
 salado
@@ -8876,7 +8842,6 @@ samurai
 sanar
 sanará
 sanatorio
-sandwich
 sanguíneo
 sanidad
 sano
@@ -9038,7 +9003,6 @@ severamente
 severo
 severos
 sexto
-sexualidad
 seña
 señal
 señalar
@@ -9050,9 +9014,7 @@ señorito
 señoría
 señuelo
 seúl
-sheriff
 shh
-show
 si
 siberia
 sicótico
@@ -9148,7 +9110,6 @@ soda
 sodio
 sofisticada
 sofisticado
-software
 sofá
 soga
 sol
@@ -9355,7 +9316,6 @@ surgir
 surja
 suroeste
 susceptible
-sushi
 suspender
 suspendido
 suspendidos
@@ -9401,7 +9361,6 @@ sótano
 súbase
 súbdito
 súper
-tabaco
 taberna
 tabla
 tablero
@@ -9552,7 +9511,6 @@ terrestres
 terrible
 terriblemente
 territorio
-terror
 tesis
 tesoro
 testamento
@@ -9568,13 +9526,10 @@ texto
 textura
 teñido
 teóricamente
-thai
 ti
 tibio
 tiburón
 tic
-ticket
-tickets
 tiemblo
 tiempo
 tienda
@@ -9624,7 +9579,6 @@ tocino
 todavía
 todo
 todopoderoso
-tokyo
 tolerancia
 tolerar
 toma
@@ -9660,8 +9614,6 @@ torso
 torta
 tortilla
 tortuga
-torturado
-torturó
 tos
 toser
 tostada
@@ -9669,7 +9621,6 @@ tostadora
 total
 totalidad
 totalmente
-totenkopf
 toxina
 traba
 trabajador
@@ -10122,8 +10073,6 @@ villa
 villano
 vinagre
 viniese
-vino
-violan
 violeta
 violín
 vip
@@ -10219,14 +10168,12 @@ vídeo
 vínculo
 víspera
 vórtice
-web
 y
 ya
 yacen
 yacer
 yacía
 yago
-yakuza
 yang
 yanqui
 yarda

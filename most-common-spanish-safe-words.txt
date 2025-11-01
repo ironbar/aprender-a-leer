@@ -333,7 +333,6 @@ aguila
 aguja
 agujero
 aguántate
-ahh
 ahogado
 ahogando
 ahogar
@@ -552,8 +551,6 @@ anciano
 andado
 andar
 andará
-androide
-androides
 anduve
 andén
 anemia
@@ -583,7 +580,6 @@ anochecer
 anomalía
 anonimato
 anormal
-anos
 anotación
 anotado
 anotar
@@ -769,9 +765,6 @@ apurado
 apurar
 apurense
 apuro
-apuñalado
-apuñalar
-apuñalaron
 apéndice
 apóyate
 aquel
@@ -791,7 +784,6 @@ ardiente
 ardilla
 ardillas
 ardor
-are
 arena
 aretes
 argentino
@@ -1180,7 +1172,6 @@ año
 aún
 baba
 babe
-babilonio
 babor
 bachillerato
 bacteria
@@ -1242,7 +1233,6 @@ barca
 barcaza
 barcelona
 barco
-barin
 barra
 barraca
 barre
@@ -1259,7 +1249,6 @@ base
 bastaba
 bastante
 bastar
-bastoche
 bastó
 bastón
 basura
@@ -1279,7 +1268,6 @@ batería
 batido
 batir
 bautizo
-bay
 bazo
 bañado
 bañar
@@ -1287,7 +1275,6 @@ bañarse
 bañera
 baño
 baúl
-be
 bebe
 beber
 bebida
@@ -1348,14 +1335,11 @@ bioquímico
 bisabuelo
 bistec
 bisturí
-bit
-bits
 bitácora
 bizcochos
 blanco
 blando
 blanquito
-bledo
 blindado
 bloque
 bloqueado
@@ -1363,7 +1347,6 @@ bloquear
 bloqueen
 bloqueo
 bloqueó
-blues
 blusa
 boa
 bobo
@@ -1397,7 +1380,6 @@ bono
 bordar
 borde
 bordo
-borracho
 borrado
 borramos
 borrar
@@ -1420,7 +1402,6 @@ brava
 bravo
 brazalete
 brazo
-brear
 brecha
 breve
 breves
@@ -1435,7 +1416,6 @@ brincar
 brindar
 brindis
 brisa
-bristol
 británico
 broche
 broma
@@ -1466,7 +1446,6 @@ buenísimo
 buey
 bufanda
 bufete
-buffet
 bufón
 buitre
 bulevar
@@ -1503,7 +1482,6 @@ bésala
 bóveda
 búfalo
 búho
-búnker
 búscalo
 búsqueda
 búsquedas
@@ -1542,12 +1520,9 @@ caerme
 caerte
 caerás
 caeré
-cafe
 cafetería
 cafeína
 café
-cagada
-cagas
 caifás
 caimán
 caja
@@ -1606,7 +1581,6 @@ calvo
 calza
 calzoncillo
 calzón
-calígula
 cama
 camarada
 camaras
@@ -1706,7 +1680,6 @@ capturado
 capturamos
 capturar
 capture
-capullo
 capítulo
 capítulos
 cara
@@ -1791,7 +1764,6 @@ casino
 casinos
 casita
 caso
-caspasian
 castaño
 castidad
 castiga
@@ -1801,7 +1773,6 @@ castigar
 castigo
 castillo
 castor
-castrar
 casual
 casualidad
 casualmente
@@ -1906,7 +1877,6 @@ cesar
 cesen
 cesta
 cesto
-ceti
 cetro
 chacal
 chaleco
@@ -1949,8 +1919,6 @@ chillar
 chimenea
 china
 chino
-chip
-chips
 chiquillo
 chisme
 chispa
@@ -1960,12 +1928,10 @@ chivo
 chocamos
 chocar
 chocolate
-chofer
 choque
 choqué
 choza
 chu
-chucha
 chuleta
 chuletas
 chulo
@@ -2049,19 +2015,16 @@ clemente
 clementina
 clic
 cliché
-click
 clienta
 cliente
 clientela
 clima
 clon
-club
 clásica
 clásico
 cláusula
 clérigo
 clínica
-cm
 coalición
 coartada
 cobarde
@@ -2073,7 +2036,6 @@ cobra
 cobrando
 cobrar
 cobre
-cocacola
 coche
 cochera
 cochino
@@ -2120,7 +2082,6 @@ colina
 coliseo
 colisión
 collar
-collet
 colmillo
 colmo
 colocado
@@ -2262,7 +2223,6 @@ compuesto
 computación
 computador
 computadora
-comun
 comunicación
 comunicado
 comunicados
@@ -2435,7 +2395,6 @@ considerarlo
 considérate
 considérelo
 consiguiente
-consiguio
 consistir
 consola
 consolar
@@ -2664,11 +2623,7 @@ cotillón
 cotton
 coyote
 coyotes
-coñac
-crack
 craneal
-crash
-craso
 creación
 creada
 creador
@@ -2702,7 +2657,6 @@ criado
 criamos
 criar
 criatura
-crimenes
 cripta
 crisco
 crisis
@@ -2878,7 +2832,6 @@ cúbranse
 cúbrete
 cúpula
 dado
-daga
 dama
 damasco
 dance
@@ -2922,7 +2875,6 @@ decidirán
 decidle
 decir
 deciros
-decision
 decisión
 declaración
 declarado
@@ -3208,7 +3160,6 @@ desliza
 desmayado
 desmayar
 desmayo
-desnudo
 desobedecer
 desobedeció
 desorden
@@ -3336,7 +3287,6 @@ devuelto
 devuelveme
 devuelven
 diabetes
-diablos
 diabólico
 diagnosticado
 diagnóstico
@@ -3575,7 +3525,6 @@ dramática
 dramático
 drenaje
 drenar
-drogado
 droide
 ducha
 duda
@@ -3712,7 +3661,6 @@ eliminados
 eliminar
 eliminaremos
 eliminaste
-elite
 ella
 elle
 ello
@@ -4500,7 +4448,6 @@ fantásticas
 fantástico
 fanático
 faraón
-fargo
 farmacia
 faro
 faros
@@ -4547,7 +4494,6 @@ festejar
 festival
 festivo
 festín
-feto
 fianza
 fiar
 fiasco
@@ -4639,7 +4585,6 @@ flujo
 fobia
 foco
 fogata
-folla
 folleto
 fondo
 forastero
@@ -4705,7 +4650,6 @@ fresa
 fresco
 fresno
 freír
-fria
 frijol
 frito
 frió

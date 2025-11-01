@@ -111,6 +111,111 @@ document.querySelectorAll('.tab-button').forEach(button => {
 // Case Toggle
 const caseToggle = document.getElementById('caseToggle');
 const caseText = document.getElementById('caseText');
+const settingsButton = document.getElementById('settingsButton');
+const settingsMenu = document.getElementById('settingsMenu');
+const effectsEnabledInput = document.getElementById('effectsEnabled');
+const effectIntervalInput = document.getElementById('effectInterval');
+const effectIntervalValue = document.getElementById('effectIntervalValue');
+const effectDurationInput = document.getElementById('effectDuration');
+const effectDurationValue = document.getElementById('effectDurationValue');
+const cooldownDurationInput = document.getElementById('cooldownDuration');
+const cooldownDurationValue = document.getElementById('cooldownDurationValue');
+
+function formatMilliseconds(ms) {
+    const seconds = ms / 1000;
+    return Number.isInteger(seconds) ? seconds.toString() : seconds.toFixed(1);
+}
+
+function initializeSettingsMenu() {
+    if (!settingsButton || !settingsMenu) {
+        return;
+    }
+
+    const defaultSettings = typeof getEffectSettings === 'function'
+        ? getEffectSettings()
+        : { enabled: true, interval: 4, duration: 4000, cooldown: 1500 };
+
+    if (effectsEnabledInput) {
+        effectsEnabledInput.checked = defaultSettings.enabled;
+        effectsEnabledInput.addEventListener('change', (event) => {
+            if (typeof setEffectsEnabled === 'function') {
+                setEffectsEnabled(event.target.checked);
+            }
+        });
+    }
+
+    if (effectIntervalInput && effectIntervalValue) {
+        effectIntervalInput.value = defaultSettings.interval;
+        effectIntervalValue.textContent = defaultSettings.interval;
+        const handleIntervalChange = (event) => {
+            const value = Math.max(1, Math.min(10, Math.round(Number(event.target.value) || 1)));
+            event.target.value = value;
+            effectIntervalValue.textContent = value;
+            if (typeof setEffectInterval === 'function') {
+                setEffectInterval(value);
+            }
+        };
+        effectIntervalInput.addEventListener('change', handleIntervalChange);
+        effectIntervalInput.addEventListener('input', handleIntervalChange);
+    }
+
+    if (effectDurationInput && effectDurationValue) {
+        effectDurationInput.value = defaultSettings.duration;
+        effectDurationValue.textContent = formatMilliseconds(defaultSettings.duration);
+        const handleDurationInput = (event) => {
+            const value = Math.max(500, Number(event.target.value) || 500);
+            event.target.value = value;
+            effectDurationValue.textContent = formatMilliseconds(value);
+            if (typeof setEffectDuration === 'function') {
+                setEffectDuration(value);
+            }
+        };
+        effectDurationInput.addEventListener('input', handleDurationInput);
+        effectDurationInput.addEventListener('change', handleDurationInput);
+    }
+
+    if (cooldownDurationInput && cooldownDurationValue) {
+        cooldownDurationInput.value = defaultSettings.cooldown;
+        cooldownDurationValue.textContent = formatMilliseconds(defaultSettings.cooldown);
+        const handleCooldownInput = (event) => {
+            const value = Math.max(0, Number(event.target.value) || 0);
+            event.target.value = value;
+            cooldownDurationValue.textContent = formatMilliseconds(value);
+            if (typeof setEffectCooldown === 'function') {
+                setEffectCooldown(value);
+            }
+        };
+        cooldownDurationInput.addEventListener('input', handleCooldownInput);
+        cooldownDurationInput.addEventListener('change', handleCooldownInput);
+    }
+
+    const closeSettingsMenu = () => {
+        settingsMenu.classList.remove('open');
+        settingsButton.setAttribute('aria-expanded', 'false');
+    };
+
+    settingsButton.addEventListener('click', (event) => {
+        event.stopPropagation();
+        const isOpen = settingsMenu.classList.toggle('open');
+        settingsButton.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+
+    settingsMenu.addEventListener('click', (event) => {
+        event.stopPropagation();
+    });
+
+    document.addEventListener('click', (event) => {
+        if (!settingsMenu.contains(event.target) && event.target !== settingsButton) {
+            closeSettingsMenu();
+        }
+    });
+
+    document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') {
+            closeSettingsMenu();
+        }
+    });
+}
 
 function updateCaseToggleLabel() {
     if (isUpperCase) {
@@ -124,6 +229,7 @@ function updateCaseToggleLabel() {
 
 // Initialize case text to match default state
 updateCaseToggleLabel();
+initializeSettingsMenu();
 
 caseToggle.addEventListener('click', () => {
     isUpperCase = !isUpperCase;

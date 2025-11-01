@@ -25,6 +25,13 @@ let currentEffectName = null;
 let currentEffectStartTime = null;
 let hasLoggedCooldownEnd = false;
 
+function blurActiveElement() {
+    const activeElement = document.activeElement;
+    if (activeElement && typeof activeElement.blur === 'function') {
+        activeElement.blur();
+    }
+}
+
 function setEffectsEnabled(enabled) {
     effectsEnabled = Boolean(enabled);
     effectTriggerCount = 0;
@@ -103,6 +110,7 @@ function activateEffectBackground() {
     currentEffectState = EFFECT_STATE.ACTIVE;
     bodyElement.classList.add('effects-active');
     bodyElement.classList.remove('effects-cooldown');
+    blurActiveElement();
 }
 
 function startEffectCooldownPhase() {
@@ -112,6 +120,7 @@ function startEffectCooldownPhase() {
     disableCanvasInteraction();
     bodyElement.classList.remove('effects-active');
     bodyElement.classList.add('effects-cooldown');
+    blurActiveElement();
 }
 
 function resetEffectBackground() {

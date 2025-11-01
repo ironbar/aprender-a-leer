@@ -50,7 +50,11 @@ function applyCase(text) {
 }
 
 function isInteractionDisabled() {
-    return typeof isEffectInCooldown === 'function' && isEffectInCooldown();
+    if (typeof isEffectInCooldown === 'function' && isEffectInCooldown()) {
+        return true;
+    }
+
+    return document.body.classList.contains('effects-active');
 }
 
 // Adaptive text sizing

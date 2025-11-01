@@ -23,6 +23,10 @@ let currentEffectName = null;
 let currentEffectStartTime = null;
 let hasLoggedCooldownEnd = false;
 
+function isEffectInCooldown() {
+    return currentEffectState === EFFECT_STATE.COOLDOWN;
+}
+
 function logEffectEvent(message) {
     console.log(`[Effects] ${message}`);
 }

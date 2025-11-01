@@ -389,14 +389,17 @@ function animateConfetti(data) {
 }
 
 // Effect 2: Fireworks
-function createFireworks() {
+function createFireworks(fireworkCount = 40) {
+    const totalFireworks = Math.max(1, Math.floor(fireworkCount));
     const data = {
         explosions: [],
         startTime: Date.now(),
         maxDuration: 4000
     };
 
-    for (let i = 0; i < 3; i++) {
+    const interval = Math.min(400, data.maxDuration / Math.max(totalFireworks, 1));
+
+    for (let i = 0; i < totalFireworks; i++) {
         setTimeout(() => {
             if (!activeInteractiveObjects || activeInteractiveObjects.type !== 'fireworks' || activeInteractiveObjects.data !== data) {
                 return;
@@ -404,7 +407,7 @@ function createFireworks() {
             const x = Math.random() * canvas.width;
             const y = Math.random() * canvas.height * 0.5;
             data.explosions.push(createExplosion(x, y));
-        }, i * 400);
+        }, i * interval);
     }
 
     activeInteractiveObjects = { type: 'fireworks', data };

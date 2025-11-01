@@ -60,6 +60,7 @@ function clearSamplingCooldown() {
         clearTimeout(samplingCooldownTimeoutId);
         samplingCooldownTimeoutId = null;
     }
+    document.body.classList.remove('sampling-cooldown');
 }
 
 function startSamplingCooldown() {
@@ -69,9 +70,11 @@ function startSamplingCooldown() {
 
     clearSamplingCooldown();
     isSamplingCooldownActive = true;
+    document.body.classList.add('sampling-cooldown');
     samplingCooldownTimeoutId = setTimeout(() => {
         isSamplingCooldownActive = false;
         samplingCooldownTimeoutId = null;
+        document.body.classList.remove('sampling-cooldown');
     }, SAMPLING_COOLDOWN_DURATION);
 }
 

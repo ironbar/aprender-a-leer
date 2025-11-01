@@ -512,7 +512,6 @@ amenazan
 amenazando
 amenazar
 americano
-ametralladora
 amiga
 amigable
 amigo
@@ -601,7 +600,6 @@ antibiótico
 anticipación
 anticipado
 anticipo
-anticristo
 antiguo
 antigüedad
 antigüedades
@@ -1361,7 +1359,6 @@ bolsillo
 bolso
 bolsón
 bolígrafo
-bombardeó
 bombea
 bombero
 bombilla
@@ -1479,7 +1476,6 @@ búho
 búscalo
 búsqueda
 búsquedas
-ca
 cabalgamos
 cabalgando
 cabalgar
@@ -1800,7 +1796,6 @@ caña
 cañería
 cañerías
 caño
-ce
 cebo
 cebolla
 cecina
@@ -1898,7 +1893,6 @@ chequeado
 chequeando
 chequear
 chequeo
-chi
 chica
 chicle
 chico
@@ -2000,7 +1994,6 @@ clavar
 clave
 clavo
 clavícula
-cleitos
 clemencia
 clemente
 clementina
@@ -2551,7 +2544,6 @@ coro
 corona
 coronación
 coronel
-corporacion
 corporaciones
 corporación
 corporal
@@ -2842,7 +2834,6 @@ deambulando
 debajo
 debate
 deber
-debiamos
 debida
 debidamente
 debilidad
@@ -3287,7 +3278,6 @@ diantres
 diariamente
 diarias
 diario
-diarrea
 dibujar
 dibuje
 dibujo
@@ -3450,7 +3440,6 @@ divierto
 divinas
 divinidad
 divino
-division
 división
 divorciado
 divorcio
@@ -3660,7 +3649,6 @@ elogio
 eludir
 eléctrica
 eléctrico
-em
 embajada
 embajadas
 embajador
@@ -4361,7 +4349,6 @@ exterminar
 exterminio
 externa
 extinción
-extorsión
 extra
 extracción
 extraer
@@ -4691,7 +4678,6 @@ furiosos
 fuselaje
 fusible
 fusibles
-fusil
 fusiles
 fusión
 futbolista
@@ -6619,7 +6605,6 @@ mozo
 mozos
 mrs
 ms
-mu
 mucama
 muchacha
 muchachito
@@ -7048,9 +7033,7 @@ operamos
 operar
 operativo
 opinar
-opinion
 opinión
-opio
 oponente
 oponentes
 oponer
@@ -7581,7 +7564,6 @@ pitón
 pizarra
 pizca
 pizza
-pié
 piénsenlo
 piña
 piñas
@@ -7641,7 +7623,6 @@ poco
 pode
 poder
 poderoso
-podiamos
 podrido
 podridos
 poema
@@ -7993,7 +7974,6 @@ prosiga
 prosperidad
 protagonista
 protagonizada
-proteccion
 protección
 protector
 protegemos
@@ -8044,10 +8024,8 @@ próximo
 psicología
 psicológica
 psicológico
-psicopata
 psicosis
 psicólogo
-psicópata
 psiquiatra
 psiquiatría
 psiquiátrico
@@ -8666,7 +8644,6 @@ retorcido
 retornar
 retorno
 retrasa
-retrasado
 retrasar
 retraso
 retrato
@@ -8846,7 +8823,6 @@ ríndanse
 río
 sabandija
 saber
-sabiamos
 sabiduría
 sabio
 sable
@@ -8946,7 +8922,6 @@ sarcófago
 sargento
 sartén
 sastre
-satanás
 satisfacción
 satisfacer
 satisfecha
@@ -9448,8 +9423,6 @@ síntoma
 sírvanse
 sírvase
 sírveme
-só
-sólamente
 sólido
 sólidos
 sólo
@@ -9569,7 +9542,6 @@ tendencia
 tender
 tendido
 tendiste
-tendriamos
 tendón
 tenedor
 tener
@@ -9721,7 +9693,6 @@ torta
 tortilla
 tortuga
 torturado
-torturar
 torturó
 tos
 toser
@@ -9865,7 +9836,6 @@ trillón
 trineo
 tripa
 triple
-tripulacion
 tripulación
 tripulante
 tripulantes
@@ -9921,7 +9891,6 @@ tutores
 tuvieramos
 tuvieses
 tuyo
-tv
 táctica
 táctico
 tápate
@@ -10266,7 +10235,6 @@ votante
 votar
 voto
 voz
-vs
 vudú
 vuelo
 vuelta

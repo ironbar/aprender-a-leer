@@ -20,8 +20,6 @@ abono
 abordando
 abordar
 abordo
-abortar
-aborto
 abrazando
 abrazar
 abrazarte
@@ -329,7 +327,6 @@ aguardando
 aguardar
 agudo
 aguijón
-aguila
 aguja
 agujero
 aguántate
@@ -434,7 +431,6 @@ alisa
 alistado
 aliviar
 alivio
-allah
 allanamiento
 allá
 allí
@@ -912,8 +908,6 @@ asegurar
 aseguraremos
 aseguraron
 aseguré
-asesinadas
-asesinado
 asesinas
 asesor
 asesora
@@ -1684,7 +1678,6 @@ capítulo
 capítulos
 cara
 caracol
-caracter
 característica
 característico
 caramba
@@ -1693,7 +1686,6 @@ caravana
 carbono
 carbón
 cardenal
-cardiaco
 cardio
 cardíaco
 carecen
@@ -1881,7 +1873,6 @@ cetro
 chacal
 chaleco
 chamarra
-champagne
 champaña
 champiñones
 champán
@@ -2620,7 +2611,6 @@ costo
 costumbre
 costura
 cotillón
-cotton
 coyote
 coyotes
 craneal
@@ -4105,7 +4095,6 @@ esperanza
 esperar
 esperaron
 esperarás
-esperma
 esperándolo
 espiaba
 espiar
@@ -4441,7 +4430,6 @@ familiarizado
 famosas
 famoso
 fango
-fantasia
 fantasma
 fantasía
 fantásticas
@@ -4601,7 +4589,6 @@ formar
 forme
 formidable
 formo
-formula
 formulario
 foro
 forro
@@ -4616,7 +4603,6 @@ foto
 fotografiando
 fotografiar
 fotografió
-fotografo
 fotografía
 fotógrafo
 fotógrafos
@@ -4708,7 +4694,6 @@ fusibles
 fusil
 fusiles
 fusión
-futbol
 futbolista
 futuro
 fábrica
@@ -4938,7 +4923,6 @@ guasón
 guau
 guay
 guerrera
-guia
 guiados
 guiando
 guiar
@@ -5049,7 +5033,6 @@ helada
 heladero
 helado
 heleno
-helicoptero
 helicóptero
 helio
 hematocrito
@@ -5301,7 +5284,6 @@ importarte
 importe
 imposible
 impostor
-impresion
 impresionada
 impresionado
 impresionante
@@ -5335,13 +5317,11 @@ inclusive
 incluso
 incluyéndote
 incomodar
-incomodo
 inconsciente
 incontables
 inconveniente
 incorrecta
 incorrecto
-increiblemente
 incrementar
 incremento
 increíble
@@ -5519,7 +5499,6 @@ intercambiar
 intercambio
 interceptado
 interceptar
-interes
 interesado
 interesante
 interesar
@@ -5583,7 +5562,6 @@ intérprete
 inundaciones
 inundar
 inusual
-inutil
 invaden
 invadido
 invadir
@@ -5681,7 +5659,6 @@ jaulas
 jazz
 je
 jeans
-jeep
 jefa
 jefatura
 jefe
@@ -5766,7 +5743,6 @@ júpiter
 ka
 karate
 kelvin
-ketchup
 kg
 khan
 kilo
@@ -7120,7 +7096,6 @@ orgullo
 orgullosas
 orgulloso
 orgánico
-orgía
 orientación
 oriental
 orientales
@@ -8189,7 +8164,6 @@ quienquiera
 quieto
 quijote
 quilates
-quimica
 quince
 quinientos
 quinta
@@ -9771,7 +9745,6 @@ tracción
 tractor
 tradicional
 tradición
-traduccion
 traducción
 traducido
 traducir
@@ -9977,7 +9950,6 @@ ubicación
 ubicado
 ubicar
 uh
-ultimamente
 ultra
 uma
 umbral
@@ -10018,7 +9990,6 @@ usual
 usualmente
 usuarios
 usábamos
-util
 utilicen
 utilidad
 utilizada
@@ -10090,7 +10061,6 @@ vecino
 vector
 vega
 vegetal
-vehiculo
 vehículo
 veinte
 veinticinco
@@ -10149,14 +10119,12 @@ verdugo
 verdura
 veredicto
 vergonzoso
-verguenza
 vergüenza
 veria
 verificación
 verificamos
 verificar
 vermont
-version
 versiones
 versión
 verso
@@ -10236,7 +10204,6 @@ virus
 visa
 visibilidad
 visible
-vision
 visita
 visitaba
 visitado
@@ -10392,7 +10359,6 @@ zurdo
 éres
 ético
 éxito
-éxtasis
 ídolo
 índice
 íntima

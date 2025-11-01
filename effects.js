@@ -19,6 +19,44 @@ const EFFECT_STATE = {
     COOLDOWN: 'cooldown'
 };
 let currentEffectState = EFFECT_STATE.IDLE;
+let currentEffectName = null;
+let currentEffectStartTime = null;
+let hasLoggedCooldownEnd = false;
+
+function logEffectEvent(message) {
+    console.log(`[Effects] ${message}`);
+}
+
+function logEffectStart(effectName) {
+    currentEffectName = effectName;
+    currentEffectStartTime = Date.now();
+    hasLoggedCooldownEnd = false;
+    logEffectEvent(`Effect "${effectName}" started.`);
+}
+
+function logEffectAnimationEnd(elapsed) {
+    if (!currentEffectName) return;
+    const duration = elapsed;
+    logEffectEvent(`Effect "${currentEffectName}" animation ended after ${duration}ms.`);
+}
+
+function logEffectCooldownStart() {
+    if (!currentEffectName) return;
+    logEffectEvent(`Cooldown started for effect "${currentEffectName}".`);
+}
+
+function logEffectCooldownEnd() {
+    if (!currentEffectName || hasLoggedCooldownEnd) return;
+    const totalElapsed = currentEffectStartTime ? Date.now() - currentEffectStartTime : null;
+    if (totalElapsed !== null) {
+        logEffectEvent(`Cooldown finished for effect "${currentEffectName}" after ${totalElapsed}ms total.`);
+    } else {
+        logEffectEvent(`Cooldown finished for effect "${currentEffectName}".`);
+    }
+    hasLoggedCooldownEnd = true;
+    currentEffectName = null;
+    currentEffectStartTime = null;
+}
 
 function activateEffectBackground() {
     if (currentEffectState === EFFECT_STATE.ACTIVE) return;
@@ -30,6 +68,7 @@ function activateEffectBackground() {
 function startEffectCooldownPhase() {
     if (currentEffectState !== EFFECT_STATE.ACTIVE) return;
     currentEffectState = EFFECT_STATE.COOLDOWN;
+    logEffectCooldownStart();
     bodyElement.classList.remove('effects-active');
     bodyElement.classList.add('effects-cooldown');
 }
@@ -45,6 +84,7 @@ function resetEffectBackground() {
 
 function updateEffectPhase(elapsed, maxDuration) {
     if (currentEffectState === EFFECT_STATE.ACTIVE && elapsed > maxDuration) {
+        logEffectAnimationEnd(elapsed);
         startEffectCooldownPhase();
     }
 }
@@ -68,6 +108,12 @@ function clearActiveAnimation() {
         cancelAnimationFrame(activeAnimation);
         activeAnimation = null;
         ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }
+    if (currentEffectName && !hasLoggedCooldownEnd) {
+        logEffectEvent(`Effect "${currentEffectName}" was cleared before completing its cooldown phase.`);
+        hasLoggedCooldownEnd = true;
+        currentEffectName = null;
+        currentEffectStartTime = null;
     }
     disableCanvasInteraction();
     resetEffectBackground();
@@ -255,15 +301,16 @@ function triggerRandomEffect() {
     clearActiveAnimation(); // Clear any existing effect
     activateEffectBackground();
     const effects = [
-        createConfetti,
-        createFireworks,
-        createBalloons,
-        createStars,
-        createBubbles,
-        createEmojiRain
+        { name: 'Confetti', create: createConfetti },
+        { name: 'Fireworks', create: createFireworks },
+        { name: 'Balloons', create: createBalloons },
+        { name: 'Stars', create: createStars },
+        { name: 'Bubbles', create: createBubbles },
+        { name: 'Emoji Rain', create: createEmojiRain }
     ];
-    const randomEffect = effects[Math.floor(Math.random() * effects.length)];
-    randomEffect();
+    const selectedEffect = effects[Math.floor(Math.random() * effects.length)];
+    logEffectStart(selectedEffect.name);
+    selectedEffect.create();
 }
 
 // Effect 1: Confetti
@@ -301,6 +348,7 @@ function animateConfetti(data) {
     updateEffectPhase(elapsed, maxDuration);
 
     if (elapsed > maxDuration + INTERACTIVE_COOLDOWN) {
+        logEffectCooldownEnd();
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         activeAnimation = null;
         disableCanvasInteraction();
@@ -392,6 +440,7 @@ function animateFireworks(data) {
     updateEffectPhase(elapsed, maxDuration);
 
     if (elapsed > maxDuration + INTERACTIVE_COOLDOWN) {
+        logEffectCooldownEnd();
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         activeAnimation = null;
         disableCanvasInteraction();
@@ -463,6 +512,7 @@ function animateBalloons(balloons, startTime, maxDuration) {
 
     // Check if we're past the total duration (animation + cooldown)
     if (elapsed > maxDuration + INTERACTIVE_COOLDOWN) {
+        logEffectCooldownEnd();
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         activeAnimation = null;
         disableCanvasInteraction();
@@ -583,6 +633,7 @@ function animateStars(data) {
     updateEffectPhase(elapsed, maxDuration);
 
     if (elapsed > maxDuration + INTERACTIVE_COOLDOWN) {
+        logEffectCooldownEnd();
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         activeAnimation = null;
         disableCanvasInteraction();
@@ -679,6 +730,7 @@ function animateBubbles(bubbles, startTime, maxDuration) {
 
     // Check if we're past the total duration (animation + cooldown)
     if (elapsed > maxDuration + INTERACTIVE_COOLDOWN) {
+        logEffectCooldownEnd();
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         activeAnimation = null;
         disableCanvasInteraction();
@@ -783,6 +835,7 @@ function animateEmojiRain(data) {
     updateEffectPhase(elapsed, maxDuration);
 
     if (elapsed > maxDuration + INTERACTIVE_COOLDOWN) {
+        logEffectCooldownEnd();
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         activeAnimation = null;
         disableCanvasInteraction();

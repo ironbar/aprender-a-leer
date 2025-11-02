@@ -72,14 +72,26 @@
                     </div>
                 </div>
                 <div class="display-area" id="numerosDisplay">
-                    <div class="letter-display">¡Haz clic!</div>
+                    <div class="display-interactive">
+                        <button type="button" class="letter-display" data-sampling-button="numeros">¡Haz clic!</button>
+                        <div class="writing-canvas" data-writing-area="numeros">
+                            <canvas class="writing-surface" data-writing-canvas="numeros"></canvas>
+                            <button type="button" class="erase-writing" data-erase-button="numeros">Borrar</button>
+                        </div>
+                    </div>
                 </div>
             </div>
 
             <!-- Vocales Tab -->
             <div id="vocales" class="tab-content">
                 <div class="display-area" id="vocalesDisplay">
-                    <div class="letter-display">¡Haz clic!</div>
+                    <div class="display-interactive">
+                        <button type="button" class="letter-display" data-sampling-button="vocales">¡Haz clic!</button>
+                        <div class="writing-canvas" data-writing-area="vocales">
+                            <canvas class="writing-surface" data-writing-canvas="vocales"></canvas>
+                            <button type="button" class="erase-writing" data-erase-button="vocales">Borrar</button>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -96,7 +108,13 @@
                     </div>
                 </div>
                 <div class="display-area" id="consonantesDisplay">
-                    <div class="letter-display">¡Haz clic!</div>
+                    <div class="display-interactive">
+                        <button type="button" class="letter-display" data-sampling-button="consonantes">¡Haz clic!</button>
+                        <div class="writing-canvas" data-writing-area="consonantes">
+                            <canvas class="writing-surface" data-writing-canvas="consonantes"></canvas>
+                            <button type="button" class="erase-writing" data-erase-button="consonantes">Borrar</button>
+                        </div>
+                    </div>
                 </div>
             </div>
 

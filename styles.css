@@ -606,7 +606,15 @@ body.sampling-cooldown .display-area {
     }
 
     #numeros .numbers-selector,
-    #consonantes .consonants-selector,
+    #consonantes .consonants-selector {
+        flex: 1 1 0;
+        min-width: 0;
+        display: flex;
+        flex-direction: column;
+        max-height: 100%;
+        overflow: auto;
+    }
+
     #silabas .consonants-selector {
         flex: 0 0 34%;
         display: flex;
@@ -616,7 +624,12 @@ body.sampling-cooldown .display-area {
     }
 
     #numeros .display-area,
-    #consonantes .display-area,
+    #consonantes .display-area {
+        flex: 1 1 0;
+        min-width: 0;
+        margin-top: 0;
+    }
+
     #silabas .display-area {
         flex: 1 1 66%;
         margin-top: 0;
@@ -624,7 +637,16 @@ body.sampling-cooldown .display-area {
 
     #numeros .interaction-area,
     #consonantes .interaction-area {
-        flex: 1 1 66%;
+        flex: 2 1 0;
+        min-width: 0;
+    }
+
+    #numeros .interaction-area .display-area,
+    #numeros .interaction-area .writing-panel,
+    #consonantes .interaction-area .display-area,
+    #consonantes .interaction-area .writing-panel {
+        flex: 1 1 0;
+        min-width: 0;
     }
 }
 

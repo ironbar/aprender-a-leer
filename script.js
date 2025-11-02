@@ -350,47 +350,43 @@ selectNoNumbersButton.addEventListener('click', () => {
 });
 
 const numerosDisplay = document.getElementById('numerosDisplay');
-const numerosButton = numerosDisplay ? numerosDisplay.querySelector('[data-sampling-button="numeros"]') : null;
-if (numerosButton) {
-    numerosButton.addEventListener('click', () => {
-        if (isInteractionDisabled()) {
-            return;
-        }
+numerosDisplay.addEventListener('click', () => {
+    if (isInteractionDisabled()) {
+        return;
+    }
+    const displayElement = numerosDisplay.querySelector('.letter-display');
 
-        if (activeNumbers.size === 0) {
-            numerosButton.textContent = '¡Selecciona números!';
-            adjustTextSize(numerosButton);
-            return;
-        }
+    if (activeNumbers.size === 0) {
+        displayElement.textContent = '¡Selecciona números!';
+        adjustTextSize(displayElement);
+        return;
+    }
 
-        const activeNumbersArray = Array.from(activeNumbers);
-        const randomNumber = getRandomElementExcluding(activeNumbersArray, lastNumber);
-        lastNumber = randomNumber;
-        numerosButton.textContent = randomNumber;
-        adjustTextSize(numerosButton);
-        incrementSamplingCounter();
-        startSamplingCooldown();
-        triggerRandomEffect();
-    });
-}
+    const activeNumbersArray = Array.from(activeNumbers);
+    const randomNumber = getRandomElementExcluding(activeNumbersArray, lastNumber);
+    lastNumber = randomNumber;
+    displayElement.textContent = randomNumber;
+    adjustTextSize(displayElement);
+    incrementSamplingCounter();
+    startSamplingCooldown();
+    triggerRandomEffect();
+});
 
 // Vocales Tab
 const vocalesDisplay = document.getElementById('vocalesDisplay');
-const vocalesButton = vocalesDisplay ? vocalesDisplay.querySelector('[data-sampling-button="vocales"]') : null;
-if (vocalesButton) {
-    vocalesButton.addEventListener('click', () => {
-        if (isInteractionDisabled()) {
-            return;
-        }
-        const randomVowel = getRandomElementExcluding(vowels, lastVowel);
-        lastVowel = randomVowel;
-        vocalesButton.textContent = applyCase(randomVowel);
-        adjustTextSize(vocalesButton);
-        incrementSamplingCounter();
-        startSamplingCooldown();
-        triggerRandomEffect();
-    });
-}
+vocalesDisplay.addEventListener('click', () => {
+    if (isInteractionDisabled()) {
+        return;
+    }
+    const randomVowel = getRandomElementExcluding(vowels, lastVowel);
+    lastVowel = randomVowel;
+    const displayElement = vocalesDisplay.querySelector('.letter-display');
+    displayElement.textContent = applyCase(randomVowel);
+    adjustTextSize(displayElement);
+    incrementSamplingCounter();
+    startSamplingCooldown();
+    triggerRandomEffect();
+});
 
 // Consonantes Tab
 const consonantsTabGrid = document.getElementById('consonantsTabGrid');
@@ -444,29 +440,27 @@ deselectAllConsonantLettersButton.addEventListener('click', () => {
 });
 
 const consonantesDisplay = document.getElementById('consonantesDisplay');
-const consonantesButton = consonantesDisplay ? consonantesDisplay.querySelector('[data-sampling-button="consonantes"]') : null;
-if (consonantesButton) {
-    consonantesButton.addEventListener('click', () => {
-        if (isInteractionDisabled()) {
-            return;
-        }
+consonantesDisplay.addEventListener('click', () => {
+    if (isInteractionDisabled()) {
+        return;
+    }
+    const displayElement = consonantesDisplay.querySelector('.letter-display');
 
-        if (activeConsonantLetters.size === 0) {
-            consonantesButton.textContent = '¡Selecciona consonantes!';
-            adjustTextSize(consonantesButton);
-            return;
-        }
+    if (activeConsonantLetters.size === 0) {
+        displayElement.textContent = '¡Selecciona consonantes!';
+        adjustTextSize(displayElement);
+        return;
+    }
 
-        const activeConsonantLettersArray = Array.from(activeConsonantLetters);
-        const randomConsonant = getRandomElementExcluding(activeConsonantLettersArray, lastConsonant);
-        lastConsonant = randomConsonant;
-        consonantesButton.textContent = applyCase(randomConsonant);
-        adjustTextSize(consonantesButton);
-        incrementSamplingCounter();
-        startSamplingCooldown();
-        triggerRandomEffect();
-    });
-}
+    const activeConsonantLettersArray = Array.from(activeConsonantLetters);
+    const randomConsonant = getRandomElementExcluding(activeConsonantLettersArray, lastConsonant);
+    lastConsonant = randomConsonant;
+    displayElement.textContent = applyCase(randomConsonant);
+    adjustTextSize(displayElement);
+    incrementSamplingCounter();
+    startSamplingCooldown();
+    triggerRandomEffect();
+});
 
 // Sílabas Tab
 // Initialize consonants grid

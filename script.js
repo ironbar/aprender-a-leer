@@ -12,6 +12,13 @@ let samplingCooldownTimeoutId = null;
 let samplingCount = 0;
 let isWritingCanvasEnabled = true;
 const writingCanvasInstances = new Map();
+let writingLineWidthMultiplier = 1;
+
+const WRITING_BASE_LINE_WIDTH_RATIO = 0.036;
+const WRITING_BASE_MIN_LINE_WIDTH = 8;
+const WRITING_BASE_MAX_LINE_WIDTH = 24;
+const WRITING_ABSOLUTE_MIN_LINE_WIDTH = 2;
+const WRITING_ABSOLUTE_MAX_LINE_WIDTH = 48;
 
 // Interaction configuration
 const SAMPLING_COOLDOWN_DURATION = 400; // milliseconds
@@ -159,6 +166,17 @@ function setWritingCanvasEnabled(enabled) {
     }
 }
 
+function setWritingLineWidthMultiplier(multiplier) {
+    const clampedMultiplier = Math.max(0.5, Math.min(2, Number(multiplier) || 1));
+    writingLineWidthMultiplier = clampedMultiplier;
+
+    writingCanvasInstances.forEach((instance) => {
+        if (typeof instance.updateStrokeStyle === 'function') {
+            instance.updateStrokeStyle();
+        }
+    });
+}
+
 function clearWritingCanvas(key) {
     const instance = writingCanvasInstances.get(key);
     if (instance) {
@@ -181,7 +199,15 @@ function registerWritingCanvas(key, canvasId) {
         ctx.lineCap = 'round';
         ctx.lineJoin = 'round';
         ctx.strokeStyle = '#1f1f1f';
-        ctx.lineWidth = Math.max(4, Math.min(12, canvas.width * 0.018));
+        const baseWidth = Math.max(
+            WRITING_BASE_MIN_LINE_WIDTH,
+            Math.min(WRITING_BASE_MAX_LINE_WIDTH, canvas.width * WRITING_BASE_LINE_WIDTH_RATIO),
+        );
+        const adjustedWidth = Math.max(
+            WRITING_ABSOLUTE_MIN_LINE_WIDTH,
+            Math.min(WRITING_ABSOLUTE_MAX_LINE_WIDTH, baseWidth * writingLineWidthMultiplier),
+        );
+        ctx.lineWidth = adjustedWidth;
     }
 
     function resize() {
@@ -268,6 +294,10 @@ function registerWritingCanvas(key, canvasId) {
     writingCanvasInstances.set(key, {
         clear,
         resize,
+        updateStrokeStyle: () => {
+            applyStrokeStyle();
+            ctx.beginPath();
+        },
     });
 }
 
@@ -315,6 +345,8 @@ const settingsButton = document.getElementById('settingsButton');
 const settingsMenu = document.getElementById('settingsMenu');
 const effectsEnabledInput = document.getElementById('effectsEnabled');
 const writingEnabledInput = document.getElementById('writingEnabled');
+const writingThicknessInput = document.getElementById('writingThickness');
+const writingThicknessValue = document.getElementById('writingThicknessValue');
 const effectIntervalInput = document.getElementById('effectInterval');
 const effectIntervalValue = document.getElementById('effectIntervalValue');
 const effectDurationInput = document.getElementById('effectDuration');
@@ -350,6 +382,23 @@ function initializeSettingsMenu() {
         writingEnabledInput.checked = isWritingCanvasEnabled;
         writingEnabledInput.addEventListener('change', (event) => {
             setWritingCanvasEnabled(event.target.checked);
+        });
+    }
+
+    if (writingThicknessInput && writingThicknessValue) {
+        const updateThicknessValue = (rawValue) => {
+            const value = Math.max(50, Math.min(200, Math.round(Number(rawValue) || 100)));
+            writingThicknessInput.value = value;
+            writingThicknessValue.textContent = value;
+            setWritingLineWidthMultiplier(value / 100);
+        };
+
+        updateThicknessValue(writingThicknessInput.value);
+        writingThicknessInput.addEventListener('input', (event) => {
+            updateThicknessValue(event.target.value);
+        });
+        writingThicknessInput.addEventListener('change', (event) => {
+            updateThicknessValue(event.target.value);
         });
     }
 

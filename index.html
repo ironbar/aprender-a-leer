@@ -25,6 +25,10 @@
                         <input type="checkbox" id="effectsEnabled" checked>
                         Activar efectos visuales
                     </label>
+                    <label class="settings-toggle" for="writingEnabled">
+                        <input type="checkbox" id="writingEnabled" checked>
+                        Activar pizarra de escritura
+                    </label>
                     <div class="settings-control">
                         <div class="settings-control-header">
                             <label for="effectInterval">Periodo de efectos</label>
@@ -71,15 +75,27 @@
                         <!-- Numbers will be added by JavaScript -->
                     </div>
                 </div>
-                <div class="display-area" id="numerosDisplay">
-                    <div class="letter-display">¡Haz clic!</div>
+                <div class="interaction-area">
+                    <div class="display-area" id="numerosDisplay">
+                        <div class="letter-display">¡Haz clic!</div>
+                    </div>
+                    <div class="writing-panel">
+                        <canvas id="numerosCanvas" aria-label="Área para dibujar números"></canvas>
+                        <button type="button" class="erase-button" aria-label="Borrar dibujo">🧽</button>
+                    </div>
                 </div>
             </div>
 
             <!-- Vocales Tab -->
             <div id="vocales" class="tab-content">
-                <div class="display-area" id="vocalesDisplay">
-                    <div class="letter-display">¡Haz clic!</div>
+                <div class="interaction-area">
+                    <div class="display-area" id="vocalesDisplay">
+                        <div class="letter-display">¡Haz clic!</div>
+                    </div>
+                    <div class="writing-panel">
+                        <canvas id="vocalesCanvas" aria-label="Área para dibujar vocales"></canvas>
+                        <button type="button" class="erase-button" aria-label="Borrar dibujo">🧽</button>
+                    </div>
                 </div>
             </div>
 
@@ -95,8 +111,14 @@
                         <!-- Consonants will be added by JavaScript -->
                     </div>
                 </div>
-                <div class="display-area" id="consonantesDisplay">
-                    <div class="letter-display">¡Haz clic!</div>
+                <div class="interaction-area">
+                    <div class="display-area" id="consonantesDisplay">
+                        <div class="letter-display">¡Haz clic!</div>
+                    </div>
+                    <div class="writing-panel">
+                        <canvas id="consonantesCanvas" aria-label="Área para dibujar consonantes"></canvas>
+                        <button type="button" class="erase-button" aria-label="Borrar dibujo">🧽</button>
+                    </div>
                 </div>
             </div>
 

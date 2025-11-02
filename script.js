@@ -10,6 +10,8 @@ let lastSyllable = null;
 let isSamplingCooldownActive = false;
 let samplingCooldownTimeoutId = null;
 let samplingCount = 0;
+let isWritingCanvasEnabled = true;
+const writingCanvasInstances = new Map();
 
 // Interaction configuration
 const SAMPLING_COOLDOWN_DURATION = 400; // milliseconds
@@ -106,7 +108,7 @@ function isInteractionDisabled() {
 function adjustTextSize(displayElement) {
     const displayArea = displayElement.closest('.display-area');
     const text = displayElement.textContent;
-    
+
     // Get container dimensions
     const containerWidth = displayArea.clientWidth;
     const containerHeight = displayArea.clientHeight;
@@ -142,6 +144,148 @@ function adjustTextSize(displayElement) {
     console.log(`Text: "${text}" | Font: ${selectedFont}`);
 }
 
+function setWritingCanvasEnabled(enabled) {
+    isWritingCanvasEnabled = Boolean(enabled);
+    interactionAreas.forEach((area) => {
+        area.classList.toggle('writing-disabled', !isWritingCanvasEnabled);
+    });
+
+    if (isWritingCanvasEnabled) {
+        requestAnimationFrame(() => {
+            writingCanvasInstances.forEach((instance) => {
+                instance.resize();
+            });
+        });
+    }
+}
+
+function clearWritingCanvas(key) {
+    const instance = writingCanvasInstances.get(key);
+    if (instance) {
+        instance.clear();
+    }
+}
+
+function registerWritingCanvas(key, canvasId) {
+    const canvas = document.getElementById(canvasId);
+    if (!canvas) {
+        return;
+    }
+
+    const ctx = canvas.getContext('2d');
+    const container = canvas.closest('.writing-panel');
+    const eraseButton = container ? container.querySelector('.erase-button') : null;
+    const state = { drawing: false };
+
+    function applyStrokeStyle() {
+        ctx.lineCap = 'round';
+        ctx.lineJoin = 'round';
+        ctx.strokeStyle = '#1f1f1f';
+        ctx.lineWidth = Math.max(4, Math.min(12, canvas.width * 0.018));
+    }
+
+    function resize() {
+        const { clientWidth, clientHeight } = canvas;
+        if (clientWidth === 0 || clientHeight === 0) {
+            return;
+        }
+
+        canvas.width = clientWidth;
+        canvas.height = clientHeight;
+        applyStrokeStyle();
+        ctx.beginPath();
+    }
+
+    resize();
+
+    const getPoint = (event) => {
+        const rect = canvas.getBoundingClientRect();
+        return {
+            x: event.clientX - rect.left,
+            y: event.clientY - rect.top,
+        };
+    };
+
+    const handlePointerDown = (event) => {
+        if (!isWritingCanvasEnabled) {
+            return;
+        }
+
+        if (event.pointerType === 'touch' || event.pointerType === 'pen') {
+            event.preventDefault();
+        }
+
+        state.drawing = true;
+        ctx.beginPath();
+        const { x, y } = getPoint(event);
+        ctx.moveTo(x, y);
+    };
+
+    const handlePointerMove = (event) => {
+        if (!state.drawing) {
+            return;
+        }
+
+        if (event.pointerType === 'touch' || event.pointerType === 'pen') {
+            event.preventDefault();
+        }
+
+        const { x, y } = getPoint(event);
+        ctx.lineTo(x, y);
+        ctx.stroke();
+    };
+
+    const handlePointerUp = (event) => {
+        if (!state.drawing) {
+            return;
+        }
+
+        if (event.pointerType === 'touch' || event.pointerType === 'pen') {
+            event.preventDefault();
+        }
+
+        state.drawing = false;
+        ctx.beginPath();
+    };
+
+    canvas.addEventListener('pointerdown', handlePointerDown);
+    canvas.addEventListener('pointermove', handlePointerMove);
+    document.addEventListener('pointerup', handlePointerUp);
+    canvas.addEventListener('pointerleave', handlePointerUp);
+    canvas.addEventListener('pointercancel', handlePointerUp);
+
+    const clear = () => {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.beginPath();
+    };
+
+    if (eraseButton) {
+        eraseButton.addEventListener('click', () => {
+            clear();
+        });
+    }
+
+    writingCanvasInstances.set(key, {
+        clear,
+        resize,
+    });
+}
+
+function initializeWritingCanvases() {
+    registerWritingCanvas('numeros', 'numerosCanvas');
+    registerWritingCanvas('vocales', 'vocalesCanvas');
+    registerWritingCanvas('consonantes', 'consonantesCanvas');
+
+    const handleResize = () => {
+        writingCanvasInstances.forEach((instance) => {
+            instance.resize();
+        });
+    };
+
+    window.addEventListener('resize', handleResize);
+    handleResize();
+}
+
 // Tab Switching
 document.querySelectorAll('.tab-button').forEach(button => {
     button.addEventListener('click', () => {
@@ -163,12 +307,14 @@ const caseText = document.getElementById('caseText');
 const settingsButton = document.getElementById('settingsButton');
 const settingsMenu = document.getElementById('settingsMenu');
 const effectsEnabledInput = document.getElementById('effectsEnabled');
+const writingEnabledInput = document.getElementById('writingEnabled');
 const effectIntervalInput = document.getElementById('effectInterval');
 const effectIntervalValue = document.getElementById('effectIntervalValue');
 const effectDurationInput = document.getElementById('effectDuration');
 const effectDurationValue = document.getElementById('effectDurationValue');
 const cooldownDurationInput = document.getElementById('cooldownDuration');
 const cooldownDurationValue = document.getElementById('cooldownDurationValue');
+const interactionAreas = document.querySelectorAll('.interaction-area');
 
 function formatMilliseconds(ms) {
     const seconds = ms / 1000;
@@ -190,6 +336,13 @@ function initializeSettingsMenu() {
             if (typeof setEffectsEnabled === 'function') {
                 setEffectsEnabled(event.target.checked);
             }
+        });
+    }
+
+    if (writingEnabledInput) {
+        writingEnabledInput.checked = isWritingCanvasEnabled;
+        writingEnabledInput.addEventListener('change', (event) => {
+            setWritingCanvasEnabled(event.target.checked);
         });
     }
 
@@ -279,6 +432,8 @@ function updateCaseToggleLabel() {
 // Initialize case text to match default state
 updateCaseToggleLabel();
 initializeSettingsMenu();
+setWritingCanvasEnabled(isWritingCanvasEnabled);
+initializeWritingCanvases();
 
 caseToggle.addEventListener('click', () => {
     isUpperCase = !isUpperCase;
@@ -367,6 +522,7 @@ numerosDisplay.addEventListener('click', () => {
     lastNumber = randomNumber;
     displayElement.textContent = randomNumber;
     adjustTextSize(displayElement);
+    clearWritingCanvas('numeros');
     incrementSamplingCounter();
     startSamplingCooldown();
     triggerRandomEffect();
@@ -383,6 +539,7 @@ vocalesDisplay.addEventListener('click', () => {
     const displayElement = vocalesDisplay.querySelector('.letter-display');
     displayElement.textContent = applyCase(randomVowel);
     adjustTextSize(displayElement);
+    clearWritingCanvas('vocales');
     incrementSamplingCounter();
     startSamplingCooldown();
     triggerRandomEffect();
@@ -457,6 +614,7 @@ consonantesDisplay.addEventListener('click', () => {
     lastConsonant = randomConsonant;
     displayElement.textContent = applyCase(randomConsonant);
     adjustTextSize(displayElement);
+    clearWritingCanvas('consonantes');
     incrementSamplingCounter();
     startSamplingCooldown();
     triggerRandomEffect();

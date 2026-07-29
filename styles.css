@@ -686,6 +686,54 @@ body.sampling-cooldown .display-area {
     white-space: nowrap;
 }
 
+.next-word-button {
+    background: #f57c00;
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(194, 90, 0, 0.3);
+    color: #ffffff;
+    cursor: pointer;
+    font-size: clamp(1rem, 2vw, 1.3rem);
+    font-weight: bold;
+    padding: clamp(0.65rem, 1.5vh, 0.9rem) clamp(1.2rem, 3vw, 1.8rem);
+    transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
+}
+
+.next-word-button:hover:not(:disabled) {
+    background: #e66f00;
+    box-shadow: 0 6px 16px rgba(194, 90, 0, 0.4);
+    transform: translateY(-2px);
+}
+
+.next-word-button:active:not(:disabled) {
+    transform: translateY(0);
+}
+
+.next-word-button:focus-visible {
+    outline: 3px solid #7c3e00;
+    outline-offset: 3px;
+}
+
+.next-word-button:disabled {
+    cursor: wait;
+    opacity: 0.55;
+}
+
+#palabrasDisplay {
+    background: linear-gradient(135deg, #dff4ff 0%, #c8d9ff 100%);
+    cursor: default;
+}
+
+#palabrasDisplay:hover,
+#palabrasDisplay:active {
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    transform: none;
+}
+
+body.sampling-cooldown #palabrasDisplay {
+    background: linear-gradient(135deg, #dff4ff 0%, #c8d9ff 100%);
+}
+
 input[type="range"] {
     flex: 1 1 240px;
     width: 100%;

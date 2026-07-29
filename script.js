@@ -770,6 +770,7 @@ silabasDisplay.addEventListener('click', () => {
 const palabrasDisplayArea = document.getElementById('palabrasDisplay');
 const letterSlider = document.getElementById('letterSlider');
 const sliderValue = document.getElementById('sliderValue');
+const nextWordButton = document.getElementById('nextWordButton');
 
 let allWords = [];
 let lastWord = '';
@@ -784,6 +785,10 @@ async function loadWords() {
             .filter(word => word.length > 0 && word.length >= 3 && word.length <= 10);
         
         console.log(`Loaded ${allWords.length} words`);
+        nextWordButton.disabled = false;
+        const displayElement = palabrasDisplayArea.querySelector('.letter-display');
+        displayElement.textContent = 'Pulsa Siguiente';
+        adjustTextSize(displayElement);
     } catch (error) {
         console.error('Error loading words:', error);
         const displayElement = palabrasDisplayArea.querySelector('.letter-display');
@@ -803,14 +808,14 @@ letterSlider.addEventListener('input', () => {
     lastWord = '';
 });
 
-palabrasDisplayArea.addEventListener('click', () => {
+nextWordButton.addEventListener('click', () => {
     if (isInteractionDisabled()) {
         return;
     }
     const displayElement = palabrasDisplayArea.querySelector('.letter-display');
     
     if (allWords.length === 0) {
-        displayElement.textContent = 'Haz clic para ver palabras';
+        displayElement.textContent = 'Cargando palabras…';
         return;
     }
     

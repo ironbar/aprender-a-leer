@@ -151,9 +151,10 @@
                 <div class="slider-container">
                     <label for="letterSlider">Número de letras: <span id="sliderValue">4</span></label>
                     <input type="range" id="letterSlider" min="3" max="10" value="4">
+                    <button type="button" id="nextWordButton" class="next-word-button" disabled>Siguiente</button>
                 </div>
                 <div id="palabrasDisplay" class="display-area">
-                    <div class="letter-display">Haz clic para ver palabras</div>
+                    <div class="letter-display" aria-live="polite">Cargando palabras…</div>
                 </div>
             </div>
         </main>

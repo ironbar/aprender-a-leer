@@ -771,9 +771,65 @@ const palabrasDisplayArea = document.getElementById('palabrasDisplay');
 const letterSlider = document.getElementById('letterSlider');
 const sliderValue = document.getElementById('sliderValue');
 const nextWordButton = document.getElementById('nextWordButton');
+const listenWordButton = document.getElementById('listenWordButton');
 
 let allWords = [];
 let lastWord = '';
+let spanishVoice = null;
+let activeWordUtterance = null;
+
+const isSpeechSynthesisSupported = (
+    'speechSynthesis' in window && 'SpeechSynthesisUtterance' in window
+);
+
+function updateSpanishVoice() {
+    if (!isSpeechSynthesisSupported) {
+        return;
+    }
+
+    const voices = window.speechSynthesis.getVoices();
+    spanishVoice = voices.find(voice => voice.lang.toLowerCase() === 'es-es')
+        || voices.find(voice => voice.lang.toLowerCase().startsWith('es'))
+        || null;
+}
+
+function setListenButtonReady(isReady) {
+    listenWordButton.disabled = !isReady || !isSpeechSynthesisSupported;
+}
+
+function finishWordSpeech(utterance) {
+    if (activeWordUtterance !== utterance) {
+        return;
+    }
+
+    activeWordUtterance = null;
+    listenWordButton.classList.remove('is-speaking');
+    listenWordButton.setAttribute('aria-label', 'Escuchar palabra');
+    setListenButtonReady(Boolean(lastWord));
+}
+
+function stopWordSpeech() {
+    if (!isSpeechSynthesisSupported || !activeWordUtterance) {
+        return;
+    }
+
+    const utterance = activeWordUtterance;
+    activeWordUtterance = null;
+    window.speechSynthesis.cancel();
+    listenWordButton.classList.remove('is-speaking');
+    listenWordButton.setAttribute('aria-label', 'Escuchar palabra');
+    setListenButtonReady(Boolean(lastWord));
+
+    utterance.onend = null;
+    utterance.onerror = null;
+}
+
+if (isSpeechSynthesisSupported) {
+    updateSpanishVoice();
+    window.speechSynthesis.addEventListener('voiceschanged', updateSpanishVoice);
+} else {
+    listenWordButton.title = 'La lectura en voz alta no está disponible en este navegador';
+}
 
 // Load words from file
 async function loadWords() {
@@ -824,16 +880,44 @@ nextWordButton.addEventListener('click', () => {
     
     if (availableWords.length === 0) {
         displayElement.textContent = 'No hay palabras disponibles';
+        lastWord = '';
+        setListenButtonReady(false);
         return;
     }
     
+    stopWordSpeech();
     const word = getRandomElementExcluding(availableWords, lastWord);
     lastWord = word;
     displayElement.textContent = isUpperCase ? word.toUpperCase() : word;
+    setListenButtonReady(true);
     adjustTextSize(displayElement);
     incrementSamplingCounter();
     startSamplingCooldown();
     triggerRandomEffect();
+});
+
+listenWordButton.addEventListener('click', () => {
+    if (!lastWord || !isSpeechSynthesisSupported || activeWordUtterance) {
+        return;
+    }
+
+    updateSpanishVoice();
+    const utterance = new SpeechSynthesisUtterance(lastWord);
+    utterance.lang = 'es-ES';
+    utterance.rate = 0.8;
+
+    if (spanishVoice) {
+        utterance.voice = spanishVoice;
+    }
+
+    activeWordUtterance = utterance;
+    listenWordButton.disabled = true;
+    listenWordButton.classList.add('is-speaking');
+    listenWordButton.setAttribute('aria-label', 'Reproduciendo palabra');
+    utterance.onend = () => finishWordSpeech(utterance);
+    utterance.onerror = () => finishWordSpeech(utterance);
+
+    window.speechSynthesis.speak(utterance);
 });
 
 // Load words when page loads

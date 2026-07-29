@@ -686,7 +686,14 @@ body.sampling-cooldown .display-area {
     white-space: nowrap;
 }
 
-.next-word-button {
+.word-actions {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: clamp(0.6rem, 1.5vw, 1rem);
+}
+
+.next-word-button,
+.listen-word-button {
     background: #f57c00;
     border: none;
     border-radius: 12px;
@@ -699,24 +706,51 @@ body.sampling-cooldown .display-area {
     transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
 }
 
-.next-word-button:hover:not(:disabled) {
+.listen-word-button {
+    align-items: center;
+    background: #2878c8;
+    box-shadow: 0 4px 12px rgba(25, 87, 150, 0.3);
+    display: inline-flex;
+    gap: 0.45rem;
+    justify-content: center;
+}
+
+.next-word-button:hover:not(:disabled),
+.listen-word-button:hover:not(:disabled) {
     background: #e66f00;
     box-shadow: 0 6px 16px rgba(194, 90, 0, 0.4);
     transform: translateY(-2px);
 }
 
-.next-word-button:active:not(:disabled) {
+.listen-word-button:hover:not(:disabled) {
+    background: #1f69b3;
+    box-shadow: 0 6px 16px rgba(25, 87, 150, 0.4);
+}
+
+.next-word-button:active:not(:disabled),
+.listen-word-button:active:not(:disabled) {
     transform: translateY(0);
 }
 
-.next-word-button:focus-visible {
+.next-word-button:focus-visible,
+.listen-word-button:focus-visible {
     outline: 3px solid #7c3e00;
     outline-offset: 3px;
 }
 
-.next-word-button:disabled {
+.listen-word-button:focus-visible {
+    outline-color: #123f6d;
+}
+
+.next-word-button:disabled,
+.listen-word-button:disabled {
     cursor: wait;
     opacity: 0.55;
+}
+
+.listen-word-button.is-speaking:disabled {
+    cursor: default;
+    opacity: 1;
 }
 
 #palabrasDisplay {

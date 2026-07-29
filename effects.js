@@ -1,7 +1,7 @@
 // filepath: /mnt/data/other/code/aprender-a-leer/effects.js
 
 // Effect Configuration
-let EFFECT_INTERVAL = 4; // Show an effect every 4 trigger calls
+let EFFECT_INTERVAL = 8; // Show an effect every 8 trigger calls
 let INTERACTIVE_COOLDOWN = 1000; // 1.5 second cooldown after interactive effects
 let EFFECT_DURATION = 4000; // Default effect animation duration in ms
 let effectsEnabled = true;

@@ -370,7 +370,7 @@ function initializeSettingsMenu() {
 
     const defaultSettings = typeof getEffectSettings === 'function'
         ? getEffectSettings()
-        : { enabled: true, interval: 4, duration: 4000, cooldown: 1000 };
+        : { enabled: true, interval: 8, duration: 4000, cooldown: 1000 };
 
     if (effectsEnabledInput) {
         effectsEnabledInput.checked = defaultSettings.enabled;

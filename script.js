@@ -11,6 +11,7 @@ let isSamplingCooldownActive = false;
 let samplingCooldownTimeoutId = null;
 let samplingCount = 0;
 let isWritingCanvasEnabled = true;
+let readingSpeedMultiplier = 0.6;
 const writingCanvasInstances = new Map();
 let writingLineWidthMultiplier = 1;
 
@@ -347,6 +348,8 @@ const effectsEnabledInput = document.getElementById('effectsEnabled');
 const writingEnabledInput = document.getElementById('writingEnabled');
 const writingThicknessInput = document.getElementById('writingThickness');
 const writingThicknessValue = document.getElementById('writingThicknessValue');
+const readingSpeedInput = document.getElementById('readingSpeed');
+const readingSpeedValue = document.getElementById('readingSpeedValue');
 const effectIntervalInput = document.getElementById('effectInterval');
 const effectIntervalValue = document.getElementById('effectIntervalValue');
 const effectDurationInput = document.getElementById('effectDuration');
@@ -399,6 +402,23 @@ function initializeSettingsMenu() {
         });
         writingThicknessInput.addEventListener('change', (event) => {
             updateThicknessValue(event.target.value);
+        });
+    }
+
+    if (readingSpeedInput && readingSpeedValue) {
+        const updateReadingSpeed = (rawValue) => {
+            const value = Math.max(40, Math.min(100, Math.round(Number(rawValue) || 60)));
+            readingSpeedInput.value = value;
+            readingSpeedValue.textContent = value;
+            readingSpeedMultiplier = value / 100;
+        };
+
+        updateReadingSpeed(readingSpeedInput.value);
+        readingSpeedInput.addEventListener('input', (event) => {
+            updateReadingSpeed(event.target.value);
+        });
+        readingSpeedInput.addEventListener('change', (event) => {
+            updateReadingSpeed(event.target.value);
         });
     }
 
@@ -904,7 +924,7 @@ listenWordButton.addEventListener('click', () => {
     updateSpanishVoice();
     const utterance = new SpeechSynthesisUtterance(lastWord);
     utterance.lang = 'es-ES';
-    utterance.rate = 0.8;
+    utterance.rate = readingSpeedMultiplier;
 
     if (spanishVoice) {
         utterance.voice = spanishVoice;

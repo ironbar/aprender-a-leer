@@ -249,34 +249,44 @@ h1 {
 }
 
 .settings-control input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    flex: 0 0 1.5rem;
     width: 100%;
+    min-width: 0;
+    max-width: none;
     accent-color: #f5576c;
-    height: 0.3rem;
+    height: 1.5rem;
     padding: 0;
     margin: 0.1rem 0 0.05rem;
+    background: transparent;
 }
 
 .settings-control input[type="range"]::-webkit-slider-runnable-track {
-    height: 0.3rem;
+    height: 0.45rem;
+    border-radius: 999px;
+    background: #dee2e6;
 }
 
 .settings-control input[type="range"]::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
-    width: 0.85rem;
-    height: 0.85rem;
+    width: 1.25rem;
+    height: 1.25rem;
     border-radius: 50%;
     background: #f5576c;
-    margin-top: calc(-0.275rem);
+    margin-top: -0.4rem;
 }
 
 .settings-control input[type="range"]::-moz-range-track {
-    height: 0.3rem;
+    height: 0.45rem;
+    border-radius: 999px;
+    background: #dee2e6;
 }
 
 .settings-control input[type="range"]::-moz-range-thumb {
-    width: 0.85rem;
-    height: 0.85rem;
+    width: 1.25rem;
+    height: 1.25rem;
     border-radius: 50%;
     background: #f5576c;
 }

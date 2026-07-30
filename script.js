@@ -407,7 +407,7 @@ function initializeSettingsMenu() {
 
     if (readingSpeedInput && readingSpeedValue) {
         const updateReadingSpeed = (rawValue) => {
-            const value = Math.max(40, Math.min(100, Math.round(Number(rawValue) || 60)));
+            const value = Math.max(10, Math.min(100, Math.round(Number(rawValue) || 60)));
             readingSpeedInput.value = value;
             readingSpeedValue.textContent = value;
             readingSpeedMultiplier = value / 100;
